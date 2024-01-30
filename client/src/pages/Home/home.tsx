@@ -14,11 +14,6 @@ import { BannerType, ProductType } from "../../types";
 
 export const Home = () => {
   const loaderData = useLoaderData() as any;
-  // const loaderData = useLoaderData() as {
-  //   products: ProductType[];
-  //   banners: BannerType[];
-  // };
-
   console.log(loaderData);
 
   // const loadingState = use

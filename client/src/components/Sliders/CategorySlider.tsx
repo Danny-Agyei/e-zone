@@ -1,15 +1,10 @@
 import { ReactNode, useState } from "react";
+import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2";
+import { Box, IconButton } from "@mui/material";
 
 import SwiperCore, { Navigation, Scrollbar } from "swiper";
 import { Swiper } from "swiper/react";
 import "swiper/swiper-bundle.css";
-import {
-  HiOutlineArrowNarrowLeft,
-  HiOutlineArrowNarrowRight,
-} from "react-icons/hi";
-
-import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2";
-import { Box, IconButton } from "@mui/material";
 
 SwiperCore.use([Navigation, Scrollbar]);
 

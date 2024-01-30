@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         loader: HomeRoute.loader,
       },
       {
-        path: "/shop/collection/:slug",
+        path: "/products/:slug",
         loader: ProductRoute.loader,
         Component: ProductRoute.Component,
       },

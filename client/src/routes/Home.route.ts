@@ -20,7 +20,7 @@ const getStoreData = async function ({ request }: { request: Request }) {
       productPromise,
     ]);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const banners = await bannersRes.json();
     const products = await productsRes.json();

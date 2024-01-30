@@ -41,7 +41,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
       onMouseEnter={() => setisHover(true)}
       onMouseLeave={() => setisHover(false)}
     >
-      <Link to={`/shop/collection/product/${slug}`}>
+      <Link to={`/products/${slug}`}>
         <Box p={2} sx={{ position: "relative", pb: 24 }}>
           <CardMedia
             sx={{
@@ -87,7 +87,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
         </Box>
       </Link>
       <CardContent sx={{ px: 0 }}>
-        <Link to="/#">
+        <Link to={`/products/${slug}`}>
           <Typography variant="h3" fontSize={16} fontWeight={600}>
             {name}
           </Typography>
