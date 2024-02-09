@@ -45,11 +45,11 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
         <Box p={2} sx={{ position: "relative", pb: 24 }}>
           <CardMedia
             sx={{
-              width: 180,
-              height: "180px",
+              width: 220,
+              height: "auto",
               m: "0 auto",
               position: "absolute",
-              top: 15,
+              top: 0,
               left: "50%",
               transform: "translate(-50%,0)",
               visibility: isHover ? "hidden" : "visible",
@@ -64,11 +64,11 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
 
           <CardMedia
             sx={{
-              width: 180,
-              height: "180px",
+              width: 220,
+              height: "auto",
               m: "0 auto",
               position: "absolute",
-              top: 15,
+              top: 0,
               left: "50%",
               transform: "translate(-50%,0)",
               visibility: !isHover ? "hidden" : "visible",
@@ -86,7 +86,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           />
         </Box>
       </Link>
-      <CardContent sx={{ px: 0 }}>
+      <CardContent sx={{ px: 0, pt:5}}>
         <Link to={`/products/${slug}`}>
           <Typography variant="h3" fontSize={16} fontWeight={600}>
             {name}

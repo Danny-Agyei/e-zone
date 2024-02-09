@@ -13,6 +13,8 @@ import { NavItem } from "../../components";
 import { BsBag } from "react-icons/bs";
 import { HiOutlineUser } from "react-icons/hi2";
 
+import logo from '../../logo.png'
+
 const Navbar = () => {
   return (
     <Box
@@ -34,9 +36,9 @@ const Navbar = () => {
                 <Box
                   component="img"
                   width={160}
-                  pr={2}
+                  pr={4}
                   lineHeight={0}
-                  src="http://localhost:1337/uploads/logo_removebg_preview_72c26cca5b.png"
+                  src={logo}
                   alt="logo"
                 />
               </Link>

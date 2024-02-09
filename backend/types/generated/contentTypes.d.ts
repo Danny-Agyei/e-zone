@@ -861,22 +861,14 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.DefaultTo<1>;
     price: Attribute.Decimal & Attribute.Required;
     type: Attribute.Enumeration<
-      [
-        'womens-fashion',
-        'mens-fashion',
-        'computer',
-        'computer-accessories',
-        'computer-all',
-        'audio',
-        'mobile',
-        'video'
-      ]
-    >;
+      ['computer-all', 'audio-all', 'mobile-all', 'tv-video-all']
+    > &
+      Attribute.Required;
     discountPercent: Attribute.Integer;
     hasDiscount: Attribute.Boolean & Attribute.DefaultTo<false>;
     Features: Attribute.JSON;
     variants: Attribute.JSON & Attribute.Required;
-    sizes: Attribute.JSON;
+    storage: Attribute.JSON;
     slug: Attribute.UID<'api::product.product', 'name'>;
     sub_category: Attribute.Relation<
       'api::product.product',

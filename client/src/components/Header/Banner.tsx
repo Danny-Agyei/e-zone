@@ -41,13 +41,21 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
 
           return (
             <SwiperSlide key={indx} style={{ height: "100%" }}>
-              <Box bgcolor="#daf3ff" sx={{ width: "100%", height: "100%" }}>
-                <Box m="0 auto" px={20} py={5}>
+              <Box
+                bgcolor="#daf3ff"
+                sx={{
+                  width: "100%",
+                  height: "70vh",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Box m="0 auto">
                   <Stack
                     direction="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    spacing={0}
+                    spacing={15}
                   >
                     <Box maxWidth={{ xs: "100%", md: 520 }}>
                       <Typography

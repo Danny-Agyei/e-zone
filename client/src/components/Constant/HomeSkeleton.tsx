@@ -1,6 +1,6 @@
 import { Box, Grid, Skeleton } from "@mui/material";
 
-export default function ProductCardSkeleton() {
+export default function HomeSkeleton() {
   return (
     <Box>
       <Box px={10} mt={4}>

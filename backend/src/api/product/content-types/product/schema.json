@@ -32,15 +32,12 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "womens-fashion",
-        "mens-fashion",
-        "computer",
-        "computer-accessories",
         "computer-all",
-        "audio",
-        "mobile",
-        "video"
-      ]
+        "audio-all",
+        "mobile-all",
+        "tv-video-all"
+      ],
+      "required": true
     },
     "discountPercent": {
       "type": "integer"
@@ -56,7 +53,7 @@
       "type": "json",
       "required": true
     },
-    "sizes": {
+    "storage": {
       "type": "json"
     },
     "slug": {

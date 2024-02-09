@@ -52,3 +52,7 @@ a {
 #category-slide .swiper-slide {
   width: auto !important;
 }
+.swiper-slide {
+  width:100% !important;
+  height: auto !important;
+}

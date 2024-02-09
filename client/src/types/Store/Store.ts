@@ -11,11 +11,15 @@ export interface ProductType {
     hasDiscount: boolean;
     discountPercent: number;
     sizes:
-      | {
-          size: number;
+     {
+      size: number;
+      price: number;
+    }[];
+    storage:
+      {
+          capacity: string;
           price: number;
-        }[]
-      | null;
+        }[];
     variants: {
       images: string[];
       details: string;

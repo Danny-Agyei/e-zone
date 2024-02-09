@@ -14,26 +14,21 @@ import { BannerType, ProductType } from "../../types";
 
 export const Home = () => {
   const loaderData = useLoaderData() as any;
-  console.log(loaderData);
-
-  // const loadingState = use
-
-  // const { products, banners } = loaderData;
 
   // @ Hero Banners
   const heroBanners = (bannerData: BannerType[]) => {
-    const filteredHeroBanner = bannerData.filter(
+    const filteredHeroBanner = bannerData.length ? bannerData.filter(
       (banner) => banner.attributes.type.toLowerCase() === "hero"
-    );
+    ):[];
 
     return filteredHeroBanner;
   };
 
   // @ Hero Banners
   const newArrivalBanners = (bannerData: BannerType[]) => {
-    const filteredArrivalBanners = bannerData.filter(
+    const filteredArrivalBanners = bannerData.length ? bannerData.filter(
       (banner) => banner.attributes.type.toLowerCase() === "new-arrival"
-    );
+    ) : [];
 
     return filteredArrivalBanners;
   };
@@ -41,7 +36,7 @@ export const Home = () => {
   // @ Trending Products
 
   const trendingProducts = (products: ProductType[]): ProductType[] | [] => {
-    const filteredTrendingProducts = products.filter((product) => {
+    const filteredTrendingProducts =products.length ? products.filter((product) => {
       const {
         attributes: {
           categories: { data: categoriesData },
@@ -55,7 +50,7 @@ export const Home = () => {
       if (isTrending) {
         return product;
       }
-    });
+    }) : [];
     return filteredTrendingProducts;
   };
 

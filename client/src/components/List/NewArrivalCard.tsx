@@ -39,6 +39,7 @@ export default function NewArrivalCard({
           sx={{
             width: "100%",
             maxHeight: "100%",
+            objectFit: "contain"
           }}
           component="img"
           src={`${process.env.REACT_APP_BASE_URL}${coverImg}`}
