@@ -42,12 +42,13 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
           return (
             <SwiperSlide key={indx} style={{ height: "100%" }}>
               <Box
-                bgcolor="#daf3ff"
+                bgcolor="orange"
                 sx={{
                   width: "100%",
                   height: "70vh",
                   display: "flex",
                   alignItems: "center",
+                  borderRadius: 5,
                 }}
               >
                 <Box m="0 auto">

@@ -2,11 +2,17 @@ import { ReactNode, useState } from "react";
 import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2";
 import { Box, IconButton } from "@mui/material";
 
-import SwiperCore, { Navigation, Scrollbar } from "swiper";
-import { Swiper } from "swiper/react";
-import "swiper/swiper-bundle.css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-SwiperCore.use([Navigation, Scrollbar]);
+import SwiperCore, {
+  Lazy,
+  Navigation,
+  Thumbs,
+  Pagination,
+  Controller,
+} from "swiper/core";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 
 const CategorySlider = ({ children }: { children: ReactNode }) => {
   const [swipe, setSwipe] = useState<any>({});
@@ -17,9 +23,9 @@ const CategorySlider = ({ children }: { children: ReactNode }) => {
         onInit={(ev) => setSwipe(ev)}
         spaceBetween={30}
         slidesPerView={"auto"}
-        centeredSlides={true}
+        // centeredSlides={true}
         loop={true}
-        style={{ maxWidth: 1000, margin: "0 auto" }}
+        // style={{ maxWidth: 1000, margin: "0 auto" }}
       >
         {children}
       </Swiper>
@@ -29,7 +35,7 @@ const CategorySlider = ({ children }: { children: ReactNode }) => {
           display: "flex",
           justifyContent: "end",
           alignItems: "center",
-          top: 63,
+          top: 0,
           right: 80,
           zIndex: 999,
           width: 42,
@@ -55,7 +61,7 @@ const CategorySlider = ({ children }: { children: ReactNode }) => {
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
-          top: 63,
+          top: 0,
           left: 80,
           zIndex: 999,
           width: 42,

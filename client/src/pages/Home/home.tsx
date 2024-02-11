@@ -17,18 +17,22 @@ export const Home = () => {
 
   // @ Hero Banners
   const heroBanners = (bannerData: BannerType[]) => {
-    const filteredHeroBanner = bannerData.length ? bannerData.filter(
-      (banner) => banner.attributes.type.toLowerCase() === "hero"
-    ):[];
+    const filteredHeroBanner = bannerData.length
+      ? bannerData.filter(
+          (banner) => banner.attributes.type.toLowerCase() === "hero"
+        )
+      : [];
 
     return filteredHeroBanner;
   };
 
   // @ Hero Banners
   const newArrivalBanners = (bannerData: BannerType[]) => {
-    const filteredArrivalBanners = bannerData.length ? bannerData.filter(
-      (banner) => banner.attributes.type.toLowerCase() === "new-arrival"
-    ) : [];
+    const filteredArrivalBanners = bannerData.length
+      ? bannerData.filter(
+          (banner) => banner.attributes.type.toLowerCase() === "new-arrival"
+        )
+      : [];
 
     return filteredArrivalBanners;
   };
@@ -36,21 +40,23 @@ export const Home = () => {
   // @ Trending Products
 
   const trendingProducts = (products: ProductType[]): ProductType[] | [] => {
-    const filteredTrendingProducts =products.length ? products.filter((product) => {
-      const {
-        attributes: {
-          categories: { data: categoriesData },
-        },
-      } = product;
+    const filteredTrendingProducts = products.length
+      ? products.filter((product) => {
+          const {
+            attributes: {
+              categories: { data: categoriesData },
+            },
+          } = product;
 
-      const isTrending = categoriesData.some(
-        (category) => category.attributes.title.toLowerCase() === "trending"
-      );
+          const isTrending = categoriesData.some(
+            (category) => category.attributes.title.toLowerCase() === "trending"
+          );
 
-      if (isTrending) {
-        return product;
-      }
-    }) : [];
+          if (isTrending) {
+            return product;
+          }
+        })
+      : [];
     return filteredTrendingProducts;
   };
 
@@ -63,62 +69,73 @@ export const Home = () => {
         {(resolveData: { banners: BannerType[]; products: ProductType[] }) => {
           return (
             <Box>
-              <Banner bannerData={heroBanners(resolveData.banners)} />
-              <Box id="category-slide" px={10} py={8} position="relative">
+              <Box px={10} pt={4}>
+                <Banner bannerData={heroBanners(resolveData.banners)} />
+                <Typography
+                  variant="h2"
+                  pt={8}
+                  pb={4}
+                  fontSize={26}
+                  fontWeight={700}
+                >
+                  Our Top Categories
+                </Typography>
+              </Box>
+              <Box id="category-slide" px={10} pb={8} position="relative">
                 <CategorySlider>
                   <SwiperSlide>
                     <CategoryCard
                       cartegoryUrl="/shop/collection?q=headphones"
                       title="Headphones"
-                      imgUrl="http://localhost:1337/uploads/Dr_dre_beats_solo_2_removebg_preview_349edbfaba.png"
+                      imgUrl="http://localhost:1337/uploads/headphone_e3c4f19d3a.jpeg"
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <CategoryCard
                       cartegoryUrl="/shop/collection?q=desktops"
                       title="Desktops"
-                      imgUrl="http://localhost:1337/uploads/Desktop1_9178fc4ceb.png"
+                      imgUrl="http://localhost:1337/uploads/desktop_c530827d2f.jpg"
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <CategoryCard
                       cartegoryUrl="/shop/collection?q=cell-phones"
                       title="Mobile Phones"
-                      imgUrl="http://localhost:1337/uploads/apple_iphone_11_fully_unlocked_2_removebg_preview_060a335f9e.png"
+                      imgUrl="http://localhost:1337/uploads/tablet_e1dcecbee1.jpeg"
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <CategoryCard
                       cartegoryUrl="/shop/collection?q=smart-watches"
                       title="Smart Watches"
-                      imgUrl="http://localhost:1337/uploads/apple_iphone_11_fully_unlocked_4_removebg_preview_08f9d954c6.png"
+                      imgUrl="http://localhost:1337/uploads/Ear_Buds_7c8da9065c.jpeg"
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <CategoryCard
                       cartegoryUrl="/shop/collection?q=ear-buds"
                       title="Ear Buds"
-                      imgUrl="http://localhost:1337/uploads/j18_tws_bluetooth_stereo_earbuds_1_removebg_preview_3bb06023e2.png"
+                      imgUrl="http://localhost:1337/uploads/Ear_Buds_7c8da9065c.jpeg"
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <CategoryCard
                       cartegoryUrl="/shop/collection?q=laptops"
                       title="Laptops"
-                      imgUrl="http://localhost:1337/uploads/hp_pro_c640_chromebook_enterprise_1_removebg_preview_3e25d5f817.png"
+                      imgUrl="http://localhost:1337/uploads/laptop_c961516cb5.jpeg"
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <CategoryCard
                       cartegoryUrl="/shop/collection?q=men-fashion"
                       title="Men Fashion"
-                      imgUrl="http://localhost:1337/uploads/White_Crew_Neck_Graphic_Shortsleeve_T_Shirt_4ab0a49dea.png"
+                      imgUrl="http://localhost:1337/uploads/Ear_Buds_7c8da9065c.jpeg"
                     />
                   </SwiperSlide>
                 </CategorySlider>
               </Box>
               <Box px={10}>
-                <Typography variant="h2" pb={6} fontSize={26} fontWeight={900}>
+                <Typography variant="h2" pb={4} fontSize={26} fontWeight={700}>
                   Trending Products
                 </Typography>
                 <Grid container columnSpacing={8}>
@@ -135,9 +152,9 @@ export const Home = () => {
                     <Typography
                       variant="h2"
                       pt={8}
-                      pb={6}
+                      pb={2}
                       fontSize={26}
-                      fontWeight={900}
+                      fontWeight={700}
                     >
                       New Arrival
                     </Typography>

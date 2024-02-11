@@ -1,25 +1,37 @@
-import { Box, Grid, Stack, Typography } from "@mui/material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import { Suspense, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  Suspense,
+  useRef,
+  useState,
+  useLayoutEffect,
+  lazy,
+} from "react";
 
+import { Box, Button, Grid, InputBase, Stack, Typography } from "@mui/material";
+import Radio from "@mui/material/Radio";
 import { Await, useLoaderData } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import SwiperClass from "swiper/types/swiper-class";
-import SwiperCore, { FreeMode, Navigation, Thumbs, Controller } from "swiper";
+import SwiperCore, {
+  Lazy,
+  Navigation,
+  Thumbs,
+  Pagination,
+  Controller,
+} from "swiper/core";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 
 import { ProductType } from "../../types";
 import ProductSkeleton from "../../components/Constant/ProductSkeleton";
 import { TiStarFullOutline } from "react-icons/ti";
+import { FaCheck } from "react-icons/fa6";
+import { BsPlus, BsDash, BsTruck } from "react-icons/bs";
+import { MdShoppingCart, MdCheckCircle } from "react-icons/md";
+import { IoStorefrontOutline } from "react-icons/io5";
 
-export default function Product() {
+SwiperCore.use([Controller, Thumbs, Pagination, Navigation, lazy]);
+
+const Product: React.FC = () => {
   const loadedData = useLoaderData() as {
     data: Promise<{
       data: Promise<any>;
@@ -29,19 +41,18 @@ export default function Product() {
   type variantsType = ProductType["attributes"]["variants"];
   type storageType = ProductType["attributes"]["storage"];
 
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore>();
-  const [firstSwiper, setFirstSwiper] = useState<SwiperClass>();
-  const [secondSwiper, setSecondSwiper] = useState<SwiperClass>();
-  const swiper1Ref = useRef<any>(null);
-  const swiper2Ref = useRef();
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
+  const [firstSwiper, setFirstSwiper] = useState<SwiperCore[]>([]);
+  const [secondSwiper, setSecondSwiper] = useState<SwiperCore[]>([]);
+  const swiper1Ref = useRef<SwiperCore | null>(null);
+  const swiper2Ref = useRef<SwiperCore | null>(null);
 
   useLayoutEffect(() => {
-    if (swiper1Ref.current !== null) {
+    if (swiper1Ref.current && swiper2Ref.current) {
       swiper1Ref.current.controller.control = swiper2Ref.current;
     }
   }, []);
 
-  //@ Product images modify
   const productImages = (variants: variantsType) => {
     const modifyVariants = variants.map((variant, indx) => ({
       id: indx + 1,
@@ -51,24 +62,38 @@ export default function Product() {
     return modifyVariants;
   };
 
-  // @ select product by variation
   const [currentColorVariant, setCurrentColorVariant] = useState<
     variantsType[0] | null
   >(null);
 
   const [storageCapacity, setStorageCapacity] = useState<storageType[0]>();
 
-  // @Set default color
-  const onSelectedColorVariant = (
+  // @ handle color selection
+
+  const onColorVarianthandler = (
     variants: variantsType,
     selectedColor: string
   ) => {
     const variant = variants.find(
-      (variant) => variant.colorName.toLowerCase() === selectedColor
+      (variant) =>
+        variant.colorName.toLowerCase() === selectedColor.toLowerCase()
     );
-
     setCurrentColorVariant(variant!);
   };
+
+  // @handle capacity selection
+  const onStorageCapacityHandler = (
+    storage: storageType,
+    selectedCapacity: string
+  ) => {
+    const storageCapacity = storage.find(
+      (strg) => strg.capacity.toLowerCase() === selectedCapacity.toLowerCase()
+    );
+    setStorageCapacity(storageCapacity!);
+  };
+
+  // @ quantity select handler
+  const [qty, setQty] = useState(1);
 
   return (
     <Suspense fallback={<ProductSkeleton />}>
@@ -79,37 +104,24 @@ export default function Product() {
         {(resolveData) => {
           const { product }: { product: ProductType } = resolveData;
           const {
-            attributes: {
-              name,
-              description,
-              price,
-              features,
-              categories,
-              inStock,
-              variants,
-              storage,
-            },
+            attributes: { name, price, variants, storage, inStock },
           } = product;
 
-          // @Get available product Color
           const availableColorVariants = variants.map((variant) =>
             variant.colorCode.toLowerCase()
           );
 
-          // onSelectedColorVariant(variants, availableColorVariants[0]);
-          // console.log("CURRENT =>", currentColorVariant);
-
-          // @Selected color
+          // @ Selected current color or set default on load
           const selectedVariant =
             currentColorVariant !== undefined && currentColorVariant !== null
               ? currentColorVariant
               : variants![0];
 
-          // @Selected storage capacity
-          // const selectedStorageCapacity =
-          //   storageCapacity !== undefined && storageCapacity !== null
-          //     ? storageCapacity
-          //     : storage[0];
+          // @ Selected current capacity or set default on load
+          const selectedCapacity =
+            storageCapacity !== undefined && storageCapacity !== null
+              ? storageCapacity
+              : storage![0];
 
           return (
             <Box px={10} py={8}>
@@ -118,11 +130,11 @@ export default function Product() {
                   <Box
                     sx={{
                       position: "sticky",
-                      top: 0,
+                      top: 100,
                     }}
                   >
-                    <Stack direction="row">
-                      <Box sx={{ height: "100%", pr: 5 }}>
+                    <Stack direction="row" spacing={2} justifyContent="center">
+                      <Box sx={{ height: "100%" }}>
                         <Swiper
                           loop={false}
                           spaceBetween={10}
@@ -131,7 +143,7 @@ export default function Product() {
                           touchRatio={0.2}
                           direction="vertical"
                           slideToClickedSlide={true}
-                          modules={[Navigation, Thumbs, Controller]}
+                          navigation
                           onSwiper={setThumbsSwiper}
                           controller={{ control: firstSwiper }}
                           style={{ width: "max-content" }}
@@ -171,33 +183,46 @@ export default function Product() {
                               swiper1Ref.current = swiper;
                             }
                           }}
+                          watchSlidesVisibility={true}
+                          lazy={true}
+                          preloadImages={false}
                           controller={{ control: secondSwiper }}
-                          spaceBetween={1}
-                          slidesPerView={1}
+                          spaceBetween={40}
+                          slidesPerView={"auto"}
                           centeredSlides={true}
-                          draggable={false}
-                          thumbs={{
-                            swiper:
-                              thumbsSwiper && !thumbsSwiper.destroyed
-                                ? thumbsSwiper
-                                : null,
-                          }}
-                          modules={[FreeMode, Navigation, Thumbs, Controller]}
-                          style={{ width: "100%", height: "100%" }}
+                          thumbs={{ swiper: thumbsSwiper }}
+                          // style={{ width: "100%", height: "100%" }}
                         >
                           {selectedVariant!.images.map((image, indx) => (
                             <SwiperSlide key={indx}>
                               <Box
-                                component="img"
-                                src={image}
                                 sx={{
                                   width: "100%",
-                                  m: "0 auto",
-                                  maxWidth: 445,
-                                  objectFit: "contain",
+                                  height: "max-content",
+                                  minHeight: 380,
+                                  position: "relative",
                                 }}
-                                alt={`${name}-${selectedVariant!.colorName}`}
-                              />
+                              >
+                                <Box
+                                  className="swiper-lazy"
+                                  component="img"
+                                  src={image}
+                                  data-src={image}
+                                  sx={{
+                                    // position: "absolute",
+                                    // top: 0,
+                                    // left: 0,
+                                    // right: 0,
+                                    // bottom: 0,
+                                    width: "100%",
+                                    height: "100%",
+                                    m: "0 auto",
+                                    objectFit: "contain",
+                                  }}
+                                  alt={`${name}-${selectedVariant!.colorName}`}
+                                />
+                                <Box className="swiper-lazy-preloader"></Box>
+                              </Box>
                             </SwiperSlide>
                           ))}
                         </Swiper>
@@ -205,11 +230,11 @@ export default function Product() {
                     </Stack>
                   </Box>
                 </Grid>
-                <Grid item sm={12} md={6}>
+                <Grid item sm={12} md={6} lg={6}>
                   <Box>
                     <Typography variant="h2" fontSize={26} fontWeight={600}>
-                      HP Newest 14" Ultral Light Laptop for Business. Intel
-                      Quad-Core N4120, 4GB RAM, 192GB Storage
+                      {name} - {selectedVariant.colorName} Color{" "}
+                      {selectedCapacity.capacity}
                     </Typography>
                   </Box>
                   <Box py={1.2}>
@@ -224,12 +249,13 @@ export default function Product() {
                       <Typography variant="body2">(25 reviews)</Typography>
                     </Stack>
                   </Box>
-                  <Typography variant="h3" fontSize={26} fontWeight={600}>
-                    ${price}
+                  <Typography variant="h3" fontSize={22} fontWeight={600}>
+                    ${selectedCapacity.price}
                   </Typography>
                   <Box pt={2.5}>
                     <Typography
                       variant="body2"
+                      color="#666"
                       fontSize={16}
                       fontWeight={500}
                       pb={1.2}
@@ -237,6 +263,7 @@ export default function Product() {
                       Colour :{" "}
                       <Typography
                         variant="body2"
+                        color="text.primary"
                         component="span"
                         fontSize={16}
                         fontWeight={600}
@@ -245,15 +272,20 @@ export default function Product() {
                       </Typography>
                     </Typography>
                     <Stack direction="row" spacing={1.2} alignItems="center">
-                      {variants.map((variant: variantsType[0]) => (
+                      {variants.map((variant: variantsType[0], indx) => (
                         <Box
+                          key={indx}
                           sx={{
                             position: "relative",
                           }}
                         >
                           <Radio
-                            // checked={}
-                            // onChange={handleChange}
+                            checked={
+                              selectedVariant.colorName === variant.colorName
+                            }
+                            onChange={() =>
+                              onColorVarianthandler(variants, variant.colorName)
+                            }
                             value={variant.colorName}
                             title={variant.colorName}
                             name="radio-buttons"
@@ -264,11 +296,13 @@ export default function Product() {
                               width: 41,
                               height: 41,
                               borderRadius: "75%",
-
-                              border: "1px solid #ccc",
+                              border: "1px solid #e1e1e1",
                               p: 0.4,
                               "& span": {
                                 display: "none",
+                              },
+                              "&.Mui-checked": {
+                                borderColor: "text.secondary",
                               },
                             }}
                           />
@@ -297,43 +331,46 @@ export default function Product() {
                   <Box pt={2.5}>
                     <Typography
                       variant="body2"
+                      color="#666"
                       fontSize={16}
                       fontWeight={500}
                       pb={1.2}
                     >
-                      Capacity :{" "}
-                      <Typography
-                        component="span"
-                        fontSize={16}
-                        fontWeight={600}
-                      >
-                        {" "}
-                        8GB RAM | 320GB Storage
-                      </Typography>
+                      Capacity
                     </Typography>
                     <Stack direction="row" spacing={1.2} alignItems="center">
-                      {storage.map((storage) => (
+                      {storage.map((strg, indx) => (
                         <Box
+                          key={indx}
                           sx={{
                             position: "relative",
                           }}
                         >
                           <Radio
-                            // checked={}
-                            // onChange={handleChange}
-                            value={storage.capacity}
-                            title={storage.capacity}
+                            checked={
+                              strg.capacity.toLowerCase() ===
+                              selectedCapacity.capacity.toLowerCase()
+                            }
+                            onChange={() =>
+                              onStorageCapacityHandler(storage, strg.capacity)
+                            }
+                            value={strg.capacity}
+                            title={strg.capacity}
                             name="radio-buttons"
                             sx={{
                               position: "absolute",
                               top: 0,
                               left: 0,
+                              bottom: 0,
                               width: "100%",
                               height: "100%",
                               borderRadius: "8px",
                               border: "1px solid #ccc",
                               "& span": {
                                 display: "none",
+                              },
+                              "&.Mui-checked": {
+                                borderColor: "text.secondary",
                               },
                             }}
                           />
@@ -343,10 +380,249 @@ export default function Product() {
                               p: "12px 16px",
                             }}
                           >
-                            {storage.capacity}
+                            {strg.capacity}
                           </Box>
                         </Box>
                       ))}
+                    </Stack>
+                  </Box>
+                  <Box pt={4}>
+                    <Typography
+                      color="#666"
+                      variant="body2"
+                      fontSize={16}
+                      pb={1.2}
+                    >
+                      Availability :{" "}
+                      <Typography
+                        component="span"
+                        fontSize={16}
+                        fontWeight={600}
+                      >
+                        {inStock > 0 ? (
+                          <Box component="span">
+                            <Box component="span" color="text.primary">
+                              In stock
+                            </Box>{" "}
+                            <FaCheck
+                              color="#2FB783 "
+                              size={15}
+                              style={{ paddingTop: "10px" }}
+                            />
+                          </Box>
+                        ) : (
+                          "Out of Stock"
+                        )}
+                      </Typography>
+                    </Typography>
+                    {inStock > 0 && (
+                      <Typography fontSize={16} variant="body2" color="red">
+                        Only {inStock} items left in stock.
+                      </Typography>
+                    )}
+                  </Box>
+                  <Box pt={4}>
+                    <Typography
+                      color="#666"
+                      variant="body2"
+                      fontSize={16}
+                      pb={1.2}
+                    >
+                      Quantity
+                    </Typography>
+                    <Stack
+                      direction="row"
+                      sx={{
+                        border: "1px solid #e1e1e1",
+                        borderRadius: 9999,
+                        maxWidth: "max-content",
+                        height: 60,
+                      }}
+                    >
+                      <Button
+                        variant="text"
+                        sx={{
+                          borderRadius: " 9999px 0 0  9999px",
+                          color: "#ebebea",
+                        }}
+                        onClick={() =>
+                          setQty((prevValue) => (qty > 1 ? qty - 1 : prevValue))
+                        }
+                      >
+                        <BsDash size={22} color="#666" />
+                      </Button>
+                      <InputBase
+                        onChange={(e) =>
+                          setQty((prevValue) =>
+                            Number(e.target.value) > inStock
+                              ? prevValue
+                              : Number(e.target.value)
+                          )
+                        }
+                        value={qty}
+                        type="tel"
+                        inputProps={{ maxLength: 2 }}
+                        sx={{
+                          width: 50,
+                          px: 1,
+                          border: "0 solid #e1e1e1",
+                          borderLeftWidth: 1,
+                          borderRightWidth: 1,
+                          fontSize: 22,
+                          "& input": {
+                            textAlign: "center",
+                          },
+                        }}
+                      />
+                      <Button
+                        variant="text"
+                        sx={{
+                          borderRadius: "0 9999px 9999px  0",
+                          color: "#ebebea",
+                        }}
+                        onClick={() =>
+                          setQty((prevValue) =>
+                            qty < inStock ? qty + 1 : prevValue
+                          )
+                        }
+                      >
+                        <BsPlus size={22} color="#666" />
+                      </Button>
+                    </Stack>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        bgcolor: "text.secondary",
+                        mt: 4,
+                        width: "100%",
+                        p: 2,
+                        boxShadow: "none !important",
+                        "&:hover": {
+                          bgcolor: "rgba(255,140, 0, 0.9) !important",
+                        },
+                      }}
+                    >
+                      <MdShoppingCart size={22} color="#13131a" />
+                      <Typography
+                        variant="body2"
+                        fontSize={20}
+                        component="span"
+                        color="text.primary"
+                        fontWeight={600}
+                      >
+                        ADD TO CART
+                      </Typography>
+                    </Button>
+                  </Box>
+                  <Typography
+                    pt={4}
+                    fontSize={22}
+                    variant="body1"
+                    fontWeight={600}
+                  >
+                    Ways to get your order
+                  </Typography>
+                  <Box
+                    sx={{ border: "1px solid #e1e1e1", px: 4, py: 2.5, mt: 2 }}
+                  >
+                    <Stack direction="row" spacing={6}>
+                      <Box sx={{ position: "relative" }}>
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            top: 8,
+                            left: 10,
+                            zIndex: -1,
+                          }}
+                        >
+                          <BsTruck size={30} />
+                        </Box>
+                        <MdCheckCircle
+                          color="#2FB783"
+                          size={20}
+                          style={{ zIndex: 9999 }}
+                        />
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" fontSize={16}>
+                          Deliver available
+                        </Typography>
+                        <Typography py={1} variant="body2" fontSize={16}>
+                          We deliver within 5 business days
+                        </Typography>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          fontSize={16}
+                          fontWeight={600}
+                        >
+                          Free shipping{" "}
+                        </Typography>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          fontSize={16}
+                        >
+                          on orders over $90
+                        </Typography>
+                      </Box>
+                    </Stack>
+                    <Stack
+                      direction="row"
+                      spacing={6}
+                      sx={{ borderTop: "1px solid #e1e1e1", mt: 2, pt: 2 }}
+                    >
+                      <Box sx={{ position: "relative" }}>
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            top: 8,
+                            left: 10,
+                            zIndex: -1,
+                          }}
+                        >
+                          <IoStorefrontOutline size={30} />
+                        </Box>
+                        <MdCheckCircle
+                          color="#2FB783"
+                          size={20}
+                          style={{ zIndex: 9999 }}
+                        />
+                      </Box>
+                      <Box>
+                        <Typography variant="body2" fontSize={16}>
+                          Free Pickup available
+                        </Typography>
+                        <Typography py={1} variant="body2" fontSize={16}>
+                          Ready for pickup in stores within 2 hours
+                        </Typography>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          fontSize={16}
+                        >
+                          Pickup at{" "}
+                        </Typography>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          fontSize={16}
+                          fontWeight={600}
+                        >
+                          Accra - 45 Graphic Road
+                        </Typography>
+
+                        <Typography
+                          variant="body2"
+                          fontSize={16}
+                          color="red"
+                          pt={2}
+                        >
+                          {inStock} in stock
+                        </Typography>
+                      </Box>
                     </Stack>
                   </Box>
                 </Grid>
@@ -357,4 +633,6 @@ export default function Product() {
       </Await>
     </Suspense>
   );
-}
+};
+
+export default Product;
