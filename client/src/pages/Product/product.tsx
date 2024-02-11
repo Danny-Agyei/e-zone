@@ -6,18 +6,26 @@ import React, {
   lazy,
 } from "react";
 
-import { Box, Button, Grid, InputBase, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  InputBase,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Radio from "@mui/material/Radio";
 import { Await, useLoaderData } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import SwiperCore, {
-  Lazy,
   Navigation,
   Thumbs,
   Pagination,
   Controller,
-} from "swiper/core";
+  Lazy,
+} from "swiper";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
 
@@ -28,8 +36,9 @@ import { FaCheck } from "react-icons/fa6";
 import { BsPlus, BsDash, BsTruck } from "react-icons/bs";
 import { MdShoppingCart, MdCheckCircle } from "react-icons/md";
 import { IoStorefrontOutline } from "react-icons/io5";
+import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2";
 
-SwiperCore.use([Controller, Thumbs, Pagination, Navigation, lazy]);
+SwiperCore.use([Controller, Thumbs, Pagination, Navigation, Lazy]);
 
 const Product: React.FC = () => {
   const loadedData = useLoaderData() as {
@@ -52,6 +61,8 @@ const Product: React.FC = () => {
       swiper1Ref.current.controller.control = swiper2Ref.current;
     }
   }, []);
+
+  const [swipe, setSwipe] = useState<any>({});
 
   const productImages = (variants: variantsType) => {
     const modifyVariants = variants.map((variant, indx) => ({
@@ -139,10 +150,10 @@ const Product: React.FC = () => {
                           loop={false}
                           spaceBetween={10}
                           slidesPerView={4}
-                          watchSlidesProgress
-                          touchRatio={0.2}
+                          // watchSlidesProgress
+                          // touchRatio={0.2}
                           direction="vertical"
-                          slideToClickedSlide={true}
+                          // slideToClickedSlide={true}
                           navigation
                           onSwiper={setThumbsSwiper}
                           controller={{ control: firstSwiper }}
@@ -168,6 +179,57 @@ const Product: React.FC = () => {
                             </SwiperSlide>
                           ))}
                         </Swiper>
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            display: "flex",
+                            justifyContent: "end",
+                            alignItems: "center",
+                            top: 0,
+                            right: 80,
+                            zIndex: 999,
+                            width: 42,
+                            height: 166,
+                            bgcolor: "#ffffff",
+                          }}
+                        >
+                          <IconButton
+                            sx={{
+                              border: "1px solid #FF8C00",
+                              "&:hover": {
+                                background: "transparent !important",
+                              },
+                            }}
+                            onClick={() => swipe.slideNext()}
+                          >
+                            <HiArrowLongRight size={20} color="#FF8C00" />
+                          </IconButton>
+                        </Box>
+                        <Box
+                          sx={{
+                            position: "absolute",
+                            display: "flex",
+                            justifyContent: "flex-start",
+                            alignItems: "bottom",
+                            top: 0,
+                            left: 0,
+                            zIndex: 999,
+                            width: 42,
+                            height: "auto",
+                          }}
+                        >
+                          <IconButton
+                            sx={{
+                              border: "1px solid #FF8C00",
+                              "&:hover": {
+                                background: "transparent !important",
+                              },
+                            }}
+                            onClick={() => swipe.slidePrev()}
+                          >
+                            <HiArrowLongLeft size={20} color="#FF8C00" />
+                          </IconButton>
+                        </Box>
                       </Box>
                       <Box
                         sx={{
@@ -187,11 +249,11 @@ const Product: React.FC = () => {
                           lazy={true}
                           preloadImages={false}
                           controller={{ control: secondSwiper }}
-                          spaceBetween={40}
-                          slidesPerView={"auto"}
+                          // spaceBetween={40}
+                          slidesPerView={1}
                           centeredSlides={true}
                           thumbs={{ swiper: thumbsSwiper }}
-                          // style={{ width: "100%", height: "100%" }}
+                          style={{ width: "100%", height: "100%" }}
                         >
                           {selectedVariant!.images.map((image, indx) => (
                             <SwiperSlide key={indx}>
@@ -209,11 +271,11 @@ const Product: React.FC = () => {
                                   src={image}
                                   data-src={image}
                                   sx={{
-                                    // position: "absolute",
-                                    // top: 0,
-                                    // left: 0,
-                                    // right: 0,
-                                    // bottom: 0,
+                                    position: "absolute",
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
                                     width: "100%",
                                     height: "100%",
                                     m: "0 auto",
@@ -221,7 +283,9 @@ const Product: React.FC = () => {
                                   }}
                                   alt={`${name}-${selectedVariant!.colorName}`}
                                 />
-                                <Box className="swiper-lazy-preloader"></Box>
+                                <Box className="swiper-lazy-preloader">
+                                  <Box component="span"></Box>
+                                </Box>
                               </Box>
                             </SwiperSlide>
                           ))}
@@ -555,7 +619,7 @@ const Product: React.FC = () => {
                         <Typography
                           component="span"
                           variant="body2"
-                          fontSize={16}
+                          fontSize={18}
                           fontWeight={600}
                         >
                           Free shipping{" "}
@@ -608,7 +672,7 @@ const Product: React.FC = () => {
                         <Typography
                           component="span"
                           variant="body2"
-                          fontSize={16}
+                          fontSize={18}
                           fontWeight={600}
                         >
                           Accra - 45 Graphic Road

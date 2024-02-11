@@ -5,7 +5,6 @@ import { Box, IconButton } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import SwiperCore, {
-  Lazy,
   Navigation,
   Thumbs,
   Pagination,
