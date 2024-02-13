@@ -10,6 +10,8 @@ import ProductCard from "./List/ProductCard";
 import HomeSkeleton from "./Constant/HomeSkeleton";
 import NewArrivalCard from "./List/NewArrivalCard";
 import Error from "./Constant/Error";
+import ProductDetails from "./List/ProductDetails";
+import ProductImageSlider from "./Sliders/ProductImageSlider";
 
 export {
   Navbar,
@@ -24,4 +26,6 @@ export {
   Footer,
   HomeSkeleton,
   Error,
+  ProductDetails,
+  ProductImageSlider,
 };

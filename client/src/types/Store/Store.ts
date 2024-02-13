@@ -4,6 +4,9 @@ export interface ProductType {
     name: string;
     description: string;
     price: number;
+    brand: string;
+    model_name: string;
+    sim_card_size: string;
     slug: string;
     inStock: number;
     type: string;

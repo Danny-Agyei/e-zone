@@ -1,33 +1,16 @@
-import React, {
-  Suspense,
-  useRef,
-  useState,
-  useLayoutEffect,
-  lazy,
-} from "react";
+import React, { Suspense, useState } from "react";
 
 import {
   Box,
   Button,
+  Divider,
   Grid,
-  IconButton,
   InputBase,
   Stack,
   Typography,
 } from "@mui/material";
 import Radio from "@mui/material/Radio";
-import { Await, useLoaderData } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import SwiperCore, {
-  Navigation,
-  Thumbs,
-  Pagination,
-  Controller,
-  Lazy,
-} from "swiper";
-import "swiper/swiper-bundle.min.css";
-import "swiper/swiper.min.css";
+import { Await, Link, useLoaderData } from "react-router-dom";
 
 import { ProductType } from "../../types";
 import ProductSkeleton from "../../components/Constant/ProductSkeleton";
@@ -36,9 +19,7 @@ import { FaCheck } from "react-icons/fa6";
 import { BsPlus, BsDash, BsTruck } from "react-icons/bs";
 import { MdShoppingCart, MdCheckCircle } from "react-icons/md";
 import { IoStorefrontOutline } from "react-icons/io5";
-import { HiArrowLongLeft, HiArrowLongRight } from "react-icons/hi2";
-
-SwiperCore.use([Controller, Thumbs, Pagination, Navigation, Lazy]);
+import { ProductDetails, ProductImageSlider } from "../../components";
 
 const Product: React.FC = () => {
   const loadedData = useLoaderData() as {
@@ -47,40 +28,14 @@ const Product: React.FC = () => {
     }>;
   };
 
-  type variantsType = ProductType["attributes"]["variants"];
   type storageType = ProductType["attributes"]["storage"];
-
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
-  const [firstSwiper, setFirstSwiper] = useState<SwiperCore[]>([]);
-  const [secondSwiper, setSecondSwiper] = useState<SwiperCore[]>([]);
-  const swiper1Ref = useRef<SwiperCore | null>(null);
-  const swiper2Ref = useRef<SwiperCore | null>(null);
-
-  useLayoutEffect(() => {
-    if (swiper1Ref.current && swiper2Ref.current) {
-      swiper1Ref.current.controller.control = swiper2Ref.current;
-    }
-  }, []);
-
-  const [swipe, setSwipe] = useState<any>({});
-
-  const productImages = (variants: variantsType) => {
-    const modifyVariants = variants.map((variant, indx) => ({
-      id: indx + 1,
-      ...variant,
-    }));
-
-    return modifyVariants;
-  };
+  type variantsType = ProductType["attributes"]["variants"];
 
   const [currentColorVariant, setCurrentColorVariant] = useState<
     variantsType[0] | null
   >(null);
 
-  const [storageCapacity, setStorageCapacity] = useState<storageType[0]>();
-
   // @ handle color selection
-
   const onColorVarianthandler = (
     variants: variantsType,
     selectedColor: string
@@ -93,6 +48,8 @@ const Product: React.FC = () => {
   };
 
   // @handle capacity selection
+  const [storageCapacity, setStorageCapacity] = useState<storageType[0]>();
+
   const onStorageCapacityHandler = (
     storage: storageType,
     selectedCapacity: string
@@ -115,7 +72,16 @@ const Product: React.FC = () => {
         {(resolveData) => {
           const { product }: { product: ProductType } = resolveData;
           const {
-            attributes: { name, price, variants, storage, inStock },
+            attributes: {
+              name,
+              price,
+              model_name,
+              brand,
+              description,
+              variants,
+              storage,
+              inStock,
+            },
           } = product;
 
           const availableColorVariants = variants.map((variant) =>
@@ -138,164 +104,24 @@ const Product: React.FC = () => {
             <Box px={10} py={8}>
               <Grid container columnSpacing={5}>
                 <Grid item sm={12} md={6} sx={{ position: "sticky", top: 0 }}>
-                  <Box
-                    sx={{
-                      position: "sticky",
-                      top: 100,
-                    }}
-                  >
-                    <Stack direction="row" spacing={2} justifyContent="center">
-                      <Box sx={{ height: "100%" }}>
-                        <Swiper
-                          loop={false}
-                          spaceBetween={10}
-                          slidesPerView={4}
-                          // watchSlidesProgress
-                          // touchRatio={0.2}
-                          direction="vertical"
-                          // slideToClickedSlide={true}
-                          navigation
-                          onSwiper={setThumbsSwiper}
-                          controller={{ control: firstSwiper }}
-                          style={{ width: "max-content" }}
-                        >
-                          {selectedVariant!.images.map((image, indx) => (
-                            <SwiperSlide key={indx}>
-                              <Box
-                                component="img"
-                                src={image}
-                                sx={{
-                                  width: "100%",
-                                  maxWidth: 70,
-                                  height: "auto",
-                                  borderRadius: 1,
-                                  border: "1px solid #e1e1e1",
-                                  px: 0.2,
-                                  py: 0.8,
-                                  mb: 0.2,
-                                }}
-                                alt={`${name}-${selectedVariant!.colorName}`}
-                              />
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            display: "flex",
-                            justifyContent: "end",
-                            alignItems: "center",
-                            top: 0,
-                            right: 80,
-                            zIndex: 999,
-                            width: 42,
-                            height: 166,
-                            bgcolor: "#ffffff",
-                          }}
-                        >
-                          <IconButton
-                            sx={{
-                              border: "1px solid #FF8C00",
-                              "&:hover": {
-                                background: "transparent !important",
-                              },
-                            }}
-                            onClick={() => swipe.slideNext()}
-                          >
-                            <HiArrowLongRight size={20} color="#FF8C00" />
-                          </IconButton>
-                        </Box>
-                        <Box
-                          sx={{
-                            position: "absolute",
-                            display: "flex",
-                            justifyContent: "flex-start",
-                            alignItems: "bottom",
-                            top: 0,
-                            left: 0,
-                            zIndex: 999,
-                            width: 42,
-                            height: "auto",
-                          }}
-                        >
-                          <IconButton
-                            sx={{
-                              border: "1px solid #FF8C00",
-                              "&:hover": {
-                                background: "transparent !important",
-                              },
-                            }}
-                            onClick={() => swipe.slidePrev()}
-                          >
-                            <HiArrowLongLeft size={20} color="#FF8C00" />
-                          </IconButton>
-                        </Box>
-                      </Box>
-                      <Box
-                        sx={{
-                          position: "relative",
-                          minHeight: 328,
-                          maxHeight: "max-content",
-                          width: "100%",
-                        }}
-                      >
-                        <Swiper
-                          onSwiper={(swiper) => {
-                            if (swiper1Ref.current !== null) {
-                              swiper1Ref.current = swiper;
-                            }
-                          }}
-                          watchSlidesVisibility={true}
-                          lazy={true}
-                          preloadImages={false}
-                          controller={{ control: secondSwiper }}
-                          // spaceBetween={40}
-                          slidesPerView={1}
-                          centeredSlides={true}
-                          thumbs={{ swiper: thumbsSwiper }}
-                          style={{ width: "100%", height: "100%" }}
-                        >
-                          {selectedVariant!.images.map((image, indx) => (
-                            <SwiperSlide key={indx}>
-                              <Box
-                                sx={{
-                                  width: "100%",
-                                  height: "max-content",
-                                  minHeight: 380,
-                                  position: "relative",
-                                }}
-                              >
-                                <Box
-                                  className="swiper-lazy"
-                                  component="img"
-                                  src={image}
-                                  data-src={image}
-                                  sx={{
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    width: "100%",
-                                    height: "100%",
-                                    m: "0 auto",
-                                    objectFit: "contain",
-                                  }}
-                                  alt={`${name}-${selectedVariant!.colorName}`}
-                                />
-                                <Box className="swiper-lazy-preloader">
-                                  <Box component="span"></Box>
-                                </Box>
-                              </Box>
-                            </SwiperSlide>
-                          ))}
-                        </Swiper>
-                      </Box>
-                    </Stack>
-                  </Box>
+                  <ProductImageSlider
+                    selectedVariant={selectedVariant}
+                    name={name}
+                  />
                 </Grid>
                 <Grid item sm={12} md={6} lg={6}>
                   <Box>
+                    <Link to={`shop/collection/brand/${brand}`}>
+                      <Typography
+                        variant="body2"
+                        color="#666"
+                        fontSize={14}
+                        fontWeight={600}
+                        pb={1.2}
+                      >
+                        {brand}
+                      </Typography>
+                    </Link>
                     <Typography variant="h2" fontSize={26} fontWeight={600}>
                       {name} - {selectedVariant.colorName} Color{" "}
                       {selectedCapacity.capacity}
@@ -451,11 +277,17 @@ const Product: React.FC = () => {
                     </Stack>
                   </Box>
                   <Box pt={4}>
+                    <Divider
+                      variant="fullWidth"
+                      sx={{
+                        borderColor: "#e5e5e5",
+                      }}
+                    />
                     <Typography
                       color="#666"
                       variant="body2"
                       fontSize={16}
-                      pb={1.2}
+                      py={1.2}
                     >
                       Availability :{" "}
                       <Typography
@@ -513,7 +345,7 @@ const Product: React.FC = () => {
                           setQty((prevValue) => (qty > 1 ? qty - 1 : prevValue))
                         }
                       >
-                        <BsDash size={22} color="#666" />
+                        <BsDash size={20} color="#666" />
                       </Button>
                       <InputBase
                         onChange={(e) =>
@@ -532,7 +364,7 @@ const Product: React.FC = () => {
                           border: "0 solid #e1e1e1",
                           borderLeftWidth: 1,
                           borderRightWidth: 1,
-                          fontSize: 22,
+                          fontSize: 17,
                           "& input": {
                             textAlign: "center",
                           },
@@ -550,7 +382,7 @@ const Product: React.FC = () => {
                           )
                         }
                       >
-                        <BsPlus size={22} color="#666" />
+                        <BsPlus size={20} color="#666" />
                       </Button>
                     </Stack>
                     <Button
@@ -614,7 +446,7 @@ const Product: React.FC = () => {
                           Deliver available
                         </Typography>
                         <Typography py={1} variant="body2" fontSize={16}>
-                          We deliver within 5 business days
+                          We deliver within 2 - 4S business days
                         </Typography>
                         <Typography
                           component="span"
@@ -691,6 +523,7 @@ const Product: React.FC = () => {
                   </Box>
                 </Grid>
               </Grid>
+              <ProductDetails product={product} description={description} />
             </Box>
           );
         }}

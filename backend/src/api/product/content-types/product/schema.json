@@ -46,9 +46,6 @@
       "type": "boolean",
       "default": false
     },
-    "Features": {
-      "type": "json"
-    },
     "variants": {
       "type": "json",
       "required": true
@@ -72,6 +69,54 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "inversedBy": "products"
+    },
+    "OS": {
+      "type": "string",
+      "required": true
+    },
+    "manufacturer": {
+      "type": "string",
+      "required": true
+    },
+    "brand": {
+      "type": "string",
+      "required": true
+    },
+    "ram": {
+      "type": "string"
+    },
+    "model_name": {
+      "type": "string"
+    },
+    "wireless_carrier": {
+      "type": "string"
+    },
+    "sim_card_slot_count": {
+      "type": "string"
+    },
+    "sim_card_size": {
+      "type": "string"
+    },
+    "Network_Technology": {
+      "type": "string"
+    },
+    "connectivity_technologies": {
+      "type": "string"
+    },
+    "battery_bescription": {
+      "type": "string"
+    },
+    "rear_camera": {
+      "type": "string"
+    },
+    "front_camera": {
+      "type": "string"
+    },
+    "biometric_security_feature": {
+      "type": "string"
+    },
+    "water_resistant": {
+      "type": "string"
     }
   }
 }
