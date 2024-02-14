@@ -49,6 +49,20 @@ export default function ProductImageSlider({
     return modifyVariants;
   };
 
+  const handleTouchEnd = (
+    swiper: any,
+    event: TouchEvent | MouseEvent | PointerEvent
+  ) => {
+    let range = 5;
+    let diff = swiper.isHorizontal()
+      ? (swiper.touches.currentX as number) - (swiper.touches.startX as number)
+      : (swiper.touches.currentY as number) - (swiper.touches.startY as number);
+
+    if (diff < range || diff > -range) {
+      swiper.allowClick = true;
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -87,17 +101,20 @@ export default function ProductImageSlider({
             loop={false}
             spaceBetween={10}
             slidesPerView={4}
-            watchSlidesProgress
+            threshold={5}
+            on={{ touchEnd: handleTouchEnd }}
             touchRatio={0.2}
             direction="vertical"
             slideToClickedSlide={true}
             onSwiper={setThumbsSwiper}
             controller={{ control: firstSwiper }}
+            preloadImages={false}
             style={{ width: "max-content" }}
           >
             {selectedVariant!.images.map((image, indx) => (
               <SwiperSlide key={indx}>
                 <Box
+                  className="thumb-img"
                   component="img"
                   src={image}
                   sx={{
@@ -105,7 +122,6 @@ export default function ProductImageSlider({
                     maxWidth: 70,
                     height: "auto",
                     borderRadius: 1,
-                    border: "1px solid #e1e1e1",
                     px: 0.2,
                     py: 0.8,
                     mb: 0.2,
@@ -147,56 +163,64 @@ export default function ProductImageSlider({
             minHeight: 328,
             maxHeight: "max-content",
             width: "100%",
+            m: "0 auto",
           }}
         >
           <Swiper
             onSwiper={(swiper) => {
+              swiper.update();
               if (swiper1Ref.current !== null) {
                 swiper1Ref.current = swiper;
               }
             }}
+            freeMode={false}
+            threshold={5}
+            on={{ touchEnd: handleTouchEnd }}
             watchSlidesVisibility={true}
-            lazy={true}
+            watchSlidesProgress={true}
+            observer={true}
+            observeParents={true}
             preloadImages={false}
+            lazy={true}
             controller={{ control: secondSwiper }}
-            // spaceBetween={40}
-            slidesPerView={1}
+            spaceBetween={0}
+            slidesPerView={"auto"}
             centeredSlides={true}
             thumbs={{ swiper: thumbsSwiper }}
-            style={{ width: "100%", height: "100%" }}
+            // style={{ maxWidth: "100%", maxHeight: "100%" }}
           >
             {selectedVariant!.images.map((image, indx) => (
               <SwiperSlide key={indx}>
-                {/* <Box
+                <Box
                   sx={{
                     width: "100%",
                     height: "max-content",
                     minHeight: 380,
                     position: "relative",
                   }}
-                > */}
-                <Box
-                  className="swiper-lazy"
-                  component="img"
-                  src={image}
-                  data-src={image}
-                  sx={{
-                    // position: "absolute",
-                    // top: 0,
-                    // left: 0,
-                    // right: 0,
-                    // bottom: 0,
-                    width: "100%",
-                    // height: "100%",
-                    m: "0 auto",
-                    objectFit: "contain",
-                  }}
-                  alt={`${name}-${selectedVariant!.colorName}`}
-                />
-                <Box className="swiper-lazy-preloader">
-                  <Box component="span"></Box>
+                >
+                  <Box
+                    className="swiper-lazy"
+                    component="img"
+                    src={image}
+                    data-src={image}
+                    sx={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      width: "100%",
+                      height: "100%",
+                      m: "0 auto",
+                      objectFit: "contain",
+                    }}
+                    alt={`${name}-${selectedVariant!.colorName}`}
+                  />
+                  <Box className="swiper-lazy-preloader">
+                    <Box component="span"></Box>
+                  </Box>
                 </Box>
-                {/* </Box> */}
               </SwiperSlide>
             ))}
           </Swiper>

@@ -396,7 +396,7 @@ const Product: React.FC = () => {
                         p: 2,
                         boxShadow: "none !important",
                         "&:hover": {
-                          bgcolor: "rgba(255,140, 0, 0.9) !important",
+                          bgcolor: "#eea501 !important",
                         },
                       }}
                     >
