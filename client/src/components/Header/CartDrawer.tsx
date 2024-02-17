@@ -20,16 +20,16 @@ export default function CartDrawer(props: {
   openCart: boolean;
 }) {
   const { toggleCartDrawer, openCart } = props;
-  const cartList: CartItemType[] = store.use.cart();
+  const shoppingCart: CartItemType[] = store.use.cart();
 
   //@subtotal calculation
-  const subtotal = cartList.reduce(
+  const subtotal = shoppingCart.reduce(
     (prev: any, curr: any) => prev + curr.price * curr.qty,
     0
   );
 
   //@stripe
-  const lineItems = cartList.map((item: any) => {
+  const lineItems = shoppingCart.map((item: any) => {
     if (item.name === "UO - Shelf Divider") {
       return {
         price: "price_1OWLB8DnQNiDZWQ7tPGe1nyg",
@@ -77,41 +77,46 @@ export default function CartDrawer(props: {
           height: "100%",
         }}
       >
-        {cartList.length > 0 ? (
-          <List>
-            {cartList.map((item: any) => (
-              <CartItem item={item} key={item.id} />
-            ))}
-          </List>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{
+            px: 2,
+            py: 2,
+            boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
+          }}
+        >
+          <Typography variant="body2" fontSize={18} fontWeight={600}>
+            Your Cart
+          </Typography>
+          <IconButton
+            onClick={toggleCartDrawer}
+            sx={{
+              bgcolor: "text.primary",
+              "&:hover": { bgcolor: "text.primary", opacity: 0.8 },
+            }}
+          >
+            <IoCloseOutline fontWeight={600} fontSize={21} color="#fff" />
+          </IconButton>
+        </Stack>
+        <Divider
+          variant="fullWidth"
+          sx={{
+            borderColor: "#eee",
+          }}
+        />
+        {shoppingCart.length > 0 ? (
+          <Box sx={{ maxHeight: 500, overflow: "auto" }}>
+            <List sx={{ "&:last-child hr": { display: "none" } }}>
+              {shoppingCart.map((item: any) => (
+                <CartItem item={item} key={item.id} />
+              ))}
+            </List>
+          </Box>
         ) : (
           <>
-            <Box>
-              <Stack
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-                sx={{ px: 2, py: 2 }}
-              >
-                <Typography variant="body2" fontSize={18} fontWeight={600}>
-                  Your Cart
-                </Typography>
-                <IconButton
-                  onClick={toggleCartDrawer}
-                  sx={{
-                    bgcolor: "text.primary",
-                    "&:hover": { bgcolor: "text.primary", opacity: 0.8 },
-                  }}
-                >
-                  <IoCloseOutline fontWeight={600} fontSize={21} color="#fff" />
-                </IconButton>
-              </Stack>
-              <Divider
-                variant="fullWidth"
-                sx={{
-                  borderColor: "#e5e5e5",
-                }}
-              />
-            </Box>
+            <Box></Box>
             <Box
               sx={{
                 textAlign: "center",
@@ -175,7 +180,8 @@ export default function CartDrawer(props: {
         />
         <Stack direction="row" justifyContent="space-between" mb={2}>
           <Typography variant="h3" fontWeight={600} fontSize={18}>
-            Subtotal [1 items] :
+            Subtotal [{shoppingCart.length}{" "}
+            {shoppingCart.length > 1 ? "items" : "item"}] :
           </Typography>
           <Typography fontWeight={600} variant="body1">
             ${subtotal.toFixed(2)}

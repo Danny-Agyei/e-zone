@@ -9,7 +9,11 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { AiOutlineDelete } from "react-icons/ai";
+import {
+  AiOutlineDelete,
+  AiOutlinePlusCircle,
+  AiOutlineMinusCircle,
+} from "react-icons/ai";
 
 //   import { CartItemProps } from "../../types";
 import store from "../../lib/zustand/store";
@@ -26,7 +30,7 @@ export default function CartItem(props: { item: any }) {
 
   return (
     <>
-      <ListItem disablePadding sx={{ px: 2, py: 1.5 }}>
+      <ListItem disablePadding sx={{ px: 2, py: 2 }}>
         <ListItemText
           primary={
             <Grid container>
@@ -49,7 +53,7 @@ export default function CartItem(props: { item: any }) {
                     <Stack direction="row" alignItems="flex-end" px={2}>
                       <Stack direction="row" alignItems="center">
                         <Typography variant="body2" component="span">
-                          Qty
+                          Qty :{" "}
                         </Typography>
                         <Button
                           onClick={() => alert(1)}
@@ -58,12 +62,12 @@ export default function CartItem(props: { item: any }) {
                             p: 0,
                             fontWeight: 600,
                             color: "text.primary",
-                            fontSize: 16,
+                            fontSize: 22,
                           }}
                         >
-                          -
+                          <AiOutlineMinusCircle />
                         </Button>
-                        <Typography variant="body2" component="span">
+                        <Typography px={0.5} variant="body2" component="span">
                           {qty}
                         </Typography>
                         <Button
@@ -72,12 +76,12 @@ export default function CartItem(props: { item: any }) {
                             p: 0,
                             fontWeight: 600,
                             color: "text.primary",
-                            fontSize: 16,
+                            fontSize: 22,
                             minWidth: 30,
                           }}
                           variant="text"
                         >
-                          +
+                          <AiOutlinePlusCircle />
                         </Button>
                       </Stack>
                     </Stack>
@@ -115,7 +119,7 @@ export default function CartItem(props: { item: any }) {
           }
         />
       </ListItem>
-      <Divider sx={{ m: 0, p: 0 }} />
+      <Divider sx={{ m: 0, p: 0, borderColor: "#eee" }} />
     </>
   );
 }
