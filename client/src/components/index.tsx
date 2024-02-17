@@ -5,7 +5,7 @@ import Banner from "./Header/Banner";
 import CartItem from "./List/CartItem";
 import NavItem from "./List/NavItem";
 import CategoryCard from "./List/CategoryCard";
-import CategorySlider from "./Sliders/CategorySlider";
+import CustomSlider from "./Sliders/CustomSlider";
 import ProductCard from "./List/ProductCard";
 import HomeSkeleton from "./Constant/HomeSkeleton";
 import NewArrivalCard from "./List/NewArrivalCard";
@@ -20,7 +20,7 @@ export {
   CartItem,
   Banner,
   CategoryCard,
-  CategorySlider,
+  CustomSlider,
   ProductCard,
   NewArrivalCard,
   Footer,

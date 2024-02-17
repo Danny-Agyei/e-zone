@@ -8,14 +8,21 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { NavItem } from "../../components";
 import { BsBag } from "react-icons/bs";
 import { HiOutlineUser } from "react-icons/hi2";
+import logo from "../../logo.png";
 
-import logo from '../../logo.png'
+import store from "../../lib/zustand/store";
+import CartDrawer from "./CartDrawer";
 
 const Navbar = () => {
+  const shopCart = store.use.cart();
+  const [openCart, setOpenCart] = useState(false);
+
+  const toggleCartDrawer = () => setOpenCart(!openCart);
   return (
     <Box
       px={10}
@@ -25,9 +32,10 @@ const Navbar = () => {
       borderColor="#eee"
       bgcolor="#fff"
       position="sticky"
-      zIndex={999999999}
+      zIndex={9998}
       top={0}
     >
+      <CartDrawer openCart={openCart} toggleCartDrawer={toggleCartDrawer} />
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Box>
           <List disablePadding sx={{ display: "flex", alignItems: "center" }}>
@@ -845,14 +853,19 @@ const Navbar = () => {
                 <HiOutlineUser size={25} color="#666" />
               </Link>
             </Box>
-            <Box position="relative">
+            <Box
+              position="relative"
+              onClick={toggleCartDrawer}
+              sx={{ cursor: "pointer" }}
+            >
               <IconButton sx={{ mr: 0.5 }}>
                 <BsBag size={22} />
               </IconButton>
               <Typography
                 component="span"
                 variant="body2"
-                fontSize={10}
+                fontSize={11}
+                fontWeight={600}
                 position="absolute"
                 top={0}
                 right={0}
@@ -863,10 +876,10 @@ const Navbar = () => {
                 alignItems="center"
                 p={0.7}
                 borderRadius={75}
-                bgcolor="text.secondary"
+                bgcolor="red"
                 color="#ffffff"
               >
-                1
+                {shopCart.length}
               </Typography>
             </Box>
           </Stack>

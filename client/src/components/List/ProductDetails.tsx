@@ -131,7 +131,7 @@ export default function ProductDetails({
       </Box>
       <Grid container pt={8} spacing={8}>
         <Grid item sm={12} md={4}>
-          <Box>
+          <Box sx={{ position: "sticky", top: 0 }}>
             <Typography variant="h2" fontSize={22} fontWeight={600}>
               Customer Ratings
             </Typography>

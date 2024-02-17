@@ -205,7 +205,7 @@ export default function ProductImageSlider({
                     src={image}
                     data-src={image}
                     sx={{
-                      position: "absolute",
+                      // position: "absolute",
                       top: 0,
                       left: 0,
                       right: 0,

@@ -9,12 +9,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { AiOutlineDelete } from "react-icons/ai";
+
 //   import { CartItemProps } from "../../types";
-//   import cartStore from "../../lib/zustand/store";
+import store from "../../lib/zustand/store";
 
 export default function CartItem(props: { item: any }) {
   //   const updateQty = cartStore.use.updateQty();
-  //   const removeCartItem = cartStore.use.removeFromCart();
+  const removeFromCart = store.use.removeFromCart();
 
   const { id, qty, name, price, image, stock, color } = props.item;
 
@@ -30,12 +32,7 @@ export default function CartItem(props: { item: any }) {
             <Grid container>
               <Grid item xs={10}>
                 <Stack direction="row" maxHeight={100}>
-                  <img
-                    width="80px"
-                    height="80px"
-                    src={`${process.env.REACT_APP_BASE_URL}${image}`}
-                    alt={name}
-                  />
+                  <img width="80px" height="80px" src={image} alt={name} />
                   <Stack direction="column" justifyContent="space-between">
                     <Box px={2}>
                       <Typography
@@ -52,7 +49,7 @@ export default function CartItem(props: { item: any }) {
                     <Stack direction="row" alignItems="flex-end" px={2}>
                       <Stack direction="row" alignItems="center">
                         <Typography variant="body2" component="span">
-                          Quantity
+                          Qty
                         </Typography>
                         <Button
                           onClick={() => alert(1)}
@@ -99,15 +96,17 @@ export default function CartItem(props: { item: any }) {
                   </Typography>
                   <Box>
                     <IconButton
-                      onClick={() => alert(id)}
+                      onClick={() => removeFromCart(id)}
                       sx={{
-                        fontSize: 45,
-                        width: "20px",
-                        height: "20px",
-                        color: "#bbb",
+                        bgcolor: "#ececec",
+                        color: "text.primary",
+                        "&:hover": {
+                          bgcolor: "#f9e9e9",
+                          color: "red",
+                        },
                       }}
                     >
-                      &times;
+                      <AiOutlineDelete fontSize={20} />
                     </IconButton>
                   </Box>
                 </Stack>

@@ -37,7 +37,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
 
   return (
     <Card
-      sx={{ maxWidth: 300, boxShadow: "none" }}
+      sx={{ maxWidth: 300, width: "100%", boxShadow: "none" }}
       onMouseEnter={() => setisHover(true)}
       onMouseLeave={() => setisHover(false)}
     >
@@ -86,14 +86,14 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           />
         </Box>
       </Link>
-      <CardContent sx={{ px: 0, pt:5}}>
+      <CardContent sx={{ px: 0, pt: 5 }}>
         <Link to={`/products/${slug}`}>
           <Typography variant="h3" fontSize={16} fontWeight={600}>
             {name}
           </Typography>
         </Link>
         <Box py={1.2}>
-          <Stack direction="row" spacing={2} alignItems="center">
+          <Stack direction="row" spacing={1} alignItems="center">
             <Box lineHeight={0}>
               <TiStarFullOutline size={20} color="#FF8C00" />
               <TiStarFullOutline size={20} color="#FF8C00" />
@@ -101,7 +101,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
               <TiStarFullOutline size={20} color="#FF8C00" />
               <TiStarFullOutline size={20} color="#FF8C00" />
             </Box>
-            <Typography variant="body2">( 25 reviews )</Typography>
+            <Typography variant="body2">(25)</Typography>
           </Stack>
         </Box>
         <Stack direction="row" spacing={2} alignItems="center">

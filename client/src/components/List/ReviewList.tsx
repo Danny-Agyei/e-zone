@@ -2,11 +2,13 @@ import {
   Avatar,
   Box,
   Button,
+  InputBase,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
   Rating,
+  Stack,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -17,9 +19,9 @@ import StarRating from "../Constant/StarRating";
 export default function ReviewList() {
   return (
     <Box>
-      <Typography variant="h2" fontSize={16}>
+      {/* <Typography variant="h2" fontSize={16}>
         This product has no reviews. Share your thoughts with other customers.
-      </Typography>
+      </Typography> */}
       <Box
         sx={{
           border: "1px solid #e9ecef",
@@ -69,50 +71,82 @@ export default function ReviewList() {
           ))}
         </List>
       </Box>
-      <Button
-        variant="contained"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          bgcolor: "text.secondary",
-          color: "text.primary",
-          fontWeight: 600,
-          mt: 4,
-          width: "100%",
-          maxWidth: 250,
-          p: "12px 20px",
-          boxShadow: "none !important",
-          "&:hover": {
-            bgcolor: "#eea501 !important",
-          },
-        }}
-      >
-        Write a review
-      </Button>
-      <Box sx={{ border: "1px solid #eee", py: 2, my: 2 }}>
-        <Typography variant="h4" fontSize={18} fontWeight={600}>
-          Write Your Own Reviews.
+      <Box pt={4}>
+        <Typography variant="h4" pb={1} fontSize={18} fontWeight={600}>
+          Leave a review.
         </Typography>
-        <Typography variant="body2" fontSize={14} color="#666">
-          Only registered users can write reviews. Please{" "}
-          <Link to="/account/login">
-            <Typography
-              component="span"
-              sx={{ textDecoration: "underline", fontWeight: 600 }}
-            >
-              login
-            </Typography>{" "}
-          </Link>{" "}
-          or{" "}
-          <Link to="/account/login">
-            <Typography
-              component="span"
-              sx={{ textDecoration: "underline", fontWeight: 600 }}
-            >
-              register
-            </Typography>
-          </Link>
-        </Typography>
+        <StarRating />
+        <Stack pt={2} spacing={2} alignItems="center" direction="row">
+          {1 > 0 && (
+            <>
+              <InputBase
+                inputComponent="textarea"
+                sx={{
+                  border: "1px solid #e1e1e1",
+                  p: "25px 20px",
+
+                  width: "65%",
+                }}
+                placeholder="Enter a review"
+              />
+              <Button
+                variant="contained"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  bgcolor: "text.secondary",
+                  color: "text.primary",
+                  fontWeight: 600,
+                  mt: 4,
+                  width: "35%",
+                  maxWidth: 250,
+                  p: "12px 20px",
+                  boxShadow: "none !important",
+                  "&:hover": {
+                    bgcolor: "#eea501 !important",
+                  },
+                }}
+              >
+                Write a review
+              </Button>
+            </>
+          )}
+          {1 > 2 && (
+            <Box sx={{ py: 2, my: 2 }}>
+              <Typography variant="h4" fontSize={18} fontWeight={600}>
+                Write Your Own Reviews.
+              </Typography>
+              <Typography variant="body2" fontSize={14} color="#666">
+                Only registered users can write reviews. Please{" "}
+                <Link to="/account/login">
+                  <Typography
+                    component="span"
+                    sx={{
+                      color: "text.secondary",
+                      textDecoration: "underline",
+                      fontWeight: 500,
+                    }}
+                  >
+                    login
+                  </Typography>{" "}
+                </Link>{" "}
+                or{" "}
+                <Link to="/account/login">
+                  <Typography
+                    component="span"
+                    sx={{
+                      color: "text.secondary",
+                      textDecoration: "underline",
+                      fontWeight: 500,
+                    }}
+                  >
+                    register
+                  </Typography>
+                </Link>
+              </Typography>
+            </Box>
+          )}
+        </Stack>
       </Box>
     </Box>
   );

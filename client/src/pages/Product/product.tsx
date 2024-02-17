@@ -1,5 +1,4 @@
 import React, { Suspense, useState } from "react";
-
 import {
   Box,
   Button,
@@ -11,17 +10,29 @@ import {
 } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import { Await, Link, useLoaderData } from "react-router-dom";
-
-import { ProductType } from "../../types";
-import ProductSkeleton from "../../components/Constant/ProductSkeleton";
 import { TiStarFullOutline } from "react-icons/ti";
 import { FaCheck } from "react-icons/fa6";
 import { BsPlus, BsDash, BsTruck } from "react-icons/bs";
 import { MdShoppingCart, MdCheckCircle } from "react-icons/md";
-import { IoStorefrontOutline } from "react-icons/io5";
-import { ProductDetails, ProductImageSlider } from "../../components";
+import { SwiperSlide } from "swiper/react";
+import { v4 as uuid } from "uuid";
 
-const Product: React.FC = () => {
+import { IoStorefrontOutline } from "react-icons/io5";
+import { ProductType } from "../../types";
+import ProductSkeleton from "../../components/Constant/ProductSkeleton";
+import {
+  CustomSlider,
+  ProductCard,
+  ProductDetails,
+  ProductImageSlider,
+} from "../../components";
+
+import store from "../../lib/zustand/store";
+
+const Product = () => {
+  const addToCart = store.use.addToCart();
+  const removeFromCart = store.use.removeFromCart();
+
   const loadedData = useLoaderData() as {
     data: Promise<{
       data: Promise<any>;
@@ -60,8 +71,24 @@ const Product: React.FC = () => {
     setStorageCapacity(storageCapacity!);
   };
 
-  // @ quantity select handler
+  // @ cart handler
   const [qty, setQty] = useState(1);
+
+  const onAddToCartHandler = ({
+    id,
+    price,
+    qty,
+    name,
+    color,
+    image,
+  }: {
+    price: number;
+    qty: number;
+    color: string;
+    id: string;
+    name: string;
+    image: string;
+  }) => addToCart({ id, name, price, qty, color, image });
 
   return (
     <Suspense fallback={<ProductSkeleton />}>
@@ -101,7 +128,7 @@ const Product: React.FC = () => {
               : storage![0];
 
           return (
-            <Box px={10} py={8}>
+            <Box px={10} pt={8}>
               <Grid container columnSpacing={5}>
                 <Grid item sm={12} md={6} sx={{ position: "sticky", top: 0 }}>
                   <ProductImageSlider
@@ -139,9 +166,6 @@ const Product: React.FC = () => {
                       <Typography variant="body2">(25 reviews)</Typography>
                     </Stack>
                   </Box>
-                  <Typography variant="h3" fontSize={22} fontWeight={600}>
-                    ${selectedCapacity.price}
-                  </Typography>
                   <Box pt={2.5}>
                     <Typography
                       variant="body2"
@@ -399,6 +423,16 @@ const Product: React.FC = () => {
                           bgcolor: "#eea501 !important",
                         },
                       }}
+                      onClick={() =>
+                        addToCart({
+                          id: uuid(),
+                          name,
+                          price: selectedCapacity.price,
+                          qty,
+                          color: selectedVariant.colorName,
+                          image: selectedVariant.images[0],
+                        })
+                      }
                     >
                       <MdShoppingCart size={22} color="#13131a" />
                       <Typography
@@ -408,7 +442,7 @@ const Product: React.FC = () => {
                         color="text.primary"
                         fontWeight={600}
                       >
-                        ADD TO CART
+                        ADD TO CART - ${selectedCapacity.price}
                       </Typography>
                     </Button>
                   </Box>
@@ -524,6 +558,30 @@ const Product: React.FC = () => {
                 </Grid>
               </Grid>
               <ProductDetails product={product} description={description} />
+              <Box id="category-slide" position="relative">
+                <Typography variant="h2" fontSize={22} fontWeight={600}>
+                  Product Related
+                </Typography>
+                <Divider
+                  variant="fullWidth"
+                  sx={{
+                    borderColor: "text.secondary",
+                    maxWidth: 180,
+                    borderWidth: 1,
+                    mt: 2,
+                    mb: 4,
+                  }}
+                />
+                <CustomSlider top={180} left={1} right={1}>
+                  {Array.from({ length: 8 }, (_, indx) => (
+                    <SwiperSlide style={{ width: "20% !important" }}>
+                      <Box sx={{ minWidth: 200 }}>
+                        <ProductCard product={product} />
+                      </Box>
+                    </SwiperSlide>
+                  ))}
+                </CustomSlider>
+              </Box>
             </Box>
           );
         }}

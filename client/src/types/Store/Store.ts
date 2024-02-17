@@ -71,6 +71,7 @@ export interface ProductCardType {
   };
 }
 
+// @Cart
 export type CartItemType = {
   id: string;
   name: string;
@@ -78,8 +79,17 @@ export type CartItemType = {
   image: string;
   price: number;
   qty: number;
-  stock: number;
+  size?:string | number
+  // stock: number;
 };
+
+export interface CartSliceTypes{
+    cart: CartItemType[]
+    addToCart: (item: CartItemType) => void
+    removeFromCart: (id:string) => void
+}
+
+
 
 export interface BannerType {
   attributes: {

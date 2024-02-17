@@ -5,7 +5,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import {
   Banner,
   CategoryCard,
-  CategorySlider,
+  CustomSlider,
   NewArrivalCard,
   ProductCard,
   HomeSkeleton,
@@ -82,7 +82,7 @@ export const Home = () => {
                 </Typography>
               </Box>
               <Box id="category-slide" px={10} pb={8} position="relative">
-                <CategorySlider>
+                <CustomSlider left={65} right={65} top={55}>
                   <SwiperSlide>
                     <CategoryCard
                       cartegoryUrl="/shop/collection?q=headphones"
@@ -132,7 +132,7 @@ export const Home = () => {
                       imgUrl="http://localhost:1337/uploads/Ear_Buds_7c8da9065c.jpeg"
                     />
                   </SwiperSlide>
-                </CategorySlider>
+                </CustomSlider>
               </Box>
               <Box px={10}>
                 <Typography variant="h2" pb={4} fontSize={26} fontWeight={700}>

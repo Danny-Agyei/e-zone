@@ -5,7 +5,7 @@ import Rating from "@mui/material/Rating";
 import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 
 const labels: { [index: string]: string } = {
-  1: "very Bad",
+  1: "Very poor",
   2: "Poor",
   3: "Okay",
   4: "Good",
@@ -17,7 +17,7 @@ function getLabelText(value: number) {
 }
 
 export default function HoverRating() {
-  const [value, setValue] = React.useState<number | null>(5);
+  const [value, setValue] = React.useState<number | null>(3);
   const [hover, setHover] = React.useState(-1);
 
   return (
@@ -39,11 +39,13 @@ export default function HoverRating() {
         onChangeActive={(event, newHover) => {
           setHover(newHover);
         }}
-        icon={<TiStarFullOutline fontSize="inherit" />}
-        emptyIcon={<TiStarOutline fontSize="inherit" color="#ccc" />}
+        icon={<TiStarFullOutline fontSize={18} />}
+        emptyIcon={<TiStarOutline fontSize={18} color="#ccc" />}
       />
       {value !== null && (
-        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+        <Box sx={{ ml: 2, color: "text.secondary" }}>
+          {labels[hover !== -1 ? hover : value]}
+        </Box>
       )}
     </Box>
   );
