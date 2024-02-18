@@ -19,14 +19,10 @@ import {
 import store from "../../lib/zustand/store";
 
 export default function CartItem(props: { item: any }) {
-  //   const updateQty = cartStore.use.updateQty();
+  const updateQty = store.use.updateQty();
   const removeFromCart = store.use.removeFromCart();
 
   const { id, qty, name, price, image, stock, color } = props.item;
-
-  // @Quantity update
-  //   const onQtyIncrease = () => qty < stock && updateQty(id, qty + 1);
-  //   const onQtyDecrease = () => qty > 1 && updateQty(id, qty - 1);
 
   return (
     <>
@@ -56,7 +52,7 @@ export default function CartItem(props: { item: any }) {
                           Qty :{" "}
                         </Typography>
                         <Button
-                          onClick={() => alert(1)}
+                          onClick={() => updateQty({ id, type: "dec" })}
                           sx={{
                             minWidth: 30,
                             p: 0,
@@ -71,7 +67,7 @@ export default function CartItem(props: { item: any }) {
                           {qty}
                         </Typography>
                         <Button
-                          onClick={() => alert(1)}
+                          onClick={() => updateQty({ id, type: "inc" })}
                           sx={{
                             p: 0,
                             fontWeight: 600,

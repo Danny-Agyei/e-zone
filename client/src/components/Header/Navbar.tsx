@@ -31,6 +31,7 @@ const Navbar = () => {
       borderBottom={1}
       borderColor="#eee"
       bgcolor="#fff"
+      boxShadow="rgba(100, 100, 111, 0.1) 0px 1px 5px 0px"
       position="sticky"
       zIndex={9998}
       top={0}

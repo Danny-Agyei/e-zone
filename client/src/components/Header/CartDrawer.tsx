@@ -15,6 +15,28 @@ import store from "../../lib/zustand/store";
 import { CartItemType } from "../../types";
 import { Link } from "react-router-dom";
 
+import LinearProgress, {
+  linearProgressClasses,
+} from "@mui/material/LinearProgress";
+
+import { styled } from "@mui/material/styles";
+
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 8,
+  width: "100%",
+  borderRadius: 5,
+  transition: "all .25s ease0",
+  [`&.${linearProgressClasses.colorPrimary}`]: {
+    backgroundColor: "#e9ecef",
+    transition: "all .25s ease0",
+  },
+  [`& .${linearProgressClasses.bar}`]: {
+    borderRadius: 5,
+    backgroundColor: "#ffb100",
+    transition: "all .25s ease0",
+  },
+}));
+
 export default function CartDrawer(props: {
   toggleCartDrawer: () => void;
   openCart: boolean;
@@ -77,35 +99,44 @@ export default function CartDrawer(props: {
           height: "100%",
         }}
       >
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
+        <Box
           sx={{
             px: 2,
             py: 2,
             boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
           }}
         >
-          <Typography variant="body2" fontSize={18} fontWeight={600}>
-            Your Cart
-          </Typography>
-          <IconButton
-            onClick={toggleCartDrawer}
-            sx={{
-              bgcolor: "text.primary",
-              "&:hover": { bgcolor: "text.primary", opacity: 0.8 },
-            }}
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
           >
-            <IoCloseOutline fontWeight={600} fontSize={21} color="#fff" />
-          </IconButton>
-        </Stack>
-        <Divider
-          variant="fullWidth"
-          sx={{
-            borderColor: "#eee",
-          }}
-        />
+            <Typography variant="body2" fontSize={18} fontWeight={600}>
+              Your Cart
+            </Typography>
+            <IconButton
+              onClick={toggleCartDrawer}
+              sx={{
+                bgcolor: "text.primary",
+                "&:hover": { bgcolor: "text.primary", opacity: 0.8 },
+              }}
+            >
+              <IoCloseOutline fontWeight={600} fontSize={20} color="#fff" />
+            </IconButton>
+          </Stack>
+          <Typography variant="body2" py={1} fontSize={14}>
+            Spend $100.00 to unlock{" "}
+            <Typography
+              component="span"
+              variant="body2"
+              fontSize={14}
+              fontWeight={600}
+            >
+              free shipping!
+            </Typography>
+          </Typography>
+          <BorderLinearProgress variant="determinate" value={9} />
+        </Box>
         {shoppingCart.length > 0 ? (
           <Box sx={{ maxHeight: 500, overflow: "auto" }}>
             <List sx={{ "&:last-child hr": { display: "none" } }}>

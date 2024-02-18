@@ -16,8 +16,8 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
   return (
     <>
       <Swiper
-        spaceBetween={0}
-        pagination={true}
+        spaceBetween={30}
+        pagination={{ clickable: true }}
         centeredSlides={true}
         autoplay={{
           delay: 8000,
@@ -42,46 +42,20 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
           return (
             <SwiperSlide key={indx} style={{ height: "100%" }}>
               <Box
-                bgcolor="orange"
                 sx={{
                   width: "100%",
-                  height: "70vh",
-                  display: "flex",
-                  alignItems: "center",
-                  borderRadius: 5,
+                  height: "100%",
+                  maxHeight: 500,
                 }}
               >
-                <Box m="0 auto">
-                  <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    spacing={15}
-                  >
-                    <Box maxWidth={{ xs: "100%", md: 520 }}>
-                      <Typography
-                        lineHeight="1em"
-                        fontSize={40}
-                        fontWeight={900}
-                        pb={2}
-                      >
-                        {heading}
-                      </Typography>
-                      <Typography fontSize={26} variant="body2">
-                        {description}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <img
-                        width="350px"
-                        height="350px"
-                        style={{ objectFit: "cover" }}
-                        src={`${process.env.REACT_APP_BASE_URL}${url}`}
-                        alt={heading}
-                      />
-                    </Box>
-                  </Stack>
-                </Box>
+                <Box
+                  component="img"
+                  width="100%"
+                  height="100%"
+                  borderRadius={5}
+                  src={`${process.env.REACT_APP_BASE_URL}${url}`}
+                  alt={heading}
+                />
               </Box>
             </SwiperSlide>
           );

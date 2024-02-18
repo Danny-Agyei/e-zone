@@ -75,8 +75,8 @@ export const Home = () => {
                   variant="h2"
                   pt={8}
                   pb={4}
-                  fontSize={26}
-                  fontWeight={700}
+                  fontSize={22}
+                  fontWeight={600}
                 >
                   Our Top Categories
                 </Typography>
@@ -135,7 +135,7 @@ export const Home = () => {
                 </CustomSlider>
               </Box>
               <Box px={10}>
-                <Typography variant="h2" pb={4} fontSize={26} fontWeight={700}>
+                <Typography variant="h2" pb={4} fontSize={22} fontWeight={600}>
                   Trending Products
                 </Typography>
                 <Grid container columnSpacing={8}>
@@ -153,8 +153,8 @@ export const Home = () => {
                       variant="h2"
                       pt={8}
                       pb={2}
-                      fontSize={26}
-                      fontWeight={700}
+                      fontSize={22}
+                      fontWeight={600}
                     >
                       New Arrival
                     </Typography>

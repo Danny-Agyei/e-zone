@@ -77,6 +77,7 @@ const Product = () => {
   const onAddToCartHandler = ({
     id,
     price,
+    inStock,
     qty,
     name,
     color,
@@ -84,11 +85,12 @@ const Product = () => {
   }: {
     price: number;
     qty: number;
+    inStock: number;
     color: string;
     id: string;
     name: string;
     image: string;
-  }) => addToCart({ id, name, price, qty, color, image });
+  }) => addToCart({ id, inStock, name, price, qty, color, image });
 
   return (
     <Suspense fallback={<ProductSkeleton />}>
@@ -431,6 +433,7 @@ const Product = () => {
                           qty,
                           color: selectedVariant.colorName,
                           image: selectedVariant.images[0],
+                          inStock,
                         })
                       }
                     >

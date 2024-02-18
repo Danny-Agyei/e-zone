@@ -34,19 +34,27 @@ a {
 }
 
 .swiper-pagination-bullet {
-  width: 20px;
-  height: 20px;
+  width: 12px !important;
+  height: 12px !important;
   text-align: center;
   line-height: 20px;
   font-size: 12px;
   color: #000;
   opacity: 1;
   background: rgba(0, 0, 0, 0.2);
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 2px 8px 0px !important
+}
+
+.swiper-pagination-bullets {
+  left:50px !important;
+  text-align: left;
+  width: max-content !important;
 }
 
 .swiper-pagination-bullet-active {
   color: #fff;
-  background: #ffb100 !important;
+  background: #fff !important;
+  
 }
 
 #category-slide .swiper-slide {

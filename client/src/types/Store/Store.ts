@@ -13,16 +13,14 @@ export interface ProductType {
     features: string[];
     hasDiscount: boolean;
     discountPercent: number;
-    sizes:
-     {
+    sizes: {
       size: number;
       price: number;
     }[];
-    storage:
-      {
-          capacity: string;
-          price: number;
-        }[];
+    storage: {
+      capacity: string;
+      price: number;
+    }[];
     variants: {
       images: string[];
       details: string;
@@ -79,22 +77,21 @@ export type CartItemType = {
   image: string;
   price: number;
   qty: number;
-  size?:string | number
-  // stock: number;
+  size?: string | number;
+  inStock: number;
 };
 
-export interface CartSliceTypes{
-    cart: CartItemType[]
-    addToCart: (item: CartItemType) => void
-    removeFromCart: (id:string) => void
+export interface CartSliceTypes {
+  cart: CartItemType[];
+  addToCart: (item: CartItemType) => void;
+  updateQty: (info: { id: string; type: "dec" | "inc" }) => void;
+  removeFromCart: (id: string) => void;
 }
-
-
 
 export interface BannerType {
   attributes: {
-    heading: string;
-    description: string;
+    heading?: string;
+    description?: string;
     type: string;
     cover: {
       data: {

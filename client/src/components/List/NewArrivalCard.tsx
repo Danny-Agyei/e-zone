@@ -32,14 +32,13 @@ export default function NewArrivalCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          p: 2,
         }}
       >
         <Box
           sx={{
             width: "100%",
             maxHeight: "100%",
-            objectFit: "contain"
+            borderRadius: 2,
           }}
           component="img"
           src={`${process.env.REACT_APP_BASE_URL}${coverImg}`}
