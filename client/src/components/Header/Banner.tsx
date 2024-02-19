@@ -40,7 +40,7 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
           } = slide;
 
           return (
-            <SwiperSlide key={indx} style={{ height: "100%" }}>
+            <SwiperSlide key={indx} style={{ height: "100%", width: "100%" }}>
               <Box
                 sx={{
                   width: "100%",
@@ -52,7 +52,7 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
                   component="img"
                   width="100%"
                   height="100%"
-                  borderRadius={5}
+                  borderRadius={10}
                   src={`${process.env.REACT_APP_BASE_URL}${url}`}
                   alt={heading}
                 />

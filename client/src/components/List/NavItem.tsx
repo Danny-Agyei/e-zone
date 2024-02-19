@@ -55,7 +55,7 @@ export default function NavItem({
                   "&:before": {
                     content: "attr(data-item-title)",
                     position: "absolute",
-                    height: "60px",
+                    height: 60,
                     width: "max-content",
                     top: 0,
                     opacity: 0,
@@ -67,10 +67,10 @@ export default function NavItem({
               <Box
                 sx={{
                   position: "fixed",
-                  top: 70,
+                  top: 135,
                   left: 0,
                   zIndex: 999,
-                  background: "#f2f2f2",
+                  background: "rgba(238, 238 ,233, 0.95)",
                   minWidth: "100%",
                   px: 5,
                   py: 4,

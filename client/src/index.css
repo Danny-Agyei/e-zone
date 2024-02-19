@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  background-color: #faf4f4;
+  background-color: #f5f0f0;
   color: #13131a;
   font-family: "Work Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,6 +26,14 @@ a {
 }
 
 /* @mui style override */
+.MuiSelect-select{
+  padding:0!important;
+  border:none !important;
+}
+.MuiSelect-icon{
+  display: none !important;
+}
+
 .MuiAccordionSummary-root,
 .MuiAccordionSummary-content,
 .Mui-expanded {

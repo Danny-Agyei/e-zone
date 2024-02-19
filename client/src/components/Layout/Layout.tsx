@@ -9,7 +9,7 @@ const Layout = () => {
     <Suspense>
       <Box>
         <Navbar />
-        <Box component="main" minHeight="80vh">
+        <Box component="main">
           <Outlet />
         </Box>
         <Box component="footer">

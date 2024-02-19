@@ -33,7 +33,7 @@ export default function ReviewList() {
       >
         <List sx={{ p: 0 }}>
           {Array.from({ length: 3 }, (_, indx) => (
-            <>
+            <Box key={indx}>
               <ListItem
                 sx={{ py: 0 }}
                 secondaryAction={
@@ -48,7 +48,7 @@ export default function ReviewList() {
                 <ListItemText
                   sx={{ "& span": { fontWeight: "600 !important" } }}
                   primary="Anonymous"
-                  secondary={<StarRating />}
+                  // secondary={<StarRating />}
                 />
               </ListItem>
               <ListItem sx={{ pt: 0 }}>
@@ -67,7 +67,7 @@ export default function ReviewList() {
                   }
                 />
               </ListItem>
-            </>
+            </Box>
           ))}
         </List>
       </Box>

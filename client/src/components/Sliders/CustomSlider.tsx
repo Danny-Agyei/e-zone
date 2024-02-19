@@ -47,7 +47,7 @@ const CustomSlider = ({
           top: top || 0,
           width: width || 42,
           height: height || "auto",
-          zIndex: 999,
+          zIndex: 998,
         }}
       >
         <IconButton
@@ -83,7 +83,7 @@ const CustomSlider = ({
           top: top || 0,
           width: width || 42,
           height: height || "auto",
-          zIndex: 999,
+          zIndex: 998,
         }}
       >
         <IconButton

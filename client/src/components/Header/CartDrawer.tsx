@@ -81,6 +81,13 @@ export default function CartDrawer(props: {
     console.log(data);
   };
 
+  // @Eligible amount for free shipping
+  const amountSpendInPercentage = () => {
+    const amountToSpend = 2000;
+
+    return subtotal > amountToSpend ? 100 : (subtotal / amountToSpend) * 100;
+  };
+
   return (
     <SwipeableDrawer
       anchor="right"
@@ -135,7 +142,10 @@ export default function CartDrawer(props: {
               free shipping!
             </Typography>
           </Typography>
-          <BorderLinearProgress variant="determinate" value={9} />
+          <BorderLinearProgress
+            variant="determinate"
+            value={amountSpendInPercentage()}
+          />
         </Box>
         {shoppingCart.length > 0 ? (
           <Box sx={{ maxHeight: 500, overflow: "auto" }}>

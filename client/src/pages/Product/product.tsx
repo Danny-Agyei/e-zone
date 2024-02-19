@@ -374,6 +374,9 @@ const Product = () => {
                         <BsDash size={20} color="#666" />
                       </Button>
                       <InputBase
+                        onBlur={(e) =>
+                          Number(e.target.value) === 0 && setQty(1)
+                        }
                         onChange={(e) =>
                           setQty((prevValue) =>
                             Number(e.target.value) > inStock
@@ -577,7 +580,7 @@ const Product = () => {
                 />
                 <CustomSlider top={180} left={1} right={1}>
                   {Array.from({ length: 8 }, (_, indx) => (
-                    <SwiperSlide style={{ width: "20% !important" }}>
+                    <SwiperSlide key={indx} style={{ width: "20% !important" }}>
                       <Box sx={{ minWidth: 200 }}>
                         <ProductCard product={product} />
                       </Box>

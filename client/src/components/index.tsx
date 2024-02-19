@@ -12,6 +12,7 @@ import NewArrivalCard from "./List/NewArrivalCard";
 import Error from "./Constant/Error";
 import ProductDetails from "./List/ProductDetails";
 import ProductImageSlider from "./Sliders/ProductImageSlider";
+import CustomSelect from "./Constant/CustomSelect";
 
 export {
   Navbar,
@@ -28,4 +29,5 @@ export {
   Error,
   ProductDetails,
   ProductImageSlider,
+  CustomSelect,
 };
