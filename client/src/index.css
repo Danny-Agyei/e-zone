@@ -27,7 +27,10 @@ a {
 
 /* @mui style override */
 .MuiSelect-select{
-  padding:0!important;
+  padding-left:0 !important;
+  padding-top:0 !important;
+  padding-bottom: 0 !important;
+  padding-right: 25px !important;
   border:none !important;
 }
 .MuiSelect-icon{

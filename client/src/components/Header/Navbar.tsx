@@ -52,29 +52,32 @@ const Navbar = () => {
               />
             </Link>
           </Box>
-          <Box sx={{ width: "40%", position: "relative", height: 50 }}>
+          <Box
+            sx={{
+              width: "50%",
+              maxWidth: 550,
+              display: "flex",
+              alignItems: "center",
+              height: 50,
+              px: 0.5,
+              border: "1px solid #aaa",
+              borderRadius: 9999,
+            }}
+          >
+            <CustomSelect />
             <InputBase
               fullWidth
-              // placeholder="Search product"
+              placeholder="Search product"
               sx={{
-                border: "1px solid #aaa",
                 p: 1,
-                pl: 4,
-                borderRadius: 9999,
-                position: "absolute",
-                top: 0,
-                bottom: 0,
-                right: 0,
-                left: 0,
-                height: 50,
+                fontSiz: 14,
+                color: "#666",
+                height: "100%",
               }}
             />
             <IconButton
               sx={{
                 bgcolor: "text.secondary",
-                position: "absolute",
-                right: 4,
-                top: 4,
                 "&:hover": {
                   opacity: 0.85,
                   bgcolor: "text.secondary",
@@ -83,7 +86,6 @@ const Navbar = () => {
             >
               <BiSearch color="#fff" />
             </IconButton>
-            <CustomSelect />
           </Box>
           <Box>
             <Stack

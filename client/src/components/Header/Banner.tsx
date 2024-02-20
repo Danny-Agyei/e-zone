@@ -16,7 +16,7 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
   return (
     <>
       <Swiper
-        spaceBetween={30}
+        spaceBetween={0}
         pagination={{ clickable: true }}
         centeredSlides={true}
         autoplay={{
@@ -45,14 +45,14 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
                 sx={{
                   width: "100%",
                   height: "100%",
-                  maxHeight: 500,
+                  maxHeight: 550,
                 }}
               >
                 <Box
                   component="img"
                   width="100%"
                   height="100%"
-                  borderRadius={10}
+                  // borderRadius={10}
                   src={`${process.env.REACT_APP_BASE_URL}${url}`}
                   alt={heading}
                 />

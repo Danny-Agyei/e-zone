@@ -69,8 +69,8 @@ export const Home = () => {
         {(resolveData: { banners: BannerType[]; products: ProductType[] }) => {
           return (
             <Box>
+              <Banner bannerData={heroBanners(resolveData.banners)} />
               <Box px={10} pt={4}>
-                <Banner bannerData={heroBanners(resolveData.banners)} />
                 <Typography
                   variant="h2"
                   pt={8}
