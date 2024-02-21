@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  background-color: #f5f0f0;
+  background-color: #f9f9f4;
   color: #13131a;
   font-family: "Work Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -26,6 +26,14 @@ a {
 }
 
 /* @mui style override */
+ .MuiMenu-paper{
+  top:75px !important;
+}
+
+.cart-drawer .MuiPaper-root{
+  top:0 !important;
+}
+
 .MuiSelect-select{
   padding-left:0 !important;
   padding-top:0 !important;
@@ -33,6 +41,7 @@ a {
   padding-right: 25px !important;
   border:none !important;
 }
+
 .MuiSelect-icon{
   display: none !important;
 }

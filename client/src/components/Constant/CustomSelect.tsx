@@ -1,12 +1,10 @@
 import * as React from "react";
-import { Theme, useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import { useTheme } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { Box, InputBase } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import zIndex from "@mui/material/styles/zIndex";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -14,24 +12,21 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 200,
+      width: 215,
       zIndex: 9999,
     },
   },
 };
 
-const names = [
+const categories = [
   "All",
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
+  "Electronics",
+  "Fashion & jewellery",
+  "Computer & Accessories",
+  "Mobile & Accessories",
+  "Headphones",
+  "Smart-Watches",
+  "tv-camera-more",
 ];
 
 export default function CustomSelect() {
@@ -46,8 +41,9 @@ export default function CustomSelect() {
   };
 
   return (
-    <Box
-      sx={{
+    <div
+      id="custom-select"
+      style={{
         position: "relative",
       }}
     >
@@ -74,17 +70,18 @@ export default function CustomSelect() {
             // position: "relative",
           }}
         >
-          {names.map((name) => (
+          {categories.map((category) => (
             <MenuItem
-              key={name}
-              value={name}
+              key={category}
+              value={category}
               sx={{
                 fontSize: 14,
                 position: "relative",
+                border: "1px solid #eee",
                 "&:hover": { bgcolor: "#e9ecef" },
               }}
             >
-              {name}
+              {category}
             </MenuItem>
           ))}
         </Select>
@@ -99,6 +96,6 @@ export default function CustomSelect() {
           zIndex: 995,
         }}
       />
-    </Box>
+    </div>
   );
 }

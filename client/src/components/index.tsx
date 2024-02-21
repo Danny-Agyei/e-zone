@@ -13,6 +13,10 @@ import Error from "./Constant/Error";
 import ProductDetails from "./List/ProductDetails";
 import ProductImageSlider from "./Sliders/ProductImageSlider";
 import CustomSelect from "./Constant/CustomSelect";
+import PriceRangeSlider from "./Sliders/PriceRageSlider";
+import BrandSearchFilter from "./Constant/BrandSearchFilter";
+import ShopCategoryList from "./List/ShopCategoryList";
+import SideBarItem from "./List/SideBarItem";
 
 export {
   Navbar,
@@ -20,6 +24,8 @@ export {
   NavItem,
   CartItem,
   Banner,
+  ShopCategoryList,
+  SideBarItem,
   CategoryCard,
   CustomSlider,
   ProductCard,
@@ -30,4 +36,6 @@ export {
   ProductDetails,
   ProductImageSlider,
   CustomSelect,
+  PriceRangeSlider,
+  BrandSearchFilter,
 };

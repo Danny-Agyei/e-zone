@@ -455,7 +455,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.DefaultTo<1>;
     price: Attribute.Decimal & Attribute.Required;
     type: Attribute.Enumeration<
-      ['computer-all', 'audio-all', 'mobile-all', 'tv-video-all']
+      ['laptop', 'desktop', 'cell-phones', 'tablets', 'ear-buds']
     > &
       Attribute.Required;
     discountPercent: Attribute.Integer;

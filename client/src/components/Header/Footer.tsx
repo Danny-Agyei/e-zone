@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <Box px={10} mt={8} py={4} bgcolor="#f2f2f2">
+    <Box px={10} py={4} bgcolor="#f2f2f8">
       <Grid container>
         <Grid item xs={6} sm={4} md={4} lg={2}>
           <Typography fontSize={18} variant="h6" fontWeight={600}>

@@ -4,6 +4,7 @@ import { Error, Layout } from "./components";
 
 import * as HomeRoute from "./routes/Home.route";
 import * as ProductRoute from "./routes/Product.route";
+import * as ShopRoute from "./routes/Shop.route";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
         path: "/products/:slug",
         loader: ProductRoute.loader,
         Component: ProductRoute.Component,
+      },
+      {
+        path: "/shop/collection/:category",
+        loader: ShopRoute.loader,
+        Component: ShopRoute.Component,
       },
     ],
   },

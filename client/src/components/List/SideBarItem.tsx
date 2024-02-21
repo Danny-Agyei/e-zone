@@ -1,0 +1,166 @@
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Button from "@mui/material/Button";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  IconButton,
+  InputBase,
+  List,
+  ListItemText,
+  Typography,
+} from "@mui/material";
+import { BiSearch } from "react-icons/bi";
+
+export default function SideBarItem({
+  listData,
+  title,
+  palceholderText,
+  hasCheckList,
+  hasSearchBar,
+}: {
+  listData: string[];
+  palceholderText?: string;
+  hasSearchBar: boolean;
+  title: string;
+  hasCheckList: boolean;
+}) {
+  return (
+    <div>
+      <Accordion sx={{ p: 0, boxShadow: "none" }}>
+        <AccordionSummary
+          sx={{ p: 0 }}
+          expandIcon={<MdOutlineKeyboardArrowRight />}
+        >
+          <Typography variant="body2" fontWeight={600}>
+            {title}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails sx={{ p: 0 }}>
+          {hasSearchBar && (
+            <Box
+              sx={{
+                maxWidth: 550,
+                display: "flex",
+                alignItems: "center",
+                height: 35,
+                p: 1,
+                mt: 2,
+                mb: 2,
+                border: "1px solid #f2ecec",
+                borderRadius: 1,
+              }}
+            >
+              <IconButton
+                sx={{
+                  cursor: "default",
+                  bgcolor: "text.secondary",
+                  borderRadius: 1.5,
+                  p: 0.5,
+                  "&:hover": {
+                    // opacity: 0.85,
+                    bgcolor: "text.secondary",
+                  },
+                }}
+              >
+                <BiSearch color="#fff" size={20} />
+              </IconButton>
+              <InputBase
+                fullWidth
+                placeholder={palceholderText}
+                sx={{
+                  p: 1,
+                  fontSiz: 13,
+                  color: "#666",
+                  height: "100%",
+                }}
+              />
+            </Box>
+          )}
+          <Box
+            sx={{
+              height: 300,
+              mt: 1,
+              overflow: "auto",
+              "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
+                bgcolor: "#eee",
+                width: 6,
+              },
+              "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
+                borderRadius: 0.5,
+                bgcolor: "text.secondary",
+              },
+              "&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover":
+                {
+                  bgcolor: "text.secondary",
+                },
+              "&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner": {
+                backgroundColor: "#2b2b2b",
+              },
+            }}
+          >
+            {hasCheckList ? (
+              <FormGroup>
+                {listData.map((data, indx) => (
+                  <FormControlLabel
+                    sx={{
+                      "& .MuiTypography-root": {
+                        fontSize: 13,
+                        color: "#666",
+                      },
+                      "& .MuiCheckbox-root": {
+                        color: "#eaeaea",
+                        "&:hover": { color: "text.secondary" },
+                      },
+                      "& .MuiCheckbox-root.Mui-checked": {
+                        color: "text.secondary",
+                        "&:hover": { color: "text.secondary" },
+                      },
+                    }}
+                    key={indx}
+                    title={data}
+                    control={<Checkbox value={data} />}
+                    label={data}
+                  />
+                ))}
+              </FormGroup>
+            ) : (
+              <List sx={{ p: 0 }}>
+                {listData.map((data, indx) => (
+                  <ListItemText
+                    sx={{ py: 0.5 }}
+                    key={indx}
+                    primary={
+                      <Button
+                        title={data}
+                        fullWidth
+                        sx={{
+                          p: 0,
+                          display: "block",
+                          textAlign: "left",
+                          textTransform: "capitalize",
+                          color: "transparent",
+                          "&:hover": { bgcolor: "transparent" },
+                        }}
+                      >
+                        <Typography variant="body2" color="#666" fontSize={13}>
+                          {data}
+                        </Typography>
+                      </Button>
+                    }
+                  />
+                ))}
+              </List>
+            )}
+          </Box>
+        </AccordionDetails>
+      </Accordion>
+    </div>
+  );
+}

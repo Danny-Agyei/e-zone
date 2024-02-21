@@ -99,6 +99,7 @@ export default function CartDrawer(props: {
       }}
     >
       <Box
+        className="cart-drawer"
         sx={{
           width: "100%",
           minWidth: 500,

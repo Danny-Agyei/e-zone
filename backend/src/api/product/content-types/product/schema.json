@@ -32,10 +32,11 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "computer-all",
-        "audio-all",
-        "mobile-all",
-        "tv-video-all"
+        "laptop",
+        "desktop",
+        "cell-phones",
+        "tablets",
+        "ear-buds"
       ],
       "required": true
     },
