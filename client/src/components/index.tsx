@@ -13,9 +13,8 @@ import Error from "./Constant/Error";
 import ProductDetails from "./List/ProductDetails";
 import ProductImageSlider from "./Sliders/ProductImageSlider";
 import CustomSelect from "./Constant/CustomSelect";
-import PriceRangeSlider from "./Sliders/PriceRageSlider";
-import BrandSearchFilter from "./Constant/BrandSearchFilter";
-import ShopCategoryList from "./List/ShopCategoryList";
+import ElectronicsFilter from "./Constant/ElectronicsFilter";
+import UniversalFilter from "./Constant/UniversalFilter";
 import SideBarItem from "./List/SideBarItem";
 
 export {
@@ -24,7 +23,7 @@ export {
   NavItem,
   CartItem,
   Banner,
-  ShopCategoryList,
+  UniversalFilter,
   SideBarItem,
   CategoryCard,
   CustomSlider,
@@ -36,6 +35,5 @@ export {
   ProductDetails,
   ProductImageSlider,
   CustomSelect,
-  PriceRangeSlider,
-  BrandSearchFilter,
+  ElectronicsFilter,
 };

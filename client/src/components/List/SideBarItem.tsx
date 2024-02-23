@@ -1,9 +1,7 @@
 import * as React from "react";
 import Accordion from "@mui/material/Accordion";
-import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Button from "@mui/material/Button";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import {
   Box,
@@ -12,8 +10,6 @@ import {
   FormGroup,
   IconButton,
   InputBase,
-  List,
-  ListItemText,
   Typography,
 } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
@@ -22,21 +18,26 @@ export default function SideBarItem({
   listData,
   title,
   palceholderText,
-  hasCheckList,
+  expand,
   hasSearchBar,
 }: {
   listData: string[];
   palceholderText?: string;
+  expand?: boolean;
   hasSearchBar: boolean;
   title: string;
-  hasCheckList: boolean;
 }) {
   return (
-    <div>
-      <Accordion sx={{ p: 0, boxShadow: "none" }}>
+    <Box>
+      <Accordion sx={{ p: 0, boxShadow: "none" }} defaultExpanded={expand}>
         <AccordionSummary
-          sx={{ p: 0 }}
-          expandIcon={<MdOutlineKeyboardArrowRight />}
+          sx={{
+            p: 0,
+            "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
+              transform: "rotate(90deg)",
+            },
+          }}
+          expandIcon={<MdOutlineKeyboardArrowRight size={20} color="#a6a6a6" />}
         >
           <Typography variant="body2" fontWeight={600}>
             {title}
@@ -85,7 +86,7 @@ export default function SideBarItem({
           )}
           <Box
             sx={{
-              height: 300,
+              maxHeight: 300,
               mt: 1,
               overflow: "auto",
               "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
@@ -105,62 +106,33 @@ export default function SideBarItem({
               },
             }}
           >
-            {hasCheckList ? (
-              <FormGroup>
-                {listData.map((data, indx) => (
-                  <FormControlLabel
-                    sx={{
-                      "& .MuiTypography-root": {
-                        fontSize: 13,
-                        color: "#666",
-                      },
-                      "& .MuiCheckbox-root": {
-                        color: "#eaeaea",
-                        "&:hover": { color: "text.secondary" },
-                      },
-                      "& .MuiCheckbox-root.Mui-checked": {
-                        color: "text.secondary",
-                        "&:hover": { color: "text.secondary" },
-                      },
-                    }}
-                    key={indx}
-                    title={data}
-                    control={<Checkbox value={data} />}
-                    label={data}
-                  />
-                ))}
-              </FormGroup>
-            ) : (
-              <List sx={{ p: 0 }}>
-                {listData.map((data, indx) => (
-                  <ListItemText
-                    sx={{ py: 0.5 }}
-                    key={indx}
-                    primary={
-                      <Button
-                        title={data}
-                        fullWidth
-                        sx={{
-                          p: 0,
-                          display: "block",
-                          textAlign: "left",
-                          textTransform: "capitalize",
-                          color: "transparent",
-                          "&:hover": { bgcolor: "transparent" },
-                        }}
-                      >
-                        <Typography variant="body2" color="#666" fontSize={13}>
-                          {data}
-                        </Typography>
-                      </Button>
-                    }
-                  />
-                ))}
-              </List>
-            )}
+            <FormGroup>
+              {listData.map((data, indx) => (
+                <FormControlLabel
+                  sx={{
+                    "& .MuiTypography-root": {
+                      fontSize: 13,
+                      color: "#666",
+                    },
+                    "& .MuiCheckbox-root": {
+                      color: "#eaeaea",
+                      "&:hover": { color: "text.secondary" },
+                    },
+                    "& .MuiCheckbox-root.Mui-checked": {
+                      color: "text.secondary",
+                      "&:hover": { color: "text.secondary" },
+                    },
+                  }}
+                  key={indx}
+                  title={data}
+                  control={<Checkbox value={data} />}
+                  label={data}
+                />
+              ))}
+            </FormGroup>
           </Box>
         </AccordionDetails>
       </Accordion>
-    </div>
+    </Box>
   );
 }

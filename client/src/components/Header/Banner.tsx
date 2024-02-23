@@ -45,7 +45,7 @@ const Banner = ({ bannerData }: { bannerData: BannerType[] }) => {
                 sx={{
                   width: "100%",
                   height: "100%",
-                  maxHeight: 550,
+                  maxHeight: 700,
                 }}
               >
                 <Box

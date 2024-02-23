@@ -13,10 +13,9 @@ import { Await, Link, useLoaderData } from "react-router-dom";
 import { ProductType } from "../../types";
 import ProductSkeleton from "../../components/Constant/ProductSkeleton";
 import {
-  BrandSearchFilter,
-  PriceRangeSlider,
+  ElectronicsFilter,
   ProductCard,
-  ShopCategoryList,
+  UniversalFilter,
 } from "../../components";
 
 import store from "../../lib/zustand/store";
@@ -60,9 +59,8 @@ const Shop = () => {
                       pr: 2,
                     }}
                   >
-                    <PriceRangeSlider />
-                    <BrandSearchFilter />
-                    <ShopCategoryList />
+                    <UniversalFilter />
+                    <ElectronicsFilter />
                   </Box>
                 </Grid>
                 <Grid item xs={9}></Grid>
