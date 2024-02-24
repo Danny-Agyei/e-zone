@@ -4,6 +4,8 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  IconButton,
+  InputBase,
   List,
   ListItemText,
   Slider,
@@ -12,44 +14,18 @@ import {
 } from "@mui/material";
 import SideBarItem from "../List/SideBarItem";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
-
-const defaultCategories = [
-  "Electronics",
-  "Computers & Accessories",
-  "Computers & Tablets",
-  "2 in 1 Laptop Computers",
-];
-
-const electronicsCategories = [
-  "Electronics",
-  "Computers & Accessories",
-  "Computers & Tablets",
-  "2 in 1 Laptop Computers",
-];
-
-const fashionCategories = [
-  "Electronics",
-  "Computers & Accessories",
-  "Computers & Tablets",
-  "2 in 1 Laptop Computers",
-];
-
-const electronicBrands = [
-  "Sony",
-  "Jbl",
-  "Canon",
-  "Apple",
-  "Samsung",
-  "Electronics Basket",
-  "Microsoft",
-  "Asus",
-  "Lg",
-  "Lenovo",
-  "Raising Electronics",
-];
+import { ChangeEvent, useState } from "react";
+import { BiSearch } from "react-icons/bi";
+import filterData from "../../filterData.json";
 
 export default function UniversalFilter() {
+  const {
+    electronicBrands,
+    electronicsCategories,
+    fashionCategories,
+    defaultCategories,
+  } = filterData;
+
   const location = useLocation();
 
   const pathname = location.pathname.toLowerCase();
@@ -58,7 +34,7 @@ export default function UniversalFilter() {
   const categories =
     categoryName === "electronics"
       ? electronicsCategories
-      : pathname === "fashion"
+      : categoryName === "fashion"
       ? fashionCategories
       : defaultCategories;
 
@@ -85,6 +61,34 @@ export default function UniversalFilter() {
     } else {
       setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
     }
+  };
+
+  // @ Brand search
+  const brands = electronicBrands;
+
+  const [searchData, setSearchData] = useState(brands);
+
+  const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    const searchMatched = brands.filter((brand) =>
+      brand.title.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setSearchData(searchMatched);
+  };
+
+  // @ Check handler
+  const onCheckHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    id: number
+  ) => {
+    const updatedData = searchData.map((data) => {
+      if (id === data.id) {
+        return { ...data, check: !data.check };
+      }
+      return data;
+    });
+    setSearchData(updatedData);
   };
 
   return (
@@ -171,8 +175,46 @@ export default function UniversalFilter() {
       </Box>
       <Box pt={4}>
         <Typography variant="body2" fontWeight={600}>
-          Brand
+          Brands
         </Typography>
+        <Box
+          sx={{
+            maxWidth: 550,
+            display: "flex",
+            alignItems: "center",
+            height: 35,
+            p: 1,
+            mt: 2,
+            mb: 2,
+            border: "1px solid #f2ecec",
+            borderRadius: 1,
+          }}
+        >
+          <IconButton
+            sx={{
+              cursor: "default",
+              bgcolor: "text.secondary",
+              borderRadius: 1.5,
+              p: 0.5,
+              "&:hover": {
+                bgcolor: "text.secondary",
+              },
+            }}
+          >
+            <BiSearch color="#fff" size={20} />
+          </IconButton>
+          <InputBase
+            onChange={onSearchHandler}
+            fullWidth
+            placeholder="Search by brand"
+            sx={{
+              p: 1,
+              fontSize: 14,
+              color: "#666",
+              height: "100%",
+            }}
+          />
+        </Box>
         <Box
           sx={{
             height: 300,
@@ -196,7 +238,7 @@ export default function UniversalFilter() {
           }}
         >
           <FormGroup>
-            {electronicBrands.map((brand, indx) => (
+            {searchData.map((brand, indx) => (
               <FormControlLabel
                 sx={{
                   "& .MuiTypography-root": {
@@ -213,9 +255,15 @@ export default function UniversalFilter() {
                   },
                 }}
                 key={indx}
-                title={brand}
-                control={<Checkbox value={brand} />}
-                label={brand}
+                title={brand.title}
+                control={
+                  <Checkbox
+                    onChange={(e) => onCheckHandler(e, brand.id)}
+                    checked={brand.check}
+                    value={brand}
+                  />
+                }
+                label={brand.title}
               />
             ))}
           </FormGroup>
@@ -225,10 +273,9 @@ export default function UniversalFilter() {
         {categoryName === "electronics" || categoryName === "fashion" ? (
           <SideBarItem
             expand={true}
-            hasSearchBar={true}
             title="Categories"
             listData={categories}
-            palceholderText="Search by category"
+            placeholderText="Search by category"
           />
         ) : (
           <>
@@ -241,9 +288,9 @@ export default function UniversalFilter() {
                   sx={{ py: 0.5 }}
                   key={indx}
                   primary={
-                    <Link to={category}>
+                    <Link to={category.title}>
                       <Button
-                        title={category}
+                        title={category.title}
                         fullWidth
                         sx={{
                           p: 0,
@@ -255,7 +302,7 @@ export default function UniversalFilter() {
                         }}
                       >
                         <Typography variant="body2" color="#666" fontSize={13}>
-                          {category}
+                          {category.title}
                         </Typography>
                       </Button>
                     </Link>

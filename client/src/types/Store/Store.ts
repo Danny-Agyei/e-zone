@@ -50,6 +50,7 @@ export interface ProductCardType {
     name: string;
     price: number;
     slug: string;
+    brand: string;
     hasDiscount: boolean;
     discountPercent: number;
     categories: {

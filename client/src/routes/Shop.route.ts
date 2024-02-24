@@ -1,29 +1,40 @@
 import React from "react";
-import { Params } from "react-router-dom";
+import { Params, defer } from "react-router-dom";
 
-const getProduct = async function ({
-  request,
-  params,
-}: {
-  request: Request;
-  params: Params<string>;
-}) {
+const getStoreData = async function ({ request }: { request: Request }) {
   try {
-    const res = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/collections/products/${params.slug}`
+    const productPromise = fetch(
+      `${process.env.REACT_APP_BASE_URL}/api/products?populate=*`,
+      {
+        signal: request.signal,
+      }
     );
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    const resData = await res.json();
 
-    return { product: resData };
+    const bannerPromise = fetch(
+      `${process.env.REACT_APP_BASE_URL}/api/banners?populate=*`,
+      { signal: request.signal }
+    );
+
+    const [bannersRes, productsRes] = await Promise.all([
+      bannerPromise,
+      productPromise,
+    ]);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
+    const banners = await bannersRes.json();
+    const products = await productsRes.json();
+
+    return { products: products.data, banners: banners.data };
   } catch (error: any) {
     console.log(error.message);
     throw error;
   }
 };
-
-export const loader = (request: any) => ({
-  data: getProduct(request),
-});
+export function loader(request: any) {
+  return defer({
+    data: getStoreData(request),
+  });
+}
 
 export const Component = React.lazy(() => import("../pages/Shop/Shop"));

@@ -1,8 +1,8 @@
 import * as React from "react";
-import { useTheme } from "@mui/material/styles";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { Box, InputBase } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
@@ -31,13 +31,13 @@ const categories = [
 
 export default function CustomSelect() {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState("All");
+  const [categoryName, setCategoryName] = React.useState("All");
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+  const handleChange = (event: SelectChangeEvent<typeof categoryName>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(value);
+    setCategoryName(value);
   };
 
   return (
@@ -60,7 +60,7 @@ export default function CustomSelect() {
       >
         <Select
           defaultValue="All"
-          value={personName}
+          value={categoryName}
           onChange={handleChange}
           input={<InputBase />}
           MenuProps={MenuProps}

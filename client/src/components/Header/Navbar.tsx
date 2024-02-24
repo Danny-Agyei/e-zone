@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CustomSelect, NavItem } from "../../components";
+import { AccountDropdown, CustomSelect, NavItem } from "../../components";
 import { BsBag } from "react-icons/bs";
 import { HiOutlineUser } from "react-icons/hi2";
 import { BiSearch } from "react-icons/bi";
@@ -31,7 +31,7 @@ const Navbar = () => {
         top: 0,
         zIndex: 999,
         borderBottom: 1,
-        borderColor: "#f2ecec",
+        borderColor: "#eae5e5",
       }}
     >
       <Box px={10} m="0 auto" py={2} bgcolor="#eeeee9">
@@ -95,17 +95,15 @@ const Navbar = () => {
               spacing={0}
             >
               <Box pr={1} pt={0.7}>
-                <Link to="/account/login">
-                  <HiOutlineUser size={25} color="#666" />
-                </Link>
+                <AccountDropdown />
               </Box>
               <Box
                 position="relative"
                 onClick={toggleCartDrawer}
                 sx={{ cursor: "pointer" }}
               >
-                <IconButton sx={{ mr: 0.5 }}>
-                  <BsBag size={22} />
+                <IconButton sx={{ mr: 0.5, p: 0 }}>
+                  <BsBag size={20} />
                 </IconButton>
                 <Typography
                   component="span"
@@ -113,8 +111,8 @@ const Navbar = () => {
                   fontSize={10}
                   fontWeight={600}
                   position="absolute"
-                  top={0}
-                  right={0}
+                  top={-8}
+                  left={10}
                   width={10}
                   height={10}
                   display="flex"

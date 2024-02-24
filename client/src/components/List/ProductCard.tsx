@@ -21,6 +21,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
   const {
     attributes: {
       name,
+      brand,
       price,
       slug,
       hasDiscount,
@@ -37,19 +38,45 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
 
   return (
     <Card
-      sx={{ maxWidth: 300, width: "100%", boxShadow: "none" }}
+      sx={{
+        maxWidth: 300,
+        width: "100%",
+        boxShadow: "none",
+        border: "1px solid #eae5e5",
+        borderRadius: 2,
+        p: 2,
+        position: "relative",
+      }}
       onMouseEnter={() => setisHover(true)}
       onMouseLeave={() => setisHover(false)}
     >
+      <Box
+        component="span"
+        sx={{
+          position: "absolute",
+          left: 15,
+          top: 12,
+          zIndex: 995,
+          bgcolor: "text.secondary",
+          px: 1,
+          py: 0.5,
+          borderRadius: 9999,
+          fontSize: 14,
+          fontWeight: 600,
+        }}
+      >
+        -{discountPercent}%
+      </Box>
       <Link to={`/products/${slug}`}>
-        <Box p={2} sx={{ position: "relative", pb: 24 }}>
+        <Box sx={{ position: "relative", p: 2, pb: 18 }}>
           <CardMedia
             sx={{
-              width: 220,
+              width: "100%",
+              maxWidth: 130,
               height: "auto",
               m: "0 auto",
               position: "absolute",
-              top: 0,
+              top: 30,
               left: "50%",
               transform: "translate(-50%,0)",
               visibility: isHover ? "hidden" : "visible",
@@ -64,7 +91,8 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
 
           <CardMedia
             sx={{
-              width: 220,
+              width: "100%",
+              maxWidth: 130,
               height: "auto",
               m: "0 auto",
               position: "absolute",
@@ -86,38 +114,49 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           />
         </Box>
       </Link>
-      <CardContent sx={{ px: 0, pt: 5 }}>
+      <CardContent sx={{ px: 1, pt: 5, pb: 5 }}>
+        <Typography
+          variant="body2"
+          fontSize={12}
+          pb={1.5}
+          fontWeight={500}
+          color="#c82e2e"
+        >
+          {brand}
+        </Typography>
         <Link to={`/products/${slug}`}>
-          <Typography variant="h3" fontSize={16} fontWeight={600}>
+          <Typography variant="body2" fontSize={16} fontWeight={600}>
             {name}
           </Typography>
         </Link>
-        <Box py={1.2}>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Box lineHeight={0}>
-              <TiStarFullOutline size={20} color="#FF8C00" />
-              <TiStarFullOutline size={20} color="#FF8C00" />
-              <TiStarFullOutline size={20} color="#FF8C00" />
-              <TiStarFullOutline size={20} color="#FF8C00" />
-              <TiStarFullOutline size={20} color="#FF8C00" />
-            </Box>
-            <Typography variant="body2">(25)</Typography>
-          </Stack>
+        <Box py={1.5}>
+          <Box lineHeight={0}>
+            <TiStarFullOutline size={12} color="#FF8C00" />
+            <TiStarFullOutline size={12} color="#FF8C00" />
+            <TiStarFullOutline size={12} color="#FF8C00" />
+            <TiStarFullOutline size={12} color="#FF8C00" />
+            <TiStarFullOutline size={12} color="#FF8C00" />
+          </Box>
         </Box>
-        <Stack direction="row" spacing={2} alignItems="center">
-          <Typography variant="h6" fontSize={16} fontWeight={600}>
-            ${hasDiscount ? (price - discountInMoney).toFixed(2) : price}
-          </Typography>
+        <Stack direction="row" spacing={1} alignItems="center">
           {hasDiscount && (
             <Typography
-              variant="h6"
-              color="#999"
+              variant="body2"
+              color="#666"
               fontSize={16}
               sx={{ textDecoration: "line-through" }}
             >
               ${price.toFixed(2)}
             </Typography>
           )}
+          <Typography
+            variant="body2"
+            fontSize={16}
+            fontWeight={500}
+            color={hasDiscount ? "#c82e2e" : "text.primary"}
+          >
+            ${hasDiscount ? (price - discountInMoney).toFixed(2) : price}
+          </Typography>
         </Stack>
       </CardContent>
     </Card>

@@ -1,0 +1,172 @@
+
+{
+   "processors": [
+        {"id":1, "check":false, "title": "2.6 Ghz Apple_ci5"},
+        {"id":2, "check":false, "title": "Intel Pentium Silver N5000"},
+        {"id":3, "check":false, "title": "2.5 Ghz"},
+        {"id":4, "check":false, "title": "9th Generation Intel Core I5-9300h"},
+        {"id":5, "check":false, "title": "Apple"},
+        {"id":6, "check":false, "title": "4.1 Ghz Core_i5_family"},
+        {"id":7, "check":false, "title": "Intel Celeron"},
+        {"id":8, "check":false, "title": "1.5 Ghz Core_i7_family"},
+        {"id":9, "check":false, "title": "4.4 Ghz Amd_ryzen_7_5800h"},
+        {"id":10, "check":false, "title": "2.9 Ghz Core_i5"},
+        {"id":11, "check":false, "title": "4.2 Ghz Core_i5"},
+        {"id":12, "check":false, "title": "3.3 Ghz Ryzen_5"},
+        {"id":13, "check":false, "title": "Intel Core I7"},
+        {"id":14, "check":false, "title": "Intel Core I7 - 8th Generation"},
+        {"id":15, "check":false, "title": "4.5 Ghz Core_i5"},
+        {"id":16, "check":false, "title": "3.8 Ghz Ryzen_7"},
+        {"id":17, "check":false, "title": "2.9 Ghz Apple_ci5"},
+        {"id":18, "check":false, "title": "3 Ghz Ryzen_5_4600h"},
+        {"id":19, "check":false, "title": "4.2 Ghz Intel_core_i5_1135g7"}
+      ],
+      
+      "graphicDetails" : [
+        {"id":1, "check":false, "title": "Firepro 2450"},
+        {"id":2, "check":false, "title": "Nvidia Ge Force Rtx 3060"},
+        {"id":3, "check":false, "title": "Dedicated Nvidia Geforce Rtx 2050 4gb Graphic"},
+        {"id":4, "check":false, "title": "Nvidia Geforce Rtx 2050"},
+        {"id":5, "check":false, "title": "Nvidia Geforce Rtx 4060"},
+        {"id":6, "check":false, "title": "Nvidia Geforce Rtx 3050"},
+        {"id":7, "check":false, "title": "Intel Iris Xe Graphics"},
+        {"id":8, "check":false, "title": "Nvidia Geforce Rtx 3060 Graphics"},
+        {"id":9, "check":false, "title": "Intel UHD Graphics"},
+        {"id":10, "check":false, "title": "AMD Radeon Graphics"},
+        {"id":11, "check":false, "title": "Integrated graphics"},
+        {"id":12, "check":false, "title": "Intel UHD Graphics 770"},
+        {"id":13, "check":false, "title": "Intel Integrated Graphics"},
+        {"id":14, "check":false, "title": "Intel Iris Xe"},
+        {"id":15, "check":false, "title": "Intel Integrated Graphics"}
+      ]
+      
+      , "displaySize" : [
+        {"id":1,  "check":false, "title": "15.6 Inches"},
+        {"id":2,  "check":false, "title": "15.6 Inches"},
+        {"id":3,  "check":false, "title": "11.6 Inches"},
+        {"id":4,  "check":false, "title": "14 Inches"},
+        {"id":5,  "check":false, "title": "17.3 Inches"},
+        {"id":6,  "check":false, "title": "16.1 Inches"},
+        {"id":7,  "check":false, "title": "23.8 Inches"}
+      ]
+      
+      , "memorySize" : [
+        {"id":1,  "check":false, "title": "4 Gb"},
+        {"id":2,  "check":false, "title": "Ddr 4"},
+        {"id":3,  "check":false, "title": "Ddr4 Sdram"},
+        {"id":4,  "check":false, "title": "8 Gb 8 Gb Ddr4"},
+        {"id":5,  "check":false, "title": "8 Gb So-dimm"},
+        {"id":6,  "check":false, "title": "8 Gb Ddr4"},
+        {"id":7,  "check":false, "title": "8 Gb Sdram"},
+        {"id":8,  "check":false, "title": "16 Gb"},
+        {"id":9,  "check":false, "title": "16 Gb Ddr5"},
+        {"id":10,  "check":false, "title": "16 Gb 16 Gb Ddr4"},
+        {"id":11,  "check":false, "title": "16 Gb Ddr4"},
+        {"id":12,  "check":false, "title": "256 Gb 8 Gb Ddr4"},
+        {"id":13,  "check":false, "title": "32 Gb Ddr4"},
+        {"id":14,  "check":false, "title": "32 Gb Ddr5"},
+        {"id":15,  "check":false, "title": "32 Gb"},
+        {"id":16,  "check":false, "title": "2400 Mhz"}
+      ]
+      
+      , "performance" :[
+        {"id":1,  "check":false, "title": "2.2 Ghz"},
+        {"id":2,  "check":false, "title": "1.1 Ghz"},
+        {"id":3,  "check":false, "title": "4.1 Ghz"},
+        {"id":4,  "check":false, "title": "2.9 Ghz"},
+        {"id":5,  "check":false, "title": "1.0"},
+        {"id":6,  "check":false, "title": "2400 Mhz"},
+        {"id":7,  "check":false, "title": "17 Pages Per Minute"},
+        {"id":8,  "check":false, "title": "2.4 Ghz"},
+        {"id":9,  "check":false, "title": "2666 Mhz"},
+        {"id":10,  "check":false, "title": "2.6 Ghz"}
+      ]
+      
+      , "hardDriveSize" : [
+       {"id":1,  "check":false, "title": "64 Gb"},
+       {"id":2,  "check":false, "title": "128 Gb"},
+       {"id":3,  "check":false, "title": "256 Gb"},
+       {"id":4,  "check":false, "title": "500 Gb"},
+       {"id":5,  "check":false, "title": "512 Gb"},
+       {"id":6,  "check":false, "title": "1 Tb"},
+       {"id":7,  "check":false, "title": "2 Tb"},
+       {"id":8,  "check":false, "title": "4 Tb"},
+       {"id":9,  "check":false, "title": "64 Gb Ssd"},
+       {"id":10,  "check":false, "title": "256 Gb Ssd"},
+       {"id":11,  "check":false, "title": "128 Gb Ssd"},
+       {"id":12,  "check":false, "title": "512 Gb Ssd"},
+       {"id":13,  "check":false, "title": "1 Tb Ssd"},
+       {"id":14,  "check":false, "title": "2 Tb Ssd"},
+       {"id":15,  "check":false, "title": "Ssd"}
+      ],
+      
+    "operatingSystem" : [
+        {"id":1, "check":false, "title":"Android"},
+        {"id":2, "check":false, "title":"Android 9.0"},
+        {"id":3, "check":false, "title":"Android 10 Os"},
+        {"id":4, "check":false, "title":"Android 10"},
+        {"id":5, "check":false, "title":"Android 11.0"},
+        {"id":6, "check":false, "title":"Android 12"},
+        {"id":7, "check":false, "title":"Chrome Os"},
+        {"id":8, "check":false, "title":"Linux"},
+        {"id":9, "check":false, "title":"Mac Os"},
+        {"id":10, "check":false, "title":"Apple Ios"},
+        {"id":11, "check":false, "title":"Ipados"},
+        {"id":12, "check":false, "title":"Amazfit Os"},
+        {"id":13, "check":false, "title":"Windows"},
+        {"id":14, "check":false, "title":"Windows 8"},
+        {"id":15, "check":false, "title":"Windows 10"},
+        {"id":16, "check":false, "title":"Windows 10 Pro"},
+        {"id":17, "check":false, "title":"Windows 11"},
+        {"id":18, "check":false, "title":"Windows 11 Home"},
+        {"id":19, "check":false, "title":"Windows 11 Pro"}
+      ],
+       "defaultCategories" : [
+        { "id": 1, "check": false, "title": "Electronics" },
+        { "id": 2, "check": false, "title": "Computers & Accessories" },
+        { "id": 3, "check": false, "title": "Computers & Tablets" },
+        { "id": 4, "check": false, "title": "2 in 1 Laptop Computers" }
+      ],
+      
+       "electronicsCategories" : [
+        { "id": 1, "check": false, "title": "Electronics" },
+        { "id": 2, "check": false, "title": "Computers & Accessories" },
+        { "id": 3, "check": false, "title": "Computers & Tablets" },
+        { "id": 4, "check": false, "title": "2 in 1 Laptop Computers" }
+      ],
+      
+       "fashionCategories" : [
+        { "id": 1, "check": false, "title": "Mens Jackets & Coats" },
+        { "id": 2, "check": false, "title": "Mens T-shirt & Tanks" },
+        { "id": 3, "check": false, "title": "Mens Sweaters & Cardigans" },
+        { "id": 4, "check": false, "title": "Mens Tops & Shirts" },
+        { "id": 5, "check": false, "title": "Mens Hoodies & Sweatshirts" },
+        { "id": 6, "check": false, "title": "Mens Joggers & Pants" },
+        { "id": 7, "check": false, "title": "Mens Underwear" },
+        { "id": 8, "check": false, "title": "Mens Shorts" },
+        { "id": 9, "check": false, "title": "Woemens Jackets & Coats" },
+        { "id": 10, "check": false, "title": "Woemens T-shirt & Tanks" },
+        { "id": 11, "check": false, "title": "Woemens Sweaters & Cardigans" },
+        { "id": 12, "check": false, "title": "Woemens Tops & Shirts" },
+        { "id": 13, "check": false, "title": "Woemens Hoodies & Sweatshirts" },
+        { "id": 14, "check": false, "title": "Woemens Joggers & Pants" },
+        { "id": 15, "check": false, "title": "Woemens Underwear" },
+        { "id": 16, "check": false, "title": "Woemens Shorts" }
+      ],
+      
+       "electronicBrands" : [
+        { "id": 1, "check": false, "title": "Sony" },
+        { "id": 2, "check": false, "title": "Jbl" },
+        { "id": 3, "check": false, "title": "Canon" },
+        { "id": 4, "check": false, "title": "Apple" },
+        { "id": 5, "check": false, "title": "Samsung" },
+        { "id": 6, "check": false, "title": "Electronics Basket" },
+        { "id": 7, "check": false, "title": "Microsoft" },
+        { "id": 8, "check": false, "title": "Asus" },
+        { "id": 9, "check": false, "title": "Lg" },
+        { "id": 10, "check": false, "title": "Lenovo" },
+        { "id": 11, "check": false, "title": "Raising Electronics" }
+      ]
+      
+
+ }

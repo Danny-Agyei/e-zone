@@ -118,6 +118,18 @@
     },
     "water_resistant": {
       "type": "string"
+    },
+    "hardDriveSize": {
+      "type": "string"
+    },
+    "graphicCard": {
+      "type": "string"
+    },
+    "displaySize": {
+      "type": "string"
+    },
+    "speed": {
+      "type": "string"
     }
   }
 }

@@ -17,25 +17,52 @@ import { BiSearch } from "react-icons/bi";
 export default function SideBarItem({
   listData,
   title,
-  palceholderText,
+  placeholderText,
   expand,
-  hasSearchBar,
 }: {
-  listData: string[];
-  palceholderText?: string;
+  listData: { id: number; title: string; check: boolean }[];
+  placeholderText?: string;
   expand?: boolean;
-  hasSearchBar: boolean;
   title: string;
 }) {
+  // @ Search
+  const [searchData, setSearchData] = React.useState(listData);
+
+  const onSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+
+    const searchMatched = listData.filter((data) =>
+      data.title.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setSearchData(searchMatched);
+  };
+
+  // @ Check handler
+  const onCheckHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    id: number
+  ) => {
+    const updatedData = searchData.map((data) => {
+      if (id === data.id) {
+        return { ...data, check: true };
+      }
+      return data;
+    });
+    setSearchData(updatedData);
+  };
   return (
     <Box>
-      <Accordion sx={{ p: 0, boxShadow: "none" }} defaultExpanded={expand}>
+      <Accordion
+        sx={{ p: 0, boxShadow: "none", bgcolor: "transparent" }}
+        defaultExpanded={expand}
+      >
         <AccordionSummary
           sx={{
             p: 0,
             "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
               transform: "rotate(90deg)",
             },
+            bgcolor: "transparent",
           }}
           expandIcon={<MdOutlineKeyboardArrowRight size={20} color="#a6a6a6" />}
         >
@@ -44,46 +71,45 @@ export default function SideBarItem({
           </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ p: 0 }}>
-          {hasSearchBar && (
-            <Box
+          <Box
+            sx={{
+              maxWidth: 550,
+              display: "flex",
+              alignItems: "center",
+              height: 35,
+              p: 1,
+              mt: 2,
+              mb: 2,
+              border: "1px solid #f2ecec",
+              borderRadius: 1,
+            }}
+          >
+            <IconButton
               sx={{
-                maxWidth: 550,
-                display: "flex",
-                alignItems: "center",
-                height: 35,
-                p: 1,
-                mt: 2,
-                mb: 2,
-                border: "1px solid #f2ecec",
-                borderRadius: 1,
+                cursor: "default",
+                bgcolor: "text.secondary",
+                borderRadius: 1.5,
+                p: 0.5,
+                "&:hover": {
+                  // opacity: 0.85,
+                  bgcolor: "text.secondary",
+                },
               }}
             >
-              <IconButton
-                sx={{
-                  cursor: "default",
-                  bgcolor: "text.secondary",
-                  borderRadius: 1.5,
-                  p: 0.5,
-                  "&:hover": {
-                    // opacity: 0.85,
-                    bgcolor: "text.secondary",
-                  },
-                }}
-              >
-                <BiSearch color="#fff" size={20} />
-              </IconButton>
-              <InputBase
-                fullWidth
-                placeholder={palceholderText}
-                sx={{
-                  p: 1,
-                  fontSiz: 13,
-                  color: "#666",
-                  height: "100%",
-                }}
-              />
-            </Box>
-          )}
+              <BiSearch color="#fff" size={20} />
+            </IconButton>
+            <InputBase
+              onChange={onSearchHandler}
+              fullWidth
+              placeholder={placeholderText}
+              sx={{
+                p: 1,
+                fontSize: 14,
+                color: "#666",
+                height: "100%",
+              }}
+            />
+          </Box>
           <Box
             sx={{
               maxHeight: 300,
@@ -107,7 +133,7 @@ export default function SideBarItem({
             }}
           >
             <FormGroup>
-              {listData.map((data, indx) => (
+              {searchData.map((data, indx) => (
                 <FormControlLabel
                   sx={{
                     "& .MuiTypography-root": {
@@ -124,9 +150,15 @@ export default function SideBarItem({
                     },
                   }}
                   key={indx}
-                  title={data}
-                  control={<Checkbox value={data} />}
-                  label={data}
+                  title={data.title}
+                  control={
+                    <Checkbox
+                      onChange={(e) => onCheckHandler(e, data.id)}
+                      checked={data.check}
+                      value={data.title}
+                    />
+                  }
+                  label={data.title}
                 />
               ))}
             </FormGroup>
