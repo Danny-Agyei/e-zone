@@ -44,7 +44,7 @@ export default function SideBarItem({
   ) => {
     const updatedData = searchData.map((data) => {
       if (id === data.id) {
-        return { ...data, check: true };
+        return { ...data, check: !data.check };
       }
       return data;
     });

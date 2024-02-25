@@ -65,7 +65,7 @@ export default function CustomSelect() {
           input={<InputBase />}
           MenuProps={MenuProps}
           sx={{
-            fontWeight: 600,
+            fontWeight: 500,
             fontSize: 14,
             // position: "relative",
           }}

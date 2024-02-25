@@ -94,7 +94,7 @@ export default function UniversalFilter() {
   return (
     <>
       <Box>
-        <Box>
+        <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5" }}>
           <Typography variant="body2" pb={1.5} fontWeight={600}>
             Price Range
           </Typography>
@@ -173,7 +173,7 @@ export default function UniversalFilter() {
           </Stack>
         </Box>
       </Box>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <Typography variant="body2" fontWeight={600}>
           Brands
         </Typography>
@@ -210,7 +210,7 @@ export default function UniversalFilter() {
             sx={{
               p: 1,
               fontSize: 14,
-              color: "#666",
+              color: "#777",
               height: "100%",
             }}
           />
@@ -269,7 +269,7 @@ export default function UniversalFilter() {
           </FormGroup>
         </Box>
       </Box>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         {categoryName === "electronics" || categoryName === "fashion" ? (
           <SideBarItem
             expand={true}
@@ -301,7 +301,7 @@ export default function UniversalFilter() {
                           "&:hover": { bgcolor: "transparent" },
                         }}
                       >
-                        <Typography variant="body2" color="#666" fontSize={13}>
+                        <Typography variant="body2" color="#777" fontSize={13}>
                           {category.title}
                         </Typography>
                       </Button>

@@ -96,6 +96,9 @@ export default function CartDrawer(props: {
       onOpen={toggleCartDrawer}
       sx={{
         zIndex: 9999,
+        "& .MuiDrawer-paper": {
+          transition: "all .35s ease-in-out !important",
+        },
       }}
     >
       <Box
@@ -119,7 +122,7 @@ export default function CartDrawer(props: {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Typography variant="body2" fontSize={18} fontWeight={600}>
+            <Typography variant="body2" fontSize={18} fontWeight={500}>
               Your Cart
             </Typography>
             <IconButton
@@ -129,7 +132,7 @@ export default function CartDrawer(props: {
                 "&:hover": { bgcolor: "text.primary", opacity: 0.8 },
               }}
             >
-              <IoCloseOutline fontWeight={600} fontSize={20} color="#fff" />
+              <IoCloseOutline fontWeight={500} fontSize={20} color="#fff" />
             </IconButton>
           </Stack>
           <Typography variant="body2" py={1} fontSize={14}>
@@ -138,7 +141,7 @@ export default function CartDrawer(props: {
               component="span"
               variant="body2"
               fontSize={14}
-              fontWeight={600}
+              fontWeight={500}
             >
               free shipping!
             </Typography>
@@ -171,10 +174,10 @@ export default function CartDrawer(props: {
                 src="http://localhost:1337/uploads/your_shopping_cart_is_empty_362dd5e5f8.png"
                 alt="empty_basket"
               />
-              <Typography variant="body2" fontWeight={600} fontSize={22}>
+              <Typography variant="body2" fontWeight={500} fontSize={18}>
                 Your shopping cart is empty
               </Typography>
-              <Typography variant="body2" py={2}>
+              <Typography variant="body2" py={2} color="#777">
                 Lets change that!
               </Typography>
               <Button
@@ -185,8 +188,8 @@ export default function CartDrawer(props: {
                   color: "text.primary",
                   boxShadow: "none",
                   maxWidth: 160,
-                  fontWeight: 600,
-                  fontSize: 14,
+                  fontWeight: 500,
+                  fontSize: 13,
                   py: 1.4,
                   "&:hover": {
                     opacity: 0.9,
@@ -221,11 +224,14 @@ export default function CartDrawer(props: {
           }}
         />
         <Stack direction="row" justifyContent="space-between" mb={2}>
-          <Typography variant="h3" fontWeight={600} fontSize={18}>
-            Subtotal [{shoppingCart.length}{" "}
-            {shoppingCart.length > 1 ? "items" : "item"}] :
+          <Typography variant="body2" fontWeight={500} fontSize={16}>
+            Subtotal [
+            <Typography color="#777" component="span" variant="body2">
+              {shoppingCart.length} {shoppingCart.length > 1 ? "items" : "item"}
+            </Typography>
+            ] :
           </Typography>
-          <Typography fontWeight={600} variant="body1">
+          <Typography fontWeight={500} variant="body2" fontSize={16}>
             ${subtotal.toFixed(2)}
           </Typography>
         </Stack>
@@ -235,15 +241,15 @@ export default function CartDrawer(props: {
               onClick={onCheckoutHandler}
               fullWidth
               sx={{
-                bgcolor: "#e1e1e1",
+                bgcolor: "#eaeaea",
                 color: "text.primary",
-                fontWeight: 600,
-                fontSize: 14,
+                fontWeight: 500,
+                fontSize: 13,
                 py: 1.4,
                 boxShadow: "none",
                 "&:hover": {
                   opacity: 0.9,
-                  bgcolor: "#e1e1e1",
+                  bgcolor: "#eaeaea",
                   boxShadow: "none",
                 },
               }}
@@ -259,8 +265,8 @@ export default function CartDrawer(props: {
               bgcolor: "text.secondary",
               color: "text.primary",
               boxShadow: "none",
-              fontWeight: 600,
-              fontSize: 14,
+              fontWeight: 500,
+              fontSize: 13,
               py: 1.4,
               "&:hover": {
                 opacity: 0.9,

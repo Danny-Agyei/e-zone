@@ -10,7 +10,211 @@ import {
   UniversalFilter,
 } from "../../components";
 
+import { BsGrid } from "react-icons/bs";
+import { CiGrid2H, CiGrid2V, CiBoxList } from "react-icons/ci";
+import { FaListUl } from "react-icons/fa6";
+
 import store from "../../lib/zustand/store";
+
+// const fashionBrands = [
+//   "Coofandy
+
+//   Adidas
+
+//   Nike
+
+//   Tommy Hilfiger
+
+//   Olevs
+
+//   Champion
+
+//   Hanes
+
+//   Calvin Klein
+
+//   Carhartt
+
+//   Levi's
+
+//   Puma
+
+//   Lacoste
+
+//   Skechers
+
+//   Dickies
+
+//   Thunderfit
+
+//   Columbia
+
+//   Amazon Essentials
+
+//   New Balance
+
+//   Polo Ralph Lauren
+
+//   Magcomsen
+
+//   Asics
+
+//   Dockers
+
+//   Nautica
+
+//   Oakley
+
+//   Under Armour
+
+//   Jousen
+
+//   Reebok
+
+//   Muscularfit
+
+//   Clarks
+
+//   Bruno Marc
+
+//   King Will
+
+//   Thorogood
+
+//   Ray-ban
+
+//   Tacvasen
+
+//   Ariat
+
+//   Jockmail
+
+//   Wrangler
+
+//   Pj Paul Jones
+
+//   Wrangler Authentics
+
+//   Stetson
+
+//   Invicta
+
+//   Merrell
+
+//   Timberland
+
+//   Casio
+
+//   Legendary Whitetails
+
+//   Jmierr
+
+//   Nortiv 8
+
+//   Timberland Pro
+
+//   Cole Haan
+
+//   Ecco
+
+//   Seiko
+
+//   By Benyar
+
+//   The North Face
+
+//   Salomon
+
+//   Adidas Originals
+
+//   Saxx Underwear Co.
+
+//   Hisdern
+
+//   Fruit Of The Loom
+
+//   G Gradual
+
+//   David Archy
+
+//   Van Heusen
+
+//   Miabella
+
+//   Fitville
+
+//   Emporio Armani
+
+//   Jockey
+
+//   Tsar Bomba
+
+//   Ikingsky
+
+//   Zeroyaa
+
+//   Lee
+
+//   Cat
+
+//   Rm Real Men
+
+//   Bamboo Cool
+
+//   Fossil
+
+//   Gingtto
+
+//   Vostey
+
+//   Gildan
+
+//   Larnmern
+
+//   Michael Kors
+
+//   Boss
+
+//   Speedy Pros
+
+//   Camel Crown
+
+//   Ritche
+
+//   Rockport
+
+//   Aelfric Eden
+
+//   Hugo Boss
+
+//   Haorun
+
+//   Crocs
+
+//   A X Armani Exchange
+
+//   Kudoro
+
+//   Hzman
+
+//   Chouyatou
+
+//   Forsining
+
+//   Suadex
+
+//   Decrum
+
+//   Rockrooster
+
+//   Arkbird
+
+//   Keen
+
+//   Cherokee
+
+//   Quiksilver"
+// ]
 
 const Shop = () => {
   const loadedData = useLoaderData() as {
@@ -43,7 +247,7 @@ const Shop = () => {
           return (
             <Box px={10}>
               <Grid container columnSpacing={4}>
-                <Grid item xs={3}>
+                <Grid item xs={12} sm={3} md={3}>
                   <Box
                     sx={{
                       borderRight: "1px solid #eae5e5",
@@ -55,7 +259,7 @@ const Shop = () => {
                     <ElectronicsFilter />
                   </Box>
                 </Grid>
-                <Grid item xs={9} sx={{ py: 8 }}>
+                <Grid item xs={12} sm={9} md={9} sx={{ py: 8 }}>
                   <Typography
                     variant="body2"
                     mb={4}

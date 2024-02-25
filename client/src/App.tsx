@@ -37,12 +37,12 @@ const theme = createTheme({
       paper: "#fff",
     },
     text: {
-      primary: "#13131a",
+      primary: "#1c1b1b",
       secondary: "#ffb100",
     },
   },
   typography: {
-    fontFamily: `"Work Sans", sans-serif`,
+    fontFamily: `"Rubik", sans-serif`,
   },
 });
 

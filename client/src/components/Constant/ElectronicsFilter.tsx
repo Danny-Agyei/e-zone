@@ -16,49 +16,49 @@ export default function ElectronicFilter() {
 
   return (
     <>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
           title="Processor "
           listData={processors}
           placeholderText="Search by processor"
         />
       </Box>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
           title="Graphic Card"
           listData={graphicDetails}
           placeholderText="Search by graphic card"
         />
       </Box>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
           title="Operating System"
           listData={operatingSystem}
           placeholderText="Search by operating system"
         />
       </Box>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
           title="Ram"
           listData={memorySize}
           placeholderText="Search by memory size"
         />
       </Box>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
           title="Hard Drive"
           listData={hardDriveSize}
           placeholderText="Search by hard drive size"
         />
       </Box>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
           title="Display Size"
           listData={displaySize}
           placeholderText="Search by screen size"
         />
       </Box>
-      <Box pt={4}>
+      <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
           title="Speed"
           listData={performance}

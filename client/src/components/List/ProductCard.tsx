@@ -7,15 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import {
-  TiStar,
-  TiStarOutline,
-  TiStarHalfOutline,
-  TiStarFullOutline,
-} from "react-icons/ti";
-import { AiFillStar } from "react-icons/ai";
 import { ProductCardType } from "../../types";
 import { useState } from "react";
+import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { IoIosStar, IoIosStarOutline, IoIosStarHalf } from "react-icons/io";
 
 export default function ProductCard({ product }: { product: ProductCardType }) {
   const {
@@ -41,7 +36,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
       sx={{
         maxWidth: 300,
         width: "100%",
-        boxShadow: "none",
+        boxShadow: "0 0 6px #eaeaea",
         border: "1px solid #eae5e5",
         borderRadius: 2,
         p: 2,
@@ -61,8 +56,8 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           px: 1,
           py: 0.5,
           borderRadius: 9999,
-          fontSize: 14,
-          fontWeight: 600,
+          fontSize: 12,
+          fontWeight: 500,
         }}
       >
         -{discountPercent}%
@@ -120,30 +115,29 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           fontSize={12}
           pb={1.5}
           fontWeight={500}
-          color="#c82e2e"
+          color="#bf4800"
         >
           {brand}
         </Typography>
         <Link to={`/products/${slug}`}>
-          <Typography variant="body2" fontSize={16} fontWeight={600}>
+          <Typography variant="body2" fontSize={14} fontWeight={500}>
             {name}
           </Typography>
         </Link>
         <Box py={1.5}>
           <Box lineHeight={0}>
-            <TiStarFullOutline size={12} color="#FF8C00" />
-            <TiStarFullOutline size={12} color="#FF8C00" />
-            <TiStarFullOutline size={12} color="#FF8C00" />
-            <TiStarFullOutline size={12} color="#FF8C00" />
-            <TiStarFullOutline size={12} color="#FF8C00" />
+            <IoIosStar size={15} color="#ffc30e" />
+            <IoIosStar size={15} color="#ffc30e" />
+            <IoIosStar size={15} color="#ffc30e" />
+            <IoIosStar size={15} color="#ffc30e" />
+            <IoIosStar size={15} color="#ffc30e" />
           </Box>
         </Box>
         <Stack direction="row" spacing={1} alignItems="center">
           {hasDiscount && (
             <Typography
               variant="body2"
-              color="#666"
-              fontSize={16}
+              fontSize={14}
               sx={{ textDecoration: "line-through" }}
             >
               ${price.toFixed(2)}
@@ -151,9 +145,9 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           )}
           <Typography
             variant="body2"
-            fontSize={16}
+            fontSize={14}
             fontWeight={500}
-            color={hasDiscount ? "#c82e2e" : "text.primary"}
+            color={hasDiscount ? "#e02b40" : "text.primary"}
           >
             ${hasDiscount ? (price - discountInMoney).toFixed(2) : price}
           </Typography>

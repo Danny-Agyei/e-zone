@@ -11,8 +11,10 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AccountDropdown, CustomSelect, NavItem } from "../../components";
-import { BsBag } from "react-icons/bs";
-import { HiOutlineUser } from "react-icons/hi2";
+import { IoHeartOutline, IoHeart } from "react-icons/io5";
+
+import { GiShoppingBag } from "react-icons/gi";
+
 import { BiSearch } from "react-icons/bi";
 
 import logo from "../../logo.png";
@@ -31,10 +33,11 @@ const Navbar = () => {
         top: 0,
         zIndex: 999,
         borderBottom: 1,
-        borderColor: "#eae5e5",
+        borderColor: "#eaeaea",
+        bgcolor: "text.primary",
       }}
     >
-      <Box px={10} m="0 auto" py={2} bgcolor="#eeeee9">
+      <Box px={10} m="0 auto" py={2}>
         <CartDrawer openCart={openCart} toggleCartDrawer={toggleCartDrawer} />
         <Stack
           direction="row"
@@ -54,14 +57,15 @@ const Navbar = () => {
           </Box>
           <Box
             sx={{
-              width: "50%",
+              width: "45%",
               maxWidth: 550,
               display: "flex",
               alignItems: "center",
-              height: 50,
+              height: 45,
               px: 0.5,
-              border: "1px solid #aaa",
+              border: "1px solid #eaeaea",
               borderRadius: 9999,
+              bgcolor: "#fff",
             }}
           >
             <CustomSelect />
@@ -70,8 +74,8 @@ const Navbar = () => {
               placeholder="Search product"
               sx={{
                 p: 1,
-                fontSiz: 14,
-                color: "#666",
+                fontSize: 14,
+                color: "#777",
                 height: "100%",
               }}
             />
@@ -84,7 +88,7 @@ const Navbar = () => {
                 },
               }}
             >
-              <BiSearch color="#fff" />
+              <BiSearch color="#1c1b1b" size={20} />
             </IconButton>
           </Box>
           <Box>
@@ -92,9 +96,23 @@ const Navbar = () => {
               direction="row"
               justifyContent="space-between"
               alignItems="center"
-              spacing={0}
+              spacing={4}
             >
-              <Box pr={1} pt={0.7}>
+              <Box pt={0.7}>
+                <Stack
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  spacing={0}
+                >
+                  <IoHeartOutline size={40} color="#fff" />
+                  <Typography variant="body2" pl={1} fontSize={13} color="#fff">
+                    Favourite <br />
+                    Wishlist
+                  </Typography>
+                </Stack>
+              </Box>
+              <Box pt={0.7}>
                 <AccountDropdown />
               </Box>
               <Box
@@ -103,25 +121,25 @@ const Navbar = () => {
                 sx={{ cursor: "pointer" }}
               >
                 <IconButton sx={{ mr: 0.5, p: 0 }}>
-                  <BsBag size={20} />
+                  <GiShoppingBag size={35} color="#ffb100" />
                 </IconButton>
                 <Typography
                   component="span"
                   variant="body2"
-                  fontSize={10}
-                  fontWeight={600}
+                  fontSize={12}
+                  fontWeight={500}
                   position="absolute"
                   top={-8}
-                  left={10}
-                  width={10}
-                  height={10}
+                  left={18}
+                  width={15}
+                  height={15}
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
                   p={0.6}
                   borderRadius={75}
-                  bgcolor="black"
-                  color="#ffffff"
+                  bgcolor="#fff"
+                  color="text.primary"
                 >
                   {shopCart.length}
                 </Typography>
@@ -138,7 +156,7 @@ const Navbar = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          bgcolor: "#fff",
+          bgcolor: "#232f3e",
         }}
       >
         <List disablePadding sx={{ display: "flex", alignItems: "center" }}>
@@ -171,7 +189,7 @@ const Navbar = () => {
                             "&:hover": { opacity: 0.6 },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Desktops
                         </Typography>
@@ -190,7 +208,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Laptops
                         </Typography>
@@ -209,7 +227,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Computer Accessories
                         </Typography>
@@ -228,7 +246,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Shop All
                         </Typography>
@@ -254,7 +272,7 @@ const Navbar = () => {
                             "&:hover": { opacity: 0.6 },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Tablets
                         </Typography>
@@ -273,7 +291,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Cell Phones
                         </Typography>
@@ -292,7 +310,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Smart Watches
                         </Typography>
@@ -311,7 +329,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Mobile Accessories
                         </Typography>
@@ -330,7 +348,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Shop All
                         </Typography>
@@ -356,7 +374,7 @@ const Navbar = () => {
                             "&:hover": { opacity: 0.6 },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Headphones
                         </Typography>
@@ -375,7 +393,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Speakers
                         </Typography>
@@ -394,7 +412,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Ear Buds
                         </Typography>
@@ -413,7 +431,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Shop All
                         </Typography>
@@ -439,7 +457,7 @@ const Navbar = () => {
                             "&:hover": { opacity: 0.6 },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Tv & video
                         </Typography>
@@ -458,7 +476,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Smart Home & Security
                         </Typography>
@@ -477,7 +495,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Video Games & Consoles
                         </Typography>
@@ -496,7 +514,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Mobile Accessories
                         </Typography>
@@ -515,7 +533,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Shop All
                         </Typography>
@@ -548,7 +566,7 @@ const Navbar = () => {
                             "&:hover": { opacity: 0.6 },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Jackets & Coats
                         </Typography>
@@ -567,7 +585,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           T-shirt & Tanks
                         </Typography>
@@ -586,7 +604,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Sweaters & Cardigans
                         </Typography>
@@ -605,7 +623,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Tops & Shirts
                         </Typography>
@@ -624,7 +642,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Hoodies & Sweatshirts
                         </Typography>
@@ -643,7 +661,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Joggers & Pants
                         </Typography>
@@ -662,7 +680,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Underwear
                         </Typography>
@@ -681,7 +699,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Shorts
                         </Typography>
@@ -700,7 +718,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Shop All
                         </Typography>
@@ -726,7 +744,7 @@ const Navbar = () => {
                             "&:hover": { opacity: 0.6 },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Jackets & Coats
                         </Typography>
@@ -745,7 +763,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           T-shirt & Tanks
                         </Typography>
@@ -764,7 +782,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Sweaters & Cardigans
                         </Typography>
@@ -783,7 +801,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Tops & Shirts
                         </Typography>
@@ -802,7 +820,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Hoodies & Sweatshirts
                         </Typography>
@@ -821,7 +839,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Joggers, Pants & Leggings
                         </Typography>
@@ -840,7 +858,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Dresses & Jumpsuits
                         </Typography>
@@ -859,7 +877,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Shorts & Skirts
                         </Typography>
@@ -878,7 +896,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Underwear
                         </Typography>
@@ -897,7 +915,7 @@ const Navbar = () => {
                             },
                           }}
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Shop All
                         </Typography>

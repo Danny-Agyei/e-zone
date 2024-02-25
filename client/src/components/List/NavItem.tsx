@@ -1,4 +1,4 @@
-import { Box, Grid, ListItemText, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React, { ReactNode, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -26,8 +26,11 @@ export default function NavItem({
         {!hasSubList ? (
           <Link to={linkTo}>
             <Typography
-              color="text.primary"
+              color="#fff"
+              fontSize={14}
               sx={{
+                textTransform: "uppercase",
+                cursor: "pointer",
                 transition: "opacity .95s ease-in-out;",
                 "&:hover": {
                   opacity: 0.6,
@@ -55,31 +58,33 @@ export default function NavItem({
                   "&:before": {
                     content: "attr(data-item-title)",
                     position: "absolute",
+                    cursor: "pointer",
                     height: 60,
                     width: "max-content",
                     top: 0,
                     opacity: 0,
                     zIndex: 9999,
                   },
+                  "& .title-text": { opacity: 0.6 },
                 },
               }}
             >
               <Box
                 sx={{
                   position: "fixed",
-                  top: 135,
+                  top: showMenu ? 150 : 180,
                   left: 0,
                   zIndex: 999,
-                  background: "rgba(238, 238 ,233, 0.95)",
+                  background: "#f5f5f7",
+                  boxShadow: "0 0 8px #eaeaea",
                   minWidth: "100%",
                   px: 5,
                   py: 4,
                   borderBottom: 1,
-                  borderColor: "#eee",
+                  borderColor: "#eaeaea",
                   visibility: showMenu ? "visible" : "hidden",
                   opacity: showMenu ? 1 : 0,
-                  transition:
-                    "opacity .25s ease-in-out, visibility .25s ease-in-out, background .25s ease-in-out",
+                  transition: "all .25s ease-in-out",
                 }}
               >
                 <Box maxWidth={1200} m="0 auto">
@@ -88,7 +93,19 @@ export default function NavItem({
                   </Grid>
                 </Box>
               </Box>
-              <Box component="p" color="text.primary">
+              <Box
+                className="title-text"
+                component="p"
+                color="#fff"
+                sx={{
+                  textTransform: "uppercase",
+                  fontSize: 14,
+                  transition: "opacity .95s ease-in-out;",
+                  "&:hover": {
+                    opacity: "0.6 !important",
+                  },
+                }}
+              >
                 {title}
               </Box>
               <Box
@@ -98,7 +115,11 @@ export default function NavItem({
                 color="text.primary"
                 lineHeight={0}
               >
-                <MdOutlineKeyboardArrowDown size={20} color="#666666" />
+                <MdOutlineKeyboardArrowDown
+                  size={20}
+                  color="#fff"
+                  style={{ cursor: "pointer" }}
+                />
               </Box>
             </Box>
           </Box>

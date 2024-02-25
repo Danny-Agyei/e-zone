@@ -69,13 +69,13 @@ export const Home = () => {
         {(resolveData: { banners: BannerType[]; products: ProductType[] }) => {
           return (
             <Box>
-              <Banner bannerData={heroBanners(resolveData.banners)} />
               <Box px={10} pt={4}>
+                <Banner bannerData={heroBanners(resolveData.banners)} />
                 <Typography
-                  variant="h2"
+                  variant="body2"
                   pt={8}
                   pb={4}
-                  fontSize={22}
+                  fontSize={18}
                   fontWeight={600}
                 >
                   Our Top Categories
@@ -135,7 +135,12 @@ export const Home = () => {
                 </CustomSlider>
               </Box>
               <Box px={10}>
-                <Typography variant="h2" pb={4} fontSize={22} fontWeight={600}>
+                <Typography
+                  variant="body2"
+                  pb={4}
+                  fontSize={18}
+                  fontWeight={600}
+                >
                   Trending Products
                 </Typography>
                 <Grid container columnSpacing={8}>
@@ -150,10 +155,10 @@ export const Home = () => {
                 {newArrivalBanners(resolveData.banners).length > 0 && (
                   <Box>
                     <Typography
-                      variant="h2"
+                      variant="body2"
                       pt={8}
                       pb={2}
-                      fontSize={22}
+                      fontSize={18}
                       fontWeight={600}
                     >
                       New Arrival

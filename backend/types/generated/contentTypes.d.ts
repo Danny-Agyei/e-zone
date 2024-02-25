@@ -880,7 +880,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'api::category.category'
     >;
     OS: Attribute.String & Attribute.Required;
-    manufacturer: Attribute.String & Attribute.Required;
+    manufacturer: Attribute.String;
     brand: Attribute.String & Attribute.Required;
     ram: Attribute.String;
     model_name: Attribute.String;
@@ -889,15 +889,21 @@ export interface ApiProductProduct extends Schema.CollectionType {
     sim_card_size: Attribute.String;
     Network_Technology: Attribute.String;
     connectivity_technologies: Attribute.String;
-    battery_bescription: Attribute.String;
+    battery_description: Attribute.String;
     rear_camera: Attribute.String;
     front_camera: Attribute.String;
     biometric_security_feature: Attribute.String;
     water_resistant: Attribute.String;
     hardDriveSize: Attribute.String;
-    graphicCard: Attribute.String;
+    graphic_Card: Attribute.String;
     displaySize: Attribute.String;
     speed: Attribute.String;
+    Processor: Attribute.String;
+    Weight: Attribute.String;
+    Charging_Time: Attribute.String;
+    Fabric_Type: Attribute.String;
+    Closure_Type: Attribute.String;
+    Neck_Style: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

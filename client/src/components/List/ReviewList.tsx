@@ -37,7 +37,7 @@ export default function ReviewList() {
               <ListItem
                 sx={{ py: 0 }}
                 secondaryAction={
-                  <Typography fontSize={14}>12/02/2024</Typography>
+                  <Typography fontSize={13}>12/02/2024</Typography>
                 }
               >
                 <ListItemAvatar>
@@ -46,7 +46,9 @@ export default function ReviewList() {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  sx={{ "& span": { fontWeight: "600 !important" } }}
+                  sx={{
+                    "& span": { fontSize: 14, fontWeight: "500 !important" },
+                  }}
                   primary="Anonymous"
                   // secondary={<StarRating />}
                 />
@@ -60,7 +62,7 @@ export default function ReviewList() {
                     pl: 7,
                   }}
                   primary={
-                    <Typography variant="body2" fontSize={14} color="#666">
+                    <Typography variant="body2" fontSize={13} color="#777">
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
                       Veritatis perspiciatis ea, culpa.
                     </Typography>
@@ -72,7 +74,7 @@ export default function ReviewList() {
         </List>
       </Box>
       <Box pt={4}>
-        <Typography variant="h4" pb={1} fontSize={18} fontWeight={600}>
+        <Typography variant="body2" pb={1} fontSize={18} fontWeight={500}>
           Leave a review.
         </Typography>
         <StarRating />
@@ -96,7 +98,7 @@ export default function ReviewList() {
                   alignItems: "center",
                   bgcolor: "text.secondary",
                   color: "text.primary",
-                  fontWeight: 600,
+                  fontWeight: 500,
                   mt: 4,
                   width: "35%",
                   maxWidth: 250,
@@ -113,10 +115,10 @@ export default function ReviewList() {
           )}
           {1 > 2 && (
             <Box sx={{ py: 2, my: 2 }}>
-              <Typography variant="h4" fontSize={18} fontWeight={600}>
+              <Typography variant="body2" fontSize={18} fontWeight={500}>
                 Write Your Own Reviews.
               </Typography>
-              <Typography variant="body2" fontSize={14} color="#666">
+              <Typography variant="body2" fontSize={14} color="#777">
                 Only registered users can write reviews. Please{" "}
                 <Link to="/account/login">
                   <Typography

@@ -26,6 +26,7 @@ import {
   ProductDetails,
   ProductImageSlider,
 } from "../../components";
+import { IoIosStar, IoIosStarOutline, IoIosStarHalf } from "react-icons/io";
 
 import store from "../../lib/zustand/store";
 
@@ -140,52 +141,59 @@ const Product = () => {
                 </Grid>
                 <Grid item sm={12} md={6} lg={6}>
                   <Box>
-                    <Link to={`shop/collection/brand/${brand}`}>
-                      <Typography
-                        variant="body2"
-                        color="#666"
-                        fontSize={14}
-                        fontWeight={600}
-                        pb={1.2}
-                      >
-                        {brand}
-                      </Typography>
-                    </Link>
-                    <Typography variant="h2" fontSize={26} fontWeight={600}>
+                    <Typography variant="body2" fontSize={18} fontWeight={600}>
                       {name} - {selectedVariant.colorName} Color{" "}
                       {selectedCapacity.capacity}
                     </Typography>
                   </Box>
-                  <Box py={1.2}>
+                  <Box py={1.8}>
                     <Stack direction="row" spacing={2} alignItems="center">
                       <Box lineHeight={0}>
-                        <TiStarFullOutline size={20} color="#FF8C00" />
-                        <TiStarFullOutline size={20} color="#FF8C00" />
-                        <TiStarFullOutline size={20} color="#FF8C00" />
-                        <TiStarFullOutline size={20} color="#FF8C00" />
-                        <TiStarFullOutline size={20} color="#FF8C00" />
+                        <IoIosStar size={15} color="#ffc30e" />
+                        <IoIosStar size={15} color="#ffc30e" />
+                        <IoIosStar size={15} color="#ffc30e" />
+                        <IoIosStar size={15} color="#ffc30e" />
+                        <IoIosStar size={15} color="#ffc30e" />
                       </Box>
-                      <Typography variant="body2">(25 reviews)</Typography>
+                      <Typography variant="body2" fontSize={13} color="#777">
+                        (25 reviews)
+                      </Typography>
                     </Stack>
                   </Box>
+                  <Divider
+                    variant="fullWidth"
+                    sx={{
+                      borderColor: "#eaeaea",
+                    }}
+                  />
                   <Box pt={2.5}>
+                    <Link to={`shop/collection/brand/${brand}`}>
+                      <Typography
+                        variant="body2"
+                        fontSize={14}
+                        fontWeight={500}
+                        pb={2}
+                      >
+                        Brand :{" "}
+                        <Typography
+                          variant="body2"
+                          fontSize={13}
+                          fontWeight={500}
+                          color="#777"
+                          component="span"
+                        >
+                          {brand}
+                        </Typography>
+                      </Typography>
+                    </Link>
+
                     <Typography
                       variant="body2"
-                      color="#666"
-                      fontSize={16}
+                      fontSize={14}
                       fontWeight={500}
                       pb={1.2}
                     >
-                      Colour :{" "}
-                      <Typography
-                        variant="body2"
-                        color="text.primary"
-                        component="span"
-                        fontSize={16}
-                        fontWeight={600}
-                      >
-                        {selectedVariant.colorName}
-                      </Typography>
+                      Colour
                     </Typography>
                     <Stack direction="row" spacing={1.2} alignItems="center">
                       {variants.map((variant: variantsType[0], indx) => (
@@ -247,12 +255,11 @@ const Product = () => {
                   <Box pt={2.5}>
                     <Typography
                       variant="body2"
-                      color="#666"
-                      fontSize={16}
+                      fontSize={14}
                       fontWeight={500}
                       pb={1.2}
                     >
-                      Capacity
+                      Storage
                     </Typography>
                     <Stack direction="row" spacing={1.2} alignItems="center">
                       {storage.map((strg, indx) => (
@@ -280,20 +287,23 @@ const Product = () => {
                               bottom: 0,
                               width: "100%",
                               height: "100%",
-                              borderRadius: "8px",
-                              border: "1px solid #ccc",
+                              borderRadius: 1,
+                              border: "1px solid #eaeaea",
                               "& span": {
                                 display: "none",
                               },
                               "&.Mui-checked": {
-                                borderColor: "text.secondary",
+                                borderColor: "text.primary",
                               },
                             }}
                           />
 
                           <Box
                             sx={{
-                              p: "12px 16px",
+                              p: "12px 14px",
+                              fontSize: 14,
+                              fontWeight: 500,
+                              color: "#777",
                             }}
                           >
                             {strg.capacity}
@@ -306,21 +316,17 @@ const Product = () => {
                     <Divider
                       variant="fullWidth"
                       sx={{
-                        borderColor: "#e5e5e5",
+                        borderColor: "#eaeaea",
                       }}
                     />
                     <Typography
-                      color="#666"
                       variant="body2"
-                      fontSize={16}
+                      fontWeight={500}
+                      fontSize={14}
                       py={1.2}
                     >
                       Availability :{" "}
-                      <Typography
-                        component="span"
-                        fontSize={16}
-                        fontWeight={600}
-                      >
+                      <Typography component="span" fontSize={14}>
                         {inStock > 0 ? (
                           <Box component="span">
                             <Box component="span" color="text.primary">
@@ -338,16 +344,16 @@ const Product = () => {
                       </Typography>
                     </Typography>
                     {inStock > 0 && (
-                      <Typography fontSize={16} variant="body2" color="red">
+                      <Typography fontSize={14} variant="body2" color="red">
                         Only {inStock} items left in stock.
                       </Typography>
                     )}
                   </Box>
                   <Box pt={4}>
                     <Typography
-                      color="#666"
                       variant="body2"
-                      fontSize={16}
+                      fontWeight={500}
+                      fontSize={14}
                       pb={1.2}
                     >
                       Quantity
@@ -443,10 +449,10 @@ const Product = () => {
                       <MdShoppingCart size={22} color="#13131a" />
                       <Typography
                         variant="body2"
-                        fontSize={20}
+                        fontSize={16}
                         component="span"
                         color="text.primary"
-                        fontWeight={600}
+                        fontWeight={500}
                       >
                         ADD TO CART - ${selectedCapacity.price}
                       </Typography>
@@ -454,9 +460,9 @@ const Product = () => {
                   </Box>
                   <Typography
                     pt={4}
-                    fontSize={22}
+                    fontSize={16}
                     variant="body1"
-                    fontWeight={600}
+                    fontWeight={500}
                   >
                     Ways to get your order
                   </Typography>
@@ -482,24 +488,24 @@ const Product = () => {
                         />
                       </Box>
                       <Box>
-                        <Typography variant="body2" fontSize={16}>
+                        <Typography variant="body2" fontSize={14}>
                           Deliver available
                         </Typography>
-                        <Typography py={1} variant="body2" fontSize={16}>
+                        <Typography py={1} variant="body2" fontSize={14}>
                           We deliver within 2 - 4S business days
                         </Typography>
                         <Typography
                           component="span"
                           variant="body2"
                           fontSize={18}
-                          fontWeight={600}
+                          fontWeight={500}
                         >
                           Free shipping{" "}
                         </Typography>
                         <Typography
                           component="span"
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           on orders over $90
                         </Typography>
@@ -528,16 +534,16 @@ const Product = () => {
                         />
                       </Box>
                       <Box>
-                        <Typography variant="body2" fontSize={16}>
+                        <Typography variant="body2" fontSize={14}>
                           Free Pickup available
                         </Typography>
-                        <Typography py={1} variant="body2" fontSize={16}>
+                        <Typography py={1} variant="body2" fontSize={14}>
                           Ready for pickup in stores within 2 hours
                         </Typography>
                         <Typography
                           component="span"
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                         >
                           Pickup at{" "}
                         </Typography>
@@ -545,14 +551,14 @@ const Product = () => {
                           component="span"
                           variant="body2"
                           fontSize={18}
-                          fontWeight={600}
+                          fontWeight={500}
                         >
                           Accra - 45 Graphic Road
                         </Typography>
 
                         <Typography
                           variant="body2"
-                          fontSize={16}
+                          fontSize={14}
                           color="red"
                           pt={2}
                         >
@@ -565,8 +571,8 @@ const Product = () => {
               </Grid>
               <ProductDetails product={product} description={description} />
               <Box id="category-slide" position="relative">
-                <Typography variant="h2" fontSize={22} fontWeight={600}>
-                  Product Related
+                <Typography variant="h2" fontSize={22} fontWeight={500}>
+                  You may like this
                 </Typography>
                 <Divider
                   variant="fullWidth"

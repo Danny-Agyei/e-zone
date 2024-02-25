@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { ProductType } from "../../types";
 import { TiStarFullOutline } from "react-icons/ti";
+import { IoIosStar, IoIosStarOutline, IoIosStarHalf } from "react-icons/io";
 
 import LinearProgress, {
   linearProgressClasses,
@@ -80,7 +81,7 @@ export default function ProductDetails({
   return (
     <Box sx={{ py: 8 }}>
       <Box>
-        <Typography variant="h2" fontSize={22} fontWeight={600}>
+        <Typography variant="body2" fontSize={18} fontWeight={500}>
           Product Descriptions
         </Typography>
         <Divider
@@ -92,12 +93,12 @@ export default function ProductDetails({
             my: 2,
           }}
         />
-        <Typography variant="body2" fontSize={16}>
+        <Typography variant="body2" fontSize={14} color="#777">
           {description}
         </Typography>
       </Box>
       <Box pt={8}>
-        <Typography variant="h2" fontSize={22} fontWeight={600}>
+        <Typography variant="h2" fontSize={18} fontWeight={500}>
           Product Features
         </Typography>
         <Divider
@@ -109,18 +110,21 @@ export default function ProductDetails({
             my: 2,
           }}
         />
-        <TableContainer sx={{ mt: 2, border: "1px solid #eee" }}>
+        <TableContainer sx={{ mt: 2, border: "1px solid #eaeaea" }}>
           <Table sx={{ minWidth: 480 }}>
             <TableBody
               sx={{
                 "& tr:nth-of-type(odd)": { bgcolor: "#f2f2f2" },
-                "& td": { borderColor: "#eee" },
+                "& td": { borderColor: "#eaeaea" },
               }}
             >
               {productFeatures.map((feature, indx) => (
                 <TableRow key={indx}>
                   <TableCell scope="row">{Object.keys(feature)}</TableCell>
-                  <TableCell scope="row" sx={{ width: "50%" }}>
+                  <TableCell
+                    scope="row"
+                    sx={{ width: "50%", color: "#777 !important" }}
+                  >
                     {Object.values(feature)}
                   </TableCell>
                 </TableRow>
@@ -132,7 +136,7 @@ export default function ProductDetails({
       <Grid container pt={8} spacing={8}>
         <Grid item sm={12} md={4}>
           <Box sx={{ position: "sticky", top: 0 }}>
-            <Typography variant="h2" fontSize={22} fontWeight={600}>
+            <Typography variant="h2" fontSize={18} fontWeight={500}>
               Customer Ratings
             </Typography>
             <Divider
@@ -144,21 +148,21 @@ export default function ProductDetails({
                 my: 2,
               }}
             />
-            <Stack direction="row" alignItems="center" spacing={1} pb={1}>
+            <Stack direction="row" alignItems="center" spacing={1} pb={1.5}>
               <Box lineHeight={0}>
-                <TiStarFullOutline size={20} color="#ffb100" />
-                <TiStarFullOutline size={20} color="#ffb100" />
-                <TiStarFullOutline size={20} color="#ffb100" />
-                <TiStarFullOutline size={20} color="#ffb100" />
-                <TiStarFullOutline size={20} color="#ffb100" />
+                <IoIosStar size={18} color="#ffb100" />
+                <IoIosStar size={18} color="#ffb100" />
+                <IoIosStar size={18} color="#ffb100" />
+                <IoIosStar size={18} color="#ffb100" />
+                <IoIosStar size={18} color="#ffb100" />
               </Box>
               <Box>
-                <Typography variant="h6" fontSize={14} fontWeight={600}>
+                <Typography variant="body2" fontSize={13} fontWeight={500}>
                   4.7 out of 5
                 </Typography>
               </Box>
             </Stack>
-            <Typography variant="body2" fontSize={13}>
+            <Typography variant="body2" fontSize={13} color="#777">
               197 customers ratings{" "}
             </Typography>
             <Box pt={2}>
@@ -167,13 +171,13 @@ export default function ProductDetails({
                   component="span"
                   variant="body2"
                   fontSize={14}
-                  fontWeight={600}
+                  fontWeight={500}
                   sx={{ whiteSpace: "nowrap" }}
                 >
                   5 Star
                 </Typography>
                 <BorderLinearProgress variant="determinate" value={89} />
-                <Typography variant="body2" fontSize={14} color="#666">
+                <Typography variant="body2" fontSize={14} color="#777">
                   89%
                 </Typography>
               </Stack>
@@ -182,13 +186,13 @@ export default function ProductDetails({
                   component="span"
                   variant="body2"
                   fontSize={14}
-                  fontWeight={600}
+                  fontWeight={500}
                   sx={{ whiteSpace: "nowrap" }}
                 >
                   4 Star
                 </Typography>
                 <BorderLinearProgress variant="determinate" value={69} />
-                <Typography variant="body2" fontSize={14} color="#666">
+                <Typography variant="body2" fontSize={14} color="#777">
                   69%
                 </Typography>
               </Stack>
@@ -197,13 +201,13 @@ export default function ProductDetails({
                   component="span"
                   variant="body2"
                   fontSize={14}
-                  fontWeight={600}
+                  fontWeight={500}
                   sx={{ whiteSpace: "nowrap" }}
                 >
                   3 Star
                 </Typography>
                 <BorderLinearProgress variant="determinate" value={29} />
-                <Typography variant="body2" fontSize={14} color="#666">
+                <Typography variant="body2" fontSize={14} color="#777">
                   29%
                 </Typography>
               </Stack>
@@ -212,13 +216,13 @@ export default function ProductDetails({
                   component="span"
                   variant="body2"
                   fontSize={14}
-                  fontWeight={600}
+                  fontWeight={500}
                   sx={{ whiteSpace: "nowrap" }}
                 >
                   2 Star
                 </Typography>
                 <BorderLinearProgress variant="determinate" value={11} />
-                <Typography variant="body2" fontSize={14} color="#666">
+                <Typography variant="body2" fontSize={14} color="#777">
                   11%
                 </Typography>
               </Stack>
@@ -227,13 +231,13 @@ export default function ProductDetails({
                   component="span"
                   variant="body2"
                   fontSize={14}
-                  fontWeight={600}
+                  fontWeight={500}
                   sx={{ whiteSpace: "nowrap" }}
                 >
                   1 Star
                 </Typography>
                 <BorderLinearProgress variant="determinate" value={9} />
-                <Typography variant="body2" fontSize={14} color="#666">
+                <Typography variant="body2" fontSize={14} color="#777">
                   9%
                 </Typography>
               </Stack>
@@ -242,7 +246,7 @@ export default function ProductDetails({
         </Grid>
         <Grid item sm={12} md={8}>
           <Box>
-            <Typography variant="h2" fontSize={22} fontWeight={600}>
+            <Typography variant="h2" fontSize={18} fontWeight={500}>
               {productAtrribute.name} reviews
             </Typography>
             <Divider
