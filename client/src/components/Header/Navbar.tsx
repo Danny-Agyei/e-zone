@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { AccountDropdown, CustomSelect, NavItem } from "../../components";
+import { AccountDropdown, FilterSelector, NavItem } from "../../components";
 import { IoHeartOutline, IoHeart } from "react-icons/io5";
 
 import { GiShoppingBag } from "react-icons/gi";
@@ -20,6 +20,17 @@ import { BiSearch } from "react-icons/bi";
 import logo from "../../logo.png";
 import store from "../../lib/zustand/store";
 import CartDrawer from "./CartDrawer";
+
+const categories = [
+  "All",
+  "Electronics",
+  "Fashion & jewellery",
+  "Computer & Accessories",
+  "Mobile & Accessories",
+  "Headphones",
+  "Smart-Watches",
+  "tv-camera-more",
+];
 
 const Navbar = () => {
   const shopCart = store.use.cart();
@@ -68,7 +79,7 @@ const Navbar = () => {
               bgcolor: "#fff",
             }}
           >
-            <CustomSelect />
+            <FilterSelector filterData={categories} />
             <InputBase
               fullWidth
               placeholder="Search product"

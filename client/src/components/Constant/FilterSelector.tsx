@@ -1,7 +1,7 @@
 import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { Box, InputBase } from "@mui/material";
+import { InputBase } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -18,26 +18,21 @@ const MenuProps = {
   },
 };
 
-const categories = [
-  "All",
-  "Electronics",
-  "Fashion & jewellery",
-  "Computer & Accessories",
-  "Mobile & Accessories",
-  "Headphones",
-  "Smart-Watches",
-  "tv-camera-more",
-];
-
-export default function CustomSelect() {
+export default function FilterSelector({
+  filterData,
+  selectColor,
+}: {
+  selectColor?: string;
+  filterData: string[];
+}) {
   const theme = useTheme();
-  const [categoryName, setCategoryName] = React.useState("All");
+  const [filterName, setFilterName] = React.useState(filterData[0]);
 
-  const handleChange = (event: SelectChangeEvent<typeof categoryName>) => {
+  const handleChange = (event: SelectChangeEvent<typeof filterName>) => {
     const {
       target: { value },
     } = event;
-    setCategoryName(value);
+    setFilterName(value);
   };
 
   return (
@@ -59,21 +54,24 @@ export default function CustomSelect() {
         }}
       >
         <Select
-          defaultValue="All"
-          value={categoryName}
+          defaultValue={filterData[0]}
+          value={filterName}
           onChange={handleChange}
           input={<InputBase />}
           MenuProps={MenuProps}
           sx={{
             fontWeight: 500,
             fontSize: 14,
+            "& .MuiSelect-select": {
+              color: selectColor ? selectColor : "#1c1b1b",
+            },
             // position: "relative",
           }}
         >
-          {categories.map((category) => (
+          {filterData.map((data) => (
             <MenuItem
-              key={category}
-              value={category}
+              key={data}
+              value={data}
               sx={{
                 fontSize: 14,
                 position: "relative",
@@ -81,7 +79,7 @@ export default function CustomSelect() {
                 "&:hover": { bgcolor: "#e9ecef" },
               }}
             >
-              {category}
+              {data}
             </MenuItem>
           ))}
         </Select>

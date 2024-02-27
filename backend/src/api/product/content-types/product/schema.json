@@ -73,7 +73,7 @@
     },
     "OS": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "manufacturer": {
       "type": "string",
@@ -119,7 +119,7 @@
     "water_resistant": {
       "type": "string"
     },
-    "hardDriveSize": {
+    "hard_drive_size": {
       "type": "string"
     },
     "graphic_Card": {
@@ -147,6 +147,9 @@
       "type": "string"
     },
     "Neck_Style": {
+      "type": "string"
+    },
+    "Sole_Material": {
       "type": "string"
     }
   }

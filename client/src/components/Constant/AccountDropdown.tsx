@@ -40,20 +40,18 @@ const linkList = [
 ];
 
 export default function AccountDropdown() {
-  const [linkName, setLinkName] = React.useState("All");
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseOver = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleMouseOut = () => {
     setAnchorEl(null);
   };
 
   return (
     <Box
-      component="button"
+      component="span"
       sx={{
         position: "relative",
         bgcolor: "transparent",
@@ -62,8 +60,8 @@ export default function AccountDropdown() {
         textTransform: "capitalize",
         textAlign: "left",
       }}
-      onMouseOver={handleClick}
-      onMouseOut={handleClose}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
     >
       <Button
         sx={{

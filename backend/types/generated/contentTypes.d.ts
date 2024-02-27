@@ -879,7 +879,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
-    OS: Attribute.String & Attribute.Required;
+    OS: Attribute.String;
     manufacturer: Attribute.String;
     brand: Attribute.String & Attribute.Required;
     ram: Attribute.String;
@@ -894,7 +894,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     front_camera: Attribute.String;
     biometric_security_feature: Attribute.String;
     water_resistant: Attribute.String;
-    hardDriveSize: Attribute.String;
+    hard_drive_size: Attribute.String;
     graphic_Card: Attribute.String;
     displaySize: Attribute.String;
     speed: Attribute.String;
@@ -904,6 +904,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     Fabric_Type: Attribute.String;
     Closure_Type: Attribute.String;
     Neck_Style: Attribute.String;
+    Sole_Material: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

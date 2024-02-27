@@ -126,14 +126,21 @@ const Product = () => {
 
           // @ Selected current capacity or set default on load
           const selectedCapacity =
-            storageCapacity !== undefined && storageCapacity !== null
-              ? storageCapacity
-              : storage![0];
+            storage !== null
+              ? storageCapacity !== undefined && storageCapacity !== null
+                ? storageCapacity
+                : storage![0]
+              : null;
 
           return (
             <Box px={10} pt={8}>
               <Grid container columnSpacing={5}>
-                <Grid item sm={12} md={6} sx={{ position: "sticky", top: 0 }}>
+                <Grid
+                  item
+                  sm={12}
+                  md={6}
+                  sx={{ position: "sticky", top: 0, pt: 8 }}
+                >
                   <ProductImageSlider
                     selectedVariant={selectedVariant}
                     name={name}
@@ -143,7 +150,7 @@ const Product = () => {
                   <Box>
                     <Typography variant="body2" fontSize={18} fontWeight={600}>
                       {name} - {selectedVariant.colorName} Color{" "}
-                      {selectedCapacity.capacity}
+                      {storage !== null && selectedCapacity!.capacity}
                     </Typography>
                   </Box>
                   <Box py={1.8}>
@@ -252,66 +259,68 @@ const Product = () => {
                       ))}
                     </Stack>
                   </Box>
-                  <Box pt={2.5}>
-                    <Typography
-                      variant="body2"
-                      fontSize={14}
-                      fontWeight={500}
-                      pb={1.2}
-                    >
-                      Storage
-                    </Typography>
-                    <Stack direction="row" spacing={1.2} alignItems="center">
-                      {storage.map((strg, indx) => (
-                        <Box
-                          key={indx}
-                          sx={{
-                            position: "relative",
-                          }}
-                        >
-                          <Radio
-                            checked={
-                              strg.capacity.toLowerCase() ===
-                              selectedCapacity.capacity.toLowerCase()
-                            }
-                            onChange={() =>
-                              onStorageCapacityHandler(storage, strg.capacity)
-                            }
-                            value={strg.capacity}
-                            title={strg.capacity}
-                            name="radio-buttons"
-                            sx={{
-                              position: "absolute",
-                              top: 0,
-                              left: 0,
-                              bottom: 0,
-                              width: "100%",
-                              height: "100%",
-                              borderRadius: 1,
-                              border: "1px solid #eaeaea",
-                              "& span": {
-                                display: "none",
-                              },
-                              "&.Mui-checked": {
-                                borderColor: "text.primary",
-                              },
-                            }}
-                          />
-
+                  {storage !== null && (
+                    <Box pt={2.5}>
+                      <Typography
+                        variant="body2"
+                        fontSize={14}
+                        fontWeight={500}
+                        pb={1.2}
+                      >
+                        Storage
+                      </Typography>
+                      <Stack direction="row" spacing={1.2} alignItems="center">
+                        {storage.map((strg, indx) => (
                           <Box
+                            key={indx}
                             sx={{
-                              p: "12px 14px",
-                              fontSize: 14,
-                              fontWeight: 500,
-                              color: "#777",
+                              position: "relative",
                             }}
                           >
-                            {strg.capacity}
+                            <Radio
+                              checked={
+                                strg.capacity.toLowerCase() ===
+                                selectedCapacity!.capacity.toLowerCase()
+                              }
+                              onChange={() =>
+                                onStorageCapacityHandler(storage, strg.capacity)
+                              }
+                              value={strg.capacity}
+                              title={strg.capacity}
+                              name="radio-buttons"
+                              sx={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                bottom: 0,
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: 1,
+                                border: "1px solid #eaeaea",
+                                "& span": {
+                                  display: "none",
+                                },
+                                "&.Mui-checked": {
+                                  borderColor: "text.primary",
+                                },
+                              }}
+                            />
+
+                            <Box
+                              sx={{
+                                p: "12px 14px",
+                                fontSize: 14,
+                                fontWeight: 500,
+                                color: "#777",
+                              }}
+                            >
+                              {strg.capacity}
+                            </Box>
                           </Box>
-                        </Box>
-                      ))}
-                    </Stack>
-                  </Box>
+                        ))}
+                      </Stack>
+                    </Box>
+                  )}
                   <Box pt={4}>
                     <Divider
                       variant="fullWidth"
@@ -438,7 +447,8 @@ const Product = () => {
                         addToCart({
                           id: uuid(),
                           name,
-                          price: selectedCapacity.price,
+                          price:
+                            storage !== null ? selectedCapacity!.price : price,
                           qty,
                           color: selectedVariant.colorName,
                           image: selectedVariant.images[0],
@@ -454,7 +464,8 @@ const Product = () => {
                         color="text.primary"
                         fontWeight={500}
                       >
-                        ADD TO CART - ${selectedCapacity.price}
+                        ADD TO CART - $
+                        {storage !== null ? selectedCapacity!.price : price}
                       </Typography>
                     </Button>
                   </Box>

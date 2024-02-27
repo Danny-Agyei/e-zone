@@ -23,6 +23,7 @@ export default function UniversalFilter() {
     electronicBrands,
     electronicsCategories,
     fashionCategories,
+    fashionBrands,
     defaultCategories,
   } = filterData;
 
@@ -37,6 +38,13 @@ export default function UniversalFilter() {
       : categoryName === "fashion"
       ? fashionCategories
       : defaultCategories;
+
+  const brands =
+    categoryName === "electronics"
+      ? electronicBrands
+      : categoryName === "fashion"
+      ? fashionBrands
+      : electronicBrands.concat(fashionBrands);
 
   // @Price range slider
   function valuetext(value: number) {
@@ -64,7 +72,6 @@ export default function UniversalFilter() {
   };
 
   // @ Brand search
-  const brands = electronicBrands;
 
   const [searchData, setSearchData] = useState(brands);
 

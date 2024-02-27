@@ -72,7 +72,7 @@ export default function NavItem({
               <Box
                 sx={{
                   position: "fixed",
-                  top: showMenu ? 150 : 180,
+                  top: showMenu ? 140.5 : 180,
                   left: 0,
                   zIndex: 999,
                   background: "#f5f5f7",

@@ -26,29 +26,45 @@ export default function CartItem(props: { item: any }) {
 
   return (
     <>
-      <ListItem disablePadding sx={{ px: 2, py: 2 }}>
+      <ListItem disablePadding sx={{ px: 2, pt: 2 }}>
         <ListItemText
           primary={
-            <Grid container>
-              <Grid item xs={10}>
+            <Stack direction="row" justifyContent="space-between" height="100%">
+              <Box>
                 <Stack direction="row" maxHeight={100}>
-                  <img width="80px" height="80px" src={image} alt={name} />
+                  <Box
+                    component="img"
+                    width="50px"
+                    height="50px"
+                    src={image}
+                    alt={name}
+                  />
                   <Stack direction="column" justifyContent="space-between">
                     <Box px={2}>
                       <Typography
-                        fontWeight={600}
-                        fontSize={16}
-                        variant="h6"
+                        fontWeight={500}
+                        fontSize={14}
+                        variant="body2"
                         lineHeight={1}
-                        pb={1}
                       >
                         {name}
                       </Typography>
-                      <Typography variant="body2">{color}</Typography>
+                      <Typography
+                        variant="body2"
+                        fontSize={13}
+                        py={1}
+                        color="#777"
+                      >
+                        {color}
+                      </Typography>
                     </Box>
                     <Stack direction="row" alignItems="flex-end" px={2}>
                       <Stack direction="row" alignItems="center">
-                        <Typography variant="body2" component="span">
+                        <Typography
+                          fontSize={13}
+                          variant="body2"
+                          component="span"
+                        >
                           Qty :{" "}
                         </Typography>
                         <Button
@@ -58,12 +74,17 @@ export default function CartItem(props: { item: any }) {
                             p: 0,
                             fontWeight: 600,
                             color: "text.primary",
-                            fontSize: 22,
+                            fontSize: 18,
                           }}
                         >
                           <AiOutlineMinusCircle />
                         </Button>
-                        <Typography px={0.5} variant="body2" component="span">
+                        <Typography
+                          px={0.5}
+                          color="#777"
+                          variant="body2"
+                          component="span"
+                        >
                           {qty}
                         </Typography>
                         <Button
@@ -72,7 +93,7 @@ export default function CartItem(props: { item: any }) {
                             p: 0,
                             fontWeight: 600,
                             color: "text.primary",
-                            fontSize: 22,
+                            fontSize: 18,
                             minWidth: 30,
                           }}
                           variant="text"
@@ -83,22 +104,28 @@ export default function CartItem(props: { item: any }) {
                     </Stack>
                   </Stack>
                 </Stack>
-              </Grid>
-              <Grid item xs={2}>
+              </Box>
+              <Box>
                 <Stack
                   direction="column"
                   justifyContent="space-between"
                   height="100%"
                   alignItems="flex-end"
                 >
-                  <Typography lineHeight={1} variant="body1" fontWeight={600}>
+                  <Typography
+                    lineHeight={1}
+                    fontSize={14}
+                    variant="body2"
+                    fontWeight={500}
+                  >
                     ${price}
                   </Typography>
                   <Box>
                     <IconButton
                       onClick={() => removeFromCart(id)}
                       sx={{
-                        bgcolor: "#ececec",
+                        bgcolor: "#eaeaea",
+                        p: 0.6,
                         color: "text.primary",
                         "&:hover": {
                           bgcolor: "#f9e9e9",
@@ -106,16 +133,16 @@ export default function CartItem(props: { item: any }) {
                         },
                       }}
                     >
-                      <AiOutlineDelete fontSize={20} />
+                      <AiOutlineDelete fontSize={18} />
                     </IconButton>
                   </Box>
                 </Stack>
-              </Grid>
-            </Grid>
+              </Box>
+            </Stack>
           }
+          sx={{ borderBottom: "1px solid #eaeaea", pb: 3 }}
         />
       </ListItem>
-      <Divider sx={{ m: 0, p: 0, borderColor: "#eee" }} />
     </>
   );
 }

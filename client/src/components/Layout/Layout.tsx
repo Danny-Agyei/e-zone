@@ -9,10 +9,10 @@ const Layout = () => {
     <Suspense>
       <Box>
         <Navbar />
-        <Box component="main">
+        <Box component="main" sx={{ minHeight: "60vh" }}>
           <Outlet />
         </Box>
-        <Box component="footer">
+        <Box component="footer" sx={{ position: "relative" }}>
           <Footer />
         </Box>
       </Box>

@@ -45,36 +45,39 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
       onMouseEnter={() => setisHover(true)}
       onMouseLeave={() => setisHover(false)}
     >
-      <Box
-        component="span"
-        sx={{
-          position: "absolute",
-          left: 15,
-          top: 12,
-          zIndex: 995,
-          bgcolor: "text.secondary",
-          px: 1,
-          py: 0.5,
-          borderRadius: 9999,
-          fontSize: 12,
-          fontWeight: 500,
-        }}
-      >
-        -{discountPercent}%
-      </Box>
+      {hasDiscount && (
+        <Box
+          component="span"
+          sx={{
+            position: "absolute",
+            left: 15,
+            top: 12,
+            zIndex: 995,
+            bgcolor: "text.secondary",
+            px: 1,
+            py: 0.5,
+            borderRadius: 9999,
+            fontSize: 12,
+            fontWeight: 500,
+          }}
+        >
+          -{discountPercent}%
+        </Box>
+      )}
       <Link to={`/products/${slug}`}>
         <Box sx={{ position: "relative", p: 2, pb: 18 }}>
           <CardMedia
             sx={{
               width: "100%",
-              maxWidth: 130,
-              height: "auto",
+              // maxWidth: 140,
+              height: 140,
               m: "0 auto",
               position: "absolute",
               top: 30,
               left: "50%",
               transform: "translate(-50%,0)",
               visibility: isHover ? "hidden" : "visible",
+              objectFit: "contain",
               opacity: isHover ? 0 : 1,
               transition:
                 "opacity .25s ease-in-out, visibility .25s ease-in-out",
@@ -87,11 +90,12 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           <CardMedia
             sx={{
               width: "100%",
-              maxWidth: 130,
-              height: "auto",
+              // maxWidth: 140,
+              height: 140,
               m: "0 auto",
               position: "absolute",
-              top: 0,
+              objectFit: "contain",
+              top: 30,
               left: "50%",
               transform: "translate(-50%,0)",
               visibility: !isHover ? "hidden" : "visible",
@@ -101,8 +105,8 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
             }}
             component="img"
             src={
-              variants[0].images.length > 1
-                ? variants[0].images[1]
+              variants.length > 1
+                ? variants[1].images[0]
                 : variants[0].images[0]
             }
             alt={name}

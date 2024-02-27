@@ -153,7 +153,7 @@ export default function CartDrawer(props: {
         </Box>
         {shoppingCart.length > 0 ? (
           <Box sx={{ maxHeight: 500, overflow: "auto" }}>
-            <List sx={{ "&:last-child hr": { display: "none" } }}>
+            <List sx={{ maxHeight: 380, pt: 2 }}>
               {shoppingCart.map((item: any) => (
                 <CartItem item={item} key={item.id} />
               ))}

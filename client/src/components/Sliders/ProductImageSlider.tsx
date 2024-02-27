@@ -70,7 +70,7 @@ export default function ProductImageSlider({
         top: 100,
       }}
     >
-      <Stack direction="row" spacing={2} justifyContent="center">
+      <Stack direction="row" spacing={5} justifyContent="center">
         <Box sx={{ height: "100%", position: "relative" }}>
           <Box
             sx={{
@@ -100,8 +100,8 @@ export default function ProductImageSlider({
             onInit={(ev) => setSwipe(ev)}
             loop={false}
             spaceBetween={10}
-            slidesPerView={4}
-            threshold={5}
+            slidesPerView={"auto"}
+            threshold={4}
             on={{ touchEnd: handleTouchEnd }}
             touchRatio={0.2}
             direction="vertical"
@@ -109,7 +109,7 @@ export default function ProductImageSlider({
             onSwiper={setThumbsSwiper}
             controller={{ control: firstSwiper }}
             preloadImages={false}
-            style={{ width: "max-content" }}
+            style={{ width: "max-content", maxHeight: 350 }}
           >
             {selectedVariant!.images.map((image, indx) => (
               <SwiperSlide key={indx}>
@@ -119,7 +119,7 @@ export default function ProductImageSlider({
                   src={image}
                   sx={{
                     width: "100%",
-                    maxWidth: 70,
+                    maxWidth: 60,
                     height: "auto",
                     borderRadius: 1,
                     px: 0.2,
@@ -137,12 +137,11 @@ export default function ProductImageSlider({
               display: "flex",
               justifyContent: "end",
               alignItems: "center",
-              bottom: -30,
+              bottom: -45,
               left: 14,
               zIndex: 999,
               width: 42,
               height: "auto",
-              bgcolor: "#ffffff",
             }}
           >
             <IconButton
@@ -161,7 +160,6 @@ export default function ProductImageSlider({
           sx={{
             position: "relative",
             minHeight: 328,
-            maxHeight: "max-content",
             width: "100%",
             m: "0 auto",
           }}
@@ -187,14 +185,14 @@ export default function ProductImageSlider({
             slidesPerView={"auto"}
             centeredSlides={true}
             thumbs={{ swiper: thumbsSwiper }}
-            // style={{ maxWidth: "100%", maxHeight: "100%" }}
+            style={{ maxWidth: "100%", maxHeight: "400px" }}
           >
             {selectedVariant!.images.map((image, indx) => (
               <SwiperSlide key={indx}>
                 <Box
                   sx={{
                     width: "100%",
-                    height: "max-content",
+                    height: 400,
                     minHeight: 380,
                     position: "relative",
                   }}
