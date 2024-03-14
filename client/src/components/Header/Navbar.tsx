@@ -171,12 +171,12 @@ const Navbar = () => {
         }}
       >
         <List disablePadding sx={{ display: "flex", alignItems: "center" }}>
-          <NavItem title="Best Seller" linkTo="/shop/collection/best-seller" />
+          <NavItem title="Best Seller" linkTo="/shop/collection/best seller" />
           <NavItem pl={4} title="Trending" linkTo="/shop/collection/trending" />
           <NavItem
             pl={4}
             title="New Arrival"
-            linkTo="/shop/collection/new-arrival"
+            linkTo="/shop/collection/new arrival"
           />
           <NavItem
             pl={4}

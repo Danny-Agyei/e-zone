@@ -3,14 +3,18 @@ import {
   Card,
   CardContent,
   CardMedia,
+  IconButton,
   Stack,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ProductCardType } from "../../types";
 import { useState } from "react";
-import { MdFavorite, MdFavoriteBorder } from "react-icons/md";
-import { IoIosStar, IoIosStarOutline, IoIosStarHalf } from "react-icons/io";
+import { MdOutlineFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
+import { IoIosStar } from "react-icons/io";
+import { v4 as uuid } from "uuid";
+
+import store from "../../lib/zustand/store";
 
 export default function ProductCard({ product }: { product: ProductCardType }) {
   const {
@@ -27,19 +31,38 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
   } = product;
 
   const [isHover, setisHover] = useState(false);
+  const [isFavHover, setFavHover] = useState(false);
 
   // @ discount calculation
   const discountInMoney = hasDiscount ? (price * discountPercent) / 100 : 0;
 
+  // @ wishList
+  const wishList = store.use.wishList();
+  const addToWishList = store.use.addToWishList();
+  const removeFromWishList = store.use.removeFromWishList();
+
+  const onWishlist = wishList.some((item) => item.slug === slug);
+  const onAddToWishListHandler = () =>
+    addToWishList({
+      id: uuid(),
+      name,
+      price,
+      slug,
+      discountedPrice: discountInMoney,
+      image: variants[0].images[0],
+    });
+
   return (
     <Card
       sx={{
-        maxWidth: 300,
-        width: "100%",
+        // maxWidth: 300,
+        width: "auto",
         boxShadow: "0 0 6px #eaeaea",
         border: "1px solid #eae5e5",
         borderRadius: 2,
         p: 2,
+        pb: 3,
+        height: 350,
         position: "relative",
       }}
       onMouseEnter={() => setisHover(true)}
@@ -57,7 +80,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
             px: 1,
             py: 0.5,
             borderRadius: 9999,
-            fontSize: 12,
+            fontSize: 10,
             fontWeight: 500,
           }}
         >
@@ -65,17 +88,16 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
         </Box>
       )}
       <Link to={`/products/${slug}`}>
-        <Box sx={{ position: "relative", p: 2, pb: 18 }}>
+        <Box sx={{ position: "relative", p: 2, pb: 22 }}>
           <CardMedia
             sx={{
               width: "100%",
-              // maxWidth: 140,
-              height: 140,
-              m: "0 auto",
+              maxWidth: "100%",
+              height: "auto",
+              maxHeight: 135,
               position: "absolute",
               top: 30,
-              left: "50%",
-              transform: "translate(-50%,0)",
+              left: 0,
               visibility: isHover ? "hidden" : "visible",
               objectFit: "contain",
               opacity: isHover ? 0 : 1,
@@ -90,14 +112,13 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           <CardMedia
             sx={{
               width: "100%",
-              // maxWidth: 140,
-              height: 140,
-              m: "0 auto",
+              maxWidth: "100%",
+              height: "auto",
               position: "absolute",
+              maxHeight: 135,
               objectFit: "contain",
               top: 30,
-              left: "50%",
-              transform: "translate(-50%,0)",
+              left: "0",
               visibility: !isHover ? "hidden" : "visible",
               opacity: !isHover ? 0 : 1,
               transition:
@@ -107,13 +128,15 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
             src={
               variants.length > 1
                 ? variants[1].images[0]
+                : variants[0].images.length > 1
+                ? variants[0].images[1]
                 : variants[0].images[0]
             }
             alt={name}
           />
         </Box>
       </Link>
-      <CardContent sx={{ px: 1, pt: 5, pb: 5 }}>
+      <CardContent sx={{ px: 1, pt: 2, pb: "0 !important" }}>
         <Typography
           variant="body2"
           fontSize={12}
@@ -155,6 +178,22 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           >
             ${hasDiscount ? (price - discountInMoney).toFixed(2) : price}
           </Typography>
+          <Box sx={{ position: "absolute", top: 6, right: 5 }}>
+            <IconButton
+              onMouseOver={() => setFavHover(true)}
+              onMouseOut={() => setFavHover(false)}
+              onClick={onAddToWishListHandler}
+              sx={{ p: 0.5, "&:hover": { bgcolor: "#e5e5e5" } }}
+            >
+              {isFavHover ? (
+                <MdOutlineFavorite size={20} color="#1c1b1b" />
+              ) : onWishlist ? (
+                <MdOutlineFavoriteBorder size={20} />
+              ) : (
+                <MdOutlineFavorite size={20} color="#1c1b1b" />
+              )}
+            </IconButton>
+          </Box>
         </Stack>
       </CardContent>
     </Card>

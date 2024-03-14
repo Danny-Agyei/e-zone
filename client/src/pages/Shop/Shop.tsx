@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import {
   Box,
   Grid,
@@ -9,6 +9,10 @@ import {
   Typography,
 } from "@mui/material";
 import { Await, useLoaderData } from "react-router-dom";
+import { BsFillGridFill } from "react-icons/bs";
+import { TbListDetails } from "react-icons/tb";
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 import { ProductType } from "../../types";
 import ProductSkeleton from "../../components/Constant/ProductSkeleton";
 import {
@@ -17,15 +21,10 @@ import {
   UniversalFilter,
 } from "../../components";
 
-import { BsFillGridFill } from "react-icons/bs";
-import { CiGrid2H, CiGrid2V, CiBoxList } from "react-icons/ci";
-import { FaListUl } from "react-icons/fa6";
-import { TbListDetails } from "react-icons/tb";
-
 import store from "../../lib/zustand/store";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import filterData from "../../filterData.json";
+const { sortData } = filterData;
 
-const sortData = ["High to Low", "Low to Top", "Best Selling", "A-Z"];
 const Shop = () => {
   const loadedData = useLoaderData() as {
     data: Promise<{
@@ -34,9 +33,10 @@ const Shop = () => {
   };
 
   // @ product view layout
-  const [gridLayout, setGridLayout] = useState(4);
+  const [gridLayout, setGridLayout] = useState(3);
 
   // @ sort
+  // const { sortData } = filterData;
   const [sortText, setSortText] = React.useState(sortData[0]);
 
   const handleSelect = (
@@ -61,6 +61,16 @@ const Shop = () => {
     setOpen(false);
     console.log("click");
   };
+
+  // @ shop filtering
+  const [loading, setLoading] = useState(false);
+  const [filterData, setFilterData] = useState({});
+
+  useEffect(() => {}, [filterData]);
+
+  const onFilterHandler: (data: { [key: string]: string }) => void = (
+    data
+  ) => {};
 
   return (
     <Suspense fallback={<ProductSkeleton />}>
@@ -87,6 +97,7 @@ const Shop = () => {
         }
       >
         {(resolveData) => {
+          console.log("SHOP PRODUCTS =>", resolveData);
           const { products }: { products: ProductType[] } = resolveData;
           // const {
           //   attributes: {
@@ -103,7 +114,11 @@ const Shop = () => {
 
           return (
             <Box px={10} onClick={handleClose}>
-              <Grid container columnSpacing={4}>
+              <Grid
+                container
+                columnSpacing={4}
+                sx={{ maxWidth: "100%", m: "0 auto" }}
+              >
                 <Grid item xs={12} sm={3} md={3}>
                   <Box
                     sx={{
@@ -116,7 +131,7 @@ const Shop = () => {
                     <ElectronicsFilter />
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={9} md={9} sx={{ py: 8 }}>
+                <Grid sx={{ py: 8 }} item xs={12} sm={9} md={9}>
                   <Typography
                     variant="body2"
                     mb={4}
@@ -182,7 +197,7 @@ const Shop = () => {
                               bottom: 0,
                               zIndex: 996,
                               width: 150,
-                              height: 168,
+                              height: 205,
                               boxShadow: "0 0 5px #ccc",
                               transition: "all .10s ease-in-out",
                               "& .MuiListItemText-root:last-child": {
@@ -226,7 +241,7 @@ const Shop = () => {
                         alignItems="center"
                         spacing={2}
                       >
-                        {[4, 2].map((grid, indx) => (
+                        {[3, 4].map((grid, indx) => (
                           <Box
                             key={indx}
                             sx={{
@@ -236,8 +251,6 @@ const Shop = () => {
                             <Radio
                               checked={gridLayout === grid ? true : false}
                               onChange={() => setGridLayout(grid)}
-                              // value={strg.capacity}
-                              // title={strg.capacity}
                               name="radio-buttons"
                               sx={{
                                 position: "absolute",
@@ -285,10 +298,17 @@ const Shop = () => {
                       </Stack>
                     </Stack>
                   </Box>
-                  <Grid container columnSpacing={8} rowSpacing={4}>
-                    {Array.from({ length: 12 }, (_, indx) => (
-                      <Grid item xs={12} sm={6} md={4} lg={3} key={indx}>
-                        <ProductCard product={products[0]} />
+                  <Grid container spacing={2}>
+                    {products.map((product, indx) => (
+                      <Grid
+                        lg={gridLayout}
+                        md={gridLayout === 3 ? 4 : gridLayout}
+                        sm={gridLayout === 3 ? 6 : 6}
+                        xs={12}
+                        item
+                        key={indx}
+                      >
+                        <ProductCard product={product} />
                       </Grid>
                     ))}
                   </Grid>

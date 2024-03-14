@@ -1,21 +1,21 @@
-import { create } from 'zustand'
-import {devtools, persist } from 'zustand/middleware'
-import cartSlice from './slices/cartSlice'
-import createSelectors from './createSelectors'
-import { CartSliceTypes } from '../../types'
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import cartSlice from "./slices/cartSlice";
+import wishListSlice from "./slices/wishListSlice";
+import createSelectors from "./createSelectors";
+import { CartSliceTypes, WishListSliceTypes } from "../../types";
 
-export const useBoundStore = create<CartSliceTypes & CartSliceTypes>()(
-    devtools(
+export const useBoundStore = create<CartSliceTypes & WishListSliceTypes>()(
+  devtools(
     persist(
-    (...a) => ({
+      (...a) => ({
         ...cartSlice(...a),
-        ...cartSlice(...a)
+        ...wishListSlice(...a),
       }),
-      { name: 'ezone-store' },
-        ),
+      { name: "ezone-store" }
     )
-)
-
+  )
+);
 
 const store = createSelectors(useBoundStore);
 

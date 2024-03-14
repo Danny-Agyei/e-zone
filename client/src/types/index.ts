@@ -3,7 +3,17 @@ import {
   BannerType,
   CartItemType,
   ProductCardType,
-  CartSliceTypes
+  CartSliceTypes,
+  WishListSItemType,
+  WishListSliceTypes,
 } from "./Store/Store";
 
-export type { ProductType, BannerType, CartItemType, ProductCardType,CartSliceTypes };
+export type {
+  ProductType,
+  BannerType,
+  CartItemType,
+  ProductCardType,
+  CartSliceTypes,
+  WishListSItemType,
+  WishListSliceTypes,
+};

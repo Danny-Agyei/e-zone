@@ -89,6 +89,24 @@ export interface CartSliceTypes {
   removeFromCart: (id: string) => void;
 }
 
+// export type WishListSItemType<T = CartItemType> = {
+//   [K in keyof T]: T[K];
+// };
+
+type WishListSItemType = Pick<
+  CartItemType,
+  "id" | "name" | "image" | "price"
+> & {
+  slug: string;
+  discountedPrice: number;
+};
+
+export interface WishListSliceTypes {
+  wishList: WishListSItemType[];
+  addToWishList: (item: WishListSItemType) => void;
+  removeFromWishList: (id: string) => void;
+}
+
 export interface BannerType {
   attributes: {
     heading?: string;

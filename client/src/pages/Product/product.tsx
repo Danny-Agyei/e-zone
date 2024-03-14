@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import { Await, Link, useLoaderData } from "react-router-dom";
-import { TiStarFullOutline } from "react-icons/ti";
 import { FaCheck } from "react-icons/fa6";
 import { BsPlus, BsDash, BsTruck } from "react-icons/bs";
 import { MdShoppingCart, MdCheckCircle } from "react-icons/md";

@@ -1,5 +1,12 @@
 
 {
+  "sortData":[
+    "Alphabetical, A-Z",
+    "Price, High to Low",
+    "Price, Low to Top",
+    "Date, New to Old",
+    "Date, Old to New"
+  ],
    "processors": [
         {"id":1, "check":false, "title": "2.6 Ghz Apple_ci5"},
         {"id":2, "check":false, "title": "Intel Pentium Silver N5000"},

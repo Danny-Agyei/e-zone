@@ -143,7 +143,7 @@ export const Home = () => {
                 >
                   Trending Products
                 </Typography>
-                <Grid container columnSpacing={8}>
+                <Grid container spacing={4}>
                   {trendingProducts(resolveData.products).map(
                     (product, indx) => (
                       <Grid item xs={12} sm={6} md={4} lg={3} key={indx}>

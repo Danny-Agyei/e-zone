@@ -1,31 +1,35 @@
 import React from "react";
 import { Params, defer } from "react-router-dom";
+import qs from "qs";
 
-const getStoreData = async function ({ request }: { request: Request }) {
+// sort=name:ASC&filters[$and][0][categories][title][$eqi]=Electronics&filters[$and][1][brand][$eq]=HP
+
+const getStoreData = async function ({
+  request,
+  params,
+}: {
+  request: Request;
+  params: Params<string>;
+}) {
   try {
+    const endpoint = params.category
+      ? `/api/products?filters[$and][0][categories][title][$eqi]=${params.category}&populate=*`
+      : "/api/products?populate=*";
+
     const productPromise = fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/products?populate=*`,
+      `${process.env.REACT_APP_BASE_URL}${endpoint}`,
       {
         signal: request.signal,
       }
     );
 
-    const bannerPromise = fetch(
-      `${process.env.REACT_APP_BASE_URL}/api/banners?populate=*`,
-      { signal: request.signal }
-    );
-
-    const [bannersRes, productsRes] = await Promise.all([
-      bannerPromise,
-      productPromise,
-    ]);
+    const [productsRes] = await Promise.all([productPromise]);
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    const banners = await bannersRes.json();
     const products = await productsRes.json();
 
-    return { products: products.data, banners: banners.data };
+    return { products: products.data };
   } catch (error: any) {
     console.log(error.message);
     throw error;
