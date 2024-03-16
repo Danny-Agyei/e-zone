@@ -4,7 +4,7 @@ import {
   CartItemType,
   ProductCardType,
   CartSliceTypes,
-  WishListSItemType,
+  WishListItemType,
   WishListSliceTypes,
 } from "./Store/Store";
 
@@ -14,6 +14,6 @@ export type {
   CartItemType,
   ProductCardType,
   CartSliceTypes,
-  WishListSItemType,
+  WishListItemType,
   WishListSliceTypes,
 };

@@ -47,13 +47,12 @@ export default function UniversalFilter() {
       : electronicBrands.concat(fashionBrands);
 
   // @Price range slider
+  const minDistance = 10;
+  const [value, setValue] = useState<number[]>([10, 28000]);
+
   function valuetext(value: number) {
     return `${value}°C`;
   }
-
-  const minDistance = 10;
-
-  const [value, setValue] = useState<number[]>([10, 28000]);
 
   const handleChange = (
     event: Event,
@@ -78,8 +77,8 @@ export default function UniversalFilter() {
   const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    const searchMatched = brands.filter((brand) =>
-      brand.title.toLowerCase().includes(inputValue.toLowerCase())
+    const searchMatched = searchData.filter((data) =>
+      data.title.toLowerCase().includes(inputValue.toLowerCase())
     );
     setSearchData(searchMatched);
   };

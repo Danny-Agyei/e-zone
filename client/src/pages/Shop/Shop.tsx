@@ -36,10 +36,9 @@ const Shop = () => {
   const [gridLayout, setGridLayout] = useState(3);
 
   // @ sort
-  // const { sortData } = filterData;
   const [sortText, setSortText] = React.useState(sortData[0]);
 
-  const handleSelect = (
+  const onSortByHandler = (
     event: React.MouseEvent<HTMLDivElement>,
     selectedText: string
   ) => {
@@ -97,7 +96,7 @@ const Shop = () => {
         }
       >
         {(resolveData) => {
-          console.log("SHOP PRODUCTS =>", resolveData);
+          // console.log("SHOP PRODUCTS =>", resolveData);
           const { products }: { products: ProductType[] } = resolveData;
           // const {
           //   attributes: {
@@ -213,7 +212,7 @@ const Shop = () => {
                                   <Box
                                     component="div"
                                     onClick={(event) =>
-                                      handleSelect(event, data)
+                                      onSortByHandler(event, data)
                                     }
                                     sx={{
                                       display: "block",

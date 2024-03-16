@@ -138,7 +138,7 @@ const Product = () => {
                   item
                   sm={12}
                   md={6}
-                  sx={{ position: "sticky", top: 0, pt: 8 }}
+                  sx={{ position: "sticky", top: 0, pt: 4 }}
                 >
                   <ProductImageSlider
                     selectedVariant={selectedVariant}
@@ -223,8 +223,8 @@ const Product = () => {
                               position: "absolute",
                               top: 0,
                               left: 0,
-                              width: 41,
-                              height: 41,
+                              width: 35,
+                              height: 35,
                               borderRadius: "75%",
                               border: "1px solid #e1e1e1",
                               p: 0.4,
@@ -239,17 +239,17 @@ const Product = () => {
 
                           <Box
                             sx={{
-                              width: 32,
-                              height: 32,
+                              width: 28,
+                              height: 28,
                               borderRadius: 9999,
-                              p: 0.5,
+                              p: 0.4167,
                             }}
                           >
                             <Box
                               bgcolor={variant.colorCode}
                               sx={{
-                                width: 32,
-                                height: 32,
+                                width: 28,
+                                height: 28,
                                 borderRadius: 9999,
                               }}
                             ></Box>

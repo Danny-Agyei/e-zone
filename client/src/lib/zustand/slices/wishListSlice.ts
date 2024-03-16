@@ -3,22 +3,11 @@ import { WishListSliceTypes } from "../../../types";
 
 const wishListSlice: StateCreator<WishListSliceTypes> = (set) => ({
   wishList: [],
-  addToWishList: (sliceItem) =>
+  addToWishList: (newItem) =>
     set((state) => ({
-      wishList: state.wishList.some(
-        (item) => item.name === sliceItem.name && item.color === sliceItem.color
-      )
-        ? state.wishList.map((item) => {
-            return {
-              ...item,
-              qty: item.inStock !== item.qty ? item.qty + 1 : item.qty,
-            };
-          })
-        : [...state.wishList, sliceItem],
-    })),
-  removeFromWishList: (id) =>
-    set((state) => ({
-      wishList: state.wishList.filter((item) => item.id !== id),
+      wishList: state.wishList.some((item) => item.slug === newItem.slug)
+        ? state.wishList.filter((item) => item.slug !== newItem.slug)
+        : [...state.wishList, newItem],
     })),
 });
 

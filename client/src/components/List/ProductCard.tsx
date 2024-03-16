@@ -31,7 +31,6 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
   } = product;
 
   const [isHover, setisHover] = useState(false);
-  const [isFavHover, setFavHover] = useState(false);
 
   // @ discount calculation
   const discountInMoney = hasDiscount ? (price * discountPercent) / 100 : 0;
@@ -39,10 +38,10 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
   // @ wishList
   const wishList = store.use.wishList();
   const addToWishList = store.use.addToWishList();
-  const removeFromWishList = store.use.removeFromWishList();
 
-  const onWishlist = wishList.some((item) => item.slug === slug);
-  const onAddToWishListHandler = () =>
+  const isOnWishList = wishList.some((item) => item.slug === slug);
+
+  const onWishListHandler = () =>
     addToWishList({
       id: uuid(),
       name,
@@ -180,17 +179,13 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           </Typography>
           <Box sx={{ position: "absolute", top: 6, right: 5 }}>
             <IconButton
-              onMouseOver={() => setFavHover(true)}
-              onMouseOut={() => setFavHover(false)}
-              onClick={onAddToWishListHandler}
+              onClick={onWishListHandler}
               sx={{ p: 0.5, "&:hover": { bgcolor: "#e5e5e5" } }}
             >
-              {isFavHover ? (
+              {isOnWishList ? (
                 <MdOutlineFavorite size={20} color="#1c1b1b" />
-              ) : onWishlist ? (
-                <MdOutlineFavoriteBorder size={20} />
               ) : (
-                <MdOutlineFavorite size={20} color="#1c1b1b" />
+                <MdOutlineFavoriteBorder size={20} />
               )}
             </IconButton>
           </Box>

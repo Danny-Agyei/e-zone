@@ -2,6 +2,13 @@ import { Box, Grid, Typography } from "@mui/material";
 import React, { ReactNode, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { GiTShirt } from "react-icons/gi";
+import { RiTShirtFill } from "react-icons/ri";
+import { PiTShirtFill } from "react-icons/pi";
+import { IoIosShirt } from "react-icons/io";
+import { PiDevicesFill } from "react-icons/pi";
+import { PiDevicesBold } from "react-icons/pi";
+import { GoDeviceDesktop } from "react-icons/go";
 
 export default function NavItem({
   title,
@@ -47,12 +54,13 @@ export default function NavItem({
           >
             <Box
               component="div"
-              data-item-title={title + " " + "v"}
+              data-item-title={title + " " + "content"}
               display="flex"
               alignItems="center"
               color="text.primary"
               sx={{
                 transition: "opacity .25s ease-in-out;",
+                cursor: "pointer",
                 "&:hover": {
                   // opacity: 0.6,
                   "&:before": {
@@ -72,11 +80,11 @@ export default function NavItem({
               <Box
                 sx={{
                   position: "fixed",
-                  top: showMenu ? 140.5 : 180,
+                  top: showMenu ? 155 : 180,
                   left: 0,
                   zIndex: 999,
                   background: "#f5f5f7",
-                  boxShadow: "0 0 8px #eaeaea",
+                  boxShadow: "0 0 5px #eaeaea",
                   minWidth: "100%",
                   px: 5,
                   py: 4,
@@ -100,13 +108,29 @@ export default function NavItem({
                 sx={{
                   textTransform: "uppercase",
                   fontSize: 14,
+                  display: "flex",
+                  alignItems: "center",
                   transition: "opacity .95s ease-in-out;",
                   "&:hover": {
                     opacity: "0.6 !important",
                   },
                 }}
               >
-                {title}
+                {title.toLowerCase() === "electronics" ? (
+                  <>
+                    <GoDeviceDesktop size={20} color="#fff" />{" "}
+                    <Box component="span" pl={1}>
+                      {title}
+                    </Box>
+                  </>
+                ) : (
+                  <>
+                    <PiTShirtFill size={20} color="#fff" />{" "}
+                    <Box component="span" pl={1}>
+                      {title}
+                    </Box>
+                  </>
+                )}
               </Box>
               <Box
                 component="span"

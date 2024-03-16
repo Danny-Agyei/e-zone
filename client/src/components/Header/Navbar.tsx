@@ -171,15 +171,7 @@ const Navbar = () => {
         }}
       >
         <List disablePadding sx={{ display: "flex", alignItems: "center" }}>
-          <NavItem title="Best Seller" linkTo="/shop/collection/best seller" />
-          <NavItem pl={4} title="Trending" linkTo="/shop/collection/trending" />
           <NavItem
-            pl={4}
-            title="New Arrival"
-            linkTo="/shop/collection/new arrival"
-          />
-          <NavItem
-            pl={4}
             title="Electronics"
             linkTo="/shop/collection/electronics"
             hasSubList={true}
@@ -937,6 +929,17 @@ const Navbar = () => {
               </Box>
             </Grid>
           </NavItem>
+          <NavItem
+            pl={4}
+            title="Best Seller"
+            linkTo="/shop/collection/best seller"
+          />
+          <NavItem pl={4} title="Trending" linkTo="/shop/collection/trending" />
+          <NavItem
+            pl={4}
+            title="New Arrival"
+            linkTo="/shop/collection/new arrival"
+          />
         </List>
       </Box>
     </Box>

@@ -88,13 +88,12 @@ a {
   height: auto !important;
 }
 
-.swiper-slide .thumb-img{
-  border: 1px solid #eee;
-}
-.swiper-slide-thumb-active .thumb-img{
+.swiper-slide-thumb-active .thumb{
   border-color: #ffb100 !important;
 }
-
+.product-thumb-slider{
+  margin: 0 !important;
+}
 .swiper-lazy-preloader{
   position: absolute !important;
   width: 100% !important;

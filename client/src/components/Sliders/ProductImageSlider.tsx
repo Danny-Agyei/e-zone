@@ -2,7 +2,8 @@ import { useRef, useState, useLayoutEffect } from "react";
 
 import { Box, IconButton, Stack } from "@mui/material";
 
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import SwiperCore, {
@@ -67,94 +68,59 @@ export default function ProductImageSlider({
     <Box
       sx={{
         position: "sticky",
-        top: 100,
+        top: 200,
       }}
     >
       <Stack direction="row" spacing={5} justifyContent="center">
         <Box sx={{ height: "100%", position: "relative" }}>
-          <Box
-            sx={{
-              position: "absolute",
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "bottom",
-              top: -45,
-              left: 18,
-              zIndex: 999,
-              width: 42,
-              height: "auto",
-            }}
-          >
-            <IconButton
-              sx={{
-                "&:hover": {
-                  background: "transparent !important",
-                },
-              }}
-              onClick={() => swipe.slidePrev()}
-            >
-              <IoIosArrowUp size={25} color="#FF8C00" />
-            </IconButton>
-          </Box>
           <Swiper
-            onInit={(ev) => setSwipe(ev)}
             loop={false}
             spaceBetween={10}
             slidesPerView={"auto"}
-            threshold={4}
+            threshold={5}
             on={{ touchEnd: handleTouchEnd }}
             touchRatio={0.2}
             direction="vertical"
-            slideToClickedSlide={true}
+            slideToClickedSlide={false}
             onSwiper={setThumbsSwiper}
             controller={{ control: firstSwiper }}
-            preloadImages={false}
-            style={{ width: "max-content", maxHeight: 350 }}
+            // preloadImages={false}
+            style={{ maxHeight: 360, overflow: "hidden" }}
           >
             {selectedVariant!.images.map((image, indx) => (
-              <SwiperSlide key={indx}>
+              <SwiperSlide key={indx} className="product-thumb-slider">
                 <Box
-                  className="thumb-img"
-                  component="img"
-                  src={image}
+                  className="thumb"
                   sx={{
-                    width: "100%",
-                    maxWidth: 60,
-                    height: "auto",
-                    borderRadius: 1,
-                    px: 0.2,
-                    py: 0.8,
-                    mb: 0.2,
+                    minHeight: " 78px",
+                    maxHeight: " 78px",
+                    maxWidth: " 78px",
+                    minWidth: " 78px",
+                    m: "4px auto 5px",
+                    p: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    border: "solid 1px #eee",
+                    borderRadius: " 6px",
                   }}
-                  alt={`${name}-${selectedVariant!.colorName}`}
-                />
+                >
+                  <Box
+                    className="thumb-img"
+                    component="img"
+                    src={image}
+                    sx={{
+                      width: "100%",
+                      maxWidth: 60,
+                      height: "100",
+                      maxHeight: 60,
+                    }}
+                    alt={`${name}-${selectedVariant!.colorName}`}
+                  />
+                </Box>
               </SwiperSlide>
             ))}
           </Swiper>
-          <Box
-            sx={{
-              position: "absolute",
-              display: "flex",
-              justifyContent: "end",
-              alignItems: "center",
-              bottom: -45,
-              left: 14,
-              zIndex: 999,
-              width: 42,
-              height: "auto",
-            }}
-          >
-            <IconButton
-              sx={{
-                "&:hover": {
-                  background: "transparent !important",
-                },
-              }}
-              onClick={() => swipe.slideNext()}
-            >
-              <IoIosArrowDown size={25} color="#FF8C00" />
-            </IconButton>
-          </Box>
         </Box>
         <Box
           sx={{
@@ -171,6 +137,7 @@ export default function ProductImageSlider({
                 swiper1Ref.current = swiper;
               }
             }}
+            onInit={(ev) => setSwipe(ev)}
             freeMode={false}
             threshold={5}
             on={{ touchEnd: handleTouchEnd }}
@@ -193,8 +160,11 @@ export default function ProductImageSlider({
                   sx={{
                     width: "100%",
                     height: 400,
-                    minHeight: 380,
+                    minHeight: 400,
                     position: "relative",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
                   }}
                 >
                   <Box
@@ -210,7 +180,8 @@ export default function ProductImageSlider({
                       bottom: 0,
                       width: "100%",
                       height: "100%",
-                      m: "0 auto",
+                      minHeight: 400,
+                      maxHeight: 400,
                       objectFit: "contain",
                     }}
                     alt={`${name}-${selectedVariant!.colorName}`}
@@ -222,6 +193,66 @@ export default function ProductImageSlider({
               </SwiperSlide>
             ))}
           </Swiper>
+          <Box
+            sx={{
+              position: "absolute",
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "center",
+              borderRadius: 9999,
+              top: 0,
+              left: 0,
+              bottom: 0,
+              zIndex: 999999,
+              width: 42,
+              height: "auto",
+            }}
+          >
+            <IconButton
+              sx={{
+                bgcolor: "#fff",
+                border: "1px solid #e0e0e0",
+                "&:hover": {
+                  width: 42,
+                  height: 42,
+                  bgcolor: "#f9f9f9",
+                },
+              }}
+              onClick={() => swipe.slidePrev()}
+            >
+              <IoIosArrowBack size={25} color="#1c1b1b" />
+            </IconButton>
+          </Box>
+          <Box
+            sx={{
+              position: "absolute",
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "center",
+              borderRadius: 9999,
+              top: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 999999,
+              width: 42,
+              height: "auto",
+            }}
+          >
+            <IconButton
+              sx={{
+                bgcolor: "#fff",
+                border: "1px solid #e0e0e0",
+                "&:hover": {
+                  width: 42,
+                  height: 42,
+                  bgcolor: "#f9f9f9",
+                },
+              }}
+              onClick={() => swipe.slideNext()}
+            >
+              <IoIosArrowForward size={25} color="#1c1b1b" />
+            </IconButton>
+          </Box>
         </Box>
       </Stack>
     </Box>
