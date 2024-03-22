@@ -189,7 +189,7 @@
         { "id": 26, "check": false, "title": "Jousen" },
         { "id": 27, "check": false, "title": "Reebok" },
         { "id": 28, "check": false, "title": "Muscularfit" },
-        { "id": 39, "check": false, "title": "Clarks" },
+        { "id": 29, "check": false, "title": "Clarks" },
         { "id": 30, "check": false, "title": "Bruno Marc" },
         { "id": 31, "check": false, "title": "King Will" },
         { "id": 32, "check": false, "title": "Thorogood" },
@@ -204,17 +204,17 @@
       ],
       
        "electronicBrands" : [
-        { "id": 1, "check": false, "title": "Sony" },
-        { "id": 2, "check": false, "title": "Jbl" },
-        { "id": 3, "check": false, "title": "Canon" },
-        { "id": 4, "check": false, "title": "Apple" },
-        { "id": 5, "check": false, "title": "Samsung" },
-        { "id": 6, "check": false, "title": "Electronics Basket" },
-        { "id": 7, "check": false, "title": "Microsoft" },
-        { "id": 8, "check": false, "title": "Asus" },
-        { "id": 9, "check": false, "title": "Lg" },
-        { "id": 10, "check": false, "title": "Lenovo" },
-        { "id": 11, "check": false, "title": "Raising Electronics" }
+        { "id": 41, "check": false, "title": "Sony" },
+        { "id": 42, "check": false, "title": "Jbl" },
+        { "id": 43, "check": false, "title": "Canon" },
+        { "id": 44, "check": false, "title": "Apple" },
+        { "id": 45, "check": false, "title": "Samsung" },
+        { "id": 46, "check": false, "title": "Electronics Basket" },
+        { "id": 47, "check": false, "title": "Microsoft" },
+        { "id": 48, "check": false, "title": "Asus" },
+        { "id": 49, "check": false, "title": "Lg" },
+        { "id": 50, "check": false, "title": "Lenovo" },
+        { "id": 51, "check": false, "title": "Raising Electronics" }
       ]
       
 

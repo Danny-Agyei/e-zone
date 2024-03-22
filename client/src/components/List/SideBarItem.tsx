@@ -25,13 +25,16 @@ export default function SideBarItem({
   expand?: boolean;
   title: string;
 }) {
-  // @ Search
-  const [searchData, setSearchData] = React.useState(listData);
+  // @ Filter Search
+  const dataToFilter = listData;
+
+  const [initialData, setInitialData] = React.useState(dataToFilter);
+  const [searchData, setSearchData] = React.useState(initialData);
 
   const onSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    const searchMatched = listData.filter((data) =>
+    const searchMatched = initialData.filter((data) =>
       data.title.toLowerCase().includes(inputValue.toLowerCase())
     );
     setSearchData(searchMatched);
@@ -42,14 +45,14 @@ export default function SideBarItem({
     event: React.ChangeEvent<HTMLInputElement>,
     id: number
   ) => {
-    const updatedData = searchData.map((data) => {
-      if (id === data.id) {
-        return { ...data, check: !data.check };
-      }
-      return data;
-    });
+    const updatedData = (prev: typeof initialData) =>
+      prev.map((data) =>
+        id === data.id ? { ...data, check: !data.check } : data
+      );
+    setInitialData(updatedData);
     setSearchData(updatedData);
   };
+
   return (
     <Box>
       <Accordion

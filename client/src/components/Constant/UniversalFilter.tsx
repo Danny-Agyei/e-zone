@@ -13,8 +13,8 @@ import {
   Typography,
 } from "@mui/material";
 import SideBarItem from "../List/SideBarItem";
-import { Link, useLocation } from "react-router-dom";
-import { ChangeEvent, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import filterData from "../../filterData.json";
 
@@ -28,7 +28,9 @@ export default function UniversalFilter() {
   } = filterData;
 
   const location = useLocation();
+  const navigate = useNavigate();
 
+  const searchParams = new URLSearchParams(location.search);
   const pathname = location.pathname.toLowerCase();
   const categoryName = pathname.slice(pathname.lastIndexOf("/") + 1);
 
@@ -39,7 +41,7 @@ export default function UniversalFilter() {
       ? fashionCategories
       : defaultCategories;
 
-  const brands =
+  const brandData =
     categoryName === "electronics"
       ? electronicBrands
       : categoryName === "fashion"
@@ -72,29 +74,104 @@ export default function UniversalFilter() {
 
   // @ Brand search
 
+  const [brands, setBrandData] = useState(brandData);
   const [searchData, setSearchData] = useState(brands);
 
   const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
 
-    const searchMatched = searchData.filter((data) =>
-      data.title.toLowerCase().includes(inputValue.toLowerCase())
+    const searchMatched = brands.filter((brand) =>
+      brand.title.toLowerCase().includes(inputValue.toLowerCase())
     );
     setSearchData(searchMatched);
   };
 
   // @ Check handler
-  const onCheckHandler = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    id: number
-  ) => {
-    const updatedData = searchData.map((data) => {
-      if (id === data.id) {
-        return { ...data, check: !data.check };
-      }
-      return data;
-    });
+  const onCheckHandler = (title: string) => {
+    const updatedData = (prev: typeof brands) =>
+      prev.map((brand) =>
+        brand.title.toLowerCase() === title.toLowerCase()
+          ? { ...brand, check: !brand.check }
+          : brand
+      );
+    setBrandData(updatedData);
     setSearchData(updatedData);
+
+    queryHandler("brand", title);
+  };
+
+  const [params, setParams] = useState<{ [key: string]: string[] } | null>(
+    null
+  );
+
+  useEffect(() => {
+    const paramsObject: { [key: string]: string[] } | null = {};
+
+    //  @ Get params from url and group values
+    searchParams.forEach((value, key) => {
+      let paramsObjectValue = paramsObject[key];
+
+      if (paramsObject.hasOwnProperty(key)) {
+        paramsObjectValue.includes(value)
+          ? (paramsObject[key] = paramsObjectValue.filter(
+              (currValue) => currValue !== value
+            ))
+          : (paramsObject[key] = [...paramsObjectValue, value]);
+      } else {
+        paramsObject[key] = [value];
+      }
+
+      // @ update the query state
+      queryHandler(key, value);
+      onCheckHandler(value);
+    });
+
+    setParams(paramsObject);
+  }, []);
+
+  // @ Set or update Params in url
+  const onUrlParamsUpdate = (urlParameters: typeof params) => {
+    if (!urlParameters || typeof urlParameters !== "object") {
+      return;
+    }
+
+    const paramsArray = Object.entries(urlParameters);
+
+    let searchString = paramsArray
+      .map(([key, value]) => {
+        if (Array.isArray(value)) {
+          return value.length
+            ? `${key}=${encodeURIComponent(value.join("&"))}`
+            : "";
+        }
+      })
+      .join("&");
+
+    navigate({ search: searchString });
+  };
+
+  // @ Query object
+  const [query, setQuery] = useState<{ [key: string]: string[] }>({});
+
+  const queryHandler = (propertyName: string, checkedPropertyValue: string) => {
+    let updatedQuery = { ...query };
+
+    let propertyValue = updatedQuery[propertyName];
+
+    if (updatedQuery.hasOwnProperty(propertyName)) {
+      propertyValue.includes(checkedPropertyValue)
+        ? (updatedQuery[propertyName] = propertyValue.filter(
+            (value) => value !== checkedPropertyValue
+          ))
+        : (updatedQuery[propertyName] = [
+            ...propertyValue,
+            checkedPropertyValue,
+          ]);
+    } else {
+      updatedQuery[propertyName] = [checkedPropertyValue];
+    }
+    onUrlParamsUpdate(updatedQuery);
+    setQuery(updatedQuery);
   };
 
   return (
@@ -244,7 +321,7 @@ export default function UniversalFilter() {
           }}
         >
           <FormGroup>
-            {searchData.map((brand, indx) => (
+            {searchData.map((brand) => (
               <FormControlLabel
                 sx={{
                   "& .MuiTypography-root": {
@@ -260,11 +337,11 @@ export default function UniversalFilter() {
                     "&:hover": { color: "text.secondary" },
                   },
                 }}
-                key={indx}
+                key={brand.id}
                 title={brand.title}
                 control={
                   <Checkbox
-                    onChange={(e) => onCheckHandler(e, brand.id)}
+                    onChange={() => onCheckHandler(brand.title)}
                     checked={brand.check}
                     value={brand}
                   />

@@ -68,7 +68,7 @@ export default function ProductImageSlider({
     <Box
       sx={{
         position: "sticky",
-        top: 200,
+        top: 150,
       }}
     >
       <Stack direction="row" spacing={5} justifyContent="center">

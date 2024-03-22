@@ -20,10 +20,31 @@ import {
   ProductCard,
   UniversalFilter,
 } from "../../components";
+import Pagination from "@mui/material/Pagination";
 
 import store from "../../lib/zustand/store";
 import filterData from "../../filterData.json";
 const { sortData } = filterData;
+
+// @to delete
+// pagination: {
+//   start: 0,
+//   limit: 10,
+// },
+
+export const PaginationControlled = function () {
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
+
+  return (
+    <Stack spacing={2}>
+      <Typography>Page: {page}</Typography>
+      <Pagination count={10} page={page} onChange={handleChange} />
+    </Stack>
+  );
+};
 
 const Shop = () => {
   const loadedData = useLoaderData() as {
@@ -53,12 +74,10 @@ const Shop = () => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setOpen(true);
-    console.log("open");
   };
 
   const handleClose = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(false);
-    console.log("click");
   };
 
   // @ shop filtering
