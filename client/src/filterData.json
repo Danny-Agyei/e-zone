@@ -136,10 +136,10 @@
       ],
       
        "electronicsCategories" : [
-        { "id": 1, "check": false, "title": "Electronics" },
-        { "id": 2, "check": false, "title": "Computers & Accessories" },
-        { "id": 3, "check": false, "title": "Computers & Tablets" },
-        { "id": 4, "check": false, "title": "2 in 1 Laptop Computers" }
+        { "id": 1, "check": false, "title": "Laptops" },
+        { "id": 2, "check": false, "title": "Desktops" },
+        { "id": 3, "check": false, "title": "Smart Watches" },
+        { "id": 4, "check": false, "title": "Headphones" }
       ],
       
        "fashionCategories" : [

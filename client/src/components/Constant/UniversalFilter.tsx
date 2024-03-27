@@ -18,6 +18,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import filterData from "../../filterData.json";
 
+type paramsTypes = { [key: string]: string[] } | null;
+
 export default function UniversalFilter() {
   const {
     electronicBrands,
@@ -49,14 +51,14 @@ export default function UniversalFilter() {
       : electronicBrands.concat(fashionBrands);
 
   // @Price range slider
-  const minDistance = 10;
-  const [value, setValue] = useState<number[]>([10, 28000]);
+  const minDistance: number = 10;
+  const [minMaxPrice, setMinMaxPrice] = useState<number[]>([10, 28000]);
 
   function valuetext(value: number) {
-    return `${value}°C`;
+    return `${value}$`;
   }
 
-  const handleChange = (
+  const priceSliderHandler = (
     event: Event,
     newValue: number | number[],
     activeThumb: number
@@ -65,11 +67,15 @@ export default function UniversalFilter() {
       return;
     }
 
-    if (activeThumb === 0) {
-      setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
-    } else {
-      setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
-    }
+    activeThumb === 0
+      ? setMinMaxPrice([
+          Math.min(newValue[0], minMaxPrice[1] - minDistance),
+          minMaxPrice[1],
+        ])
+      : setMinMaxPrice([
+          minMaxPrice[0],
+          Math.max(newValue[1], minMaxPrice[0] + minDistance),
+        ]);
   };
 
   // @ Brand search
@@ -78,101 +84,87 @@ export default function UniversalFilter() {
   const [searchData, setSearchData] = useState(brands);
 
   const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+    const searchEnteredText = event.target.value;
 
-    const searchMatched = brands.filter((brand) =>
-      brand.title.toLowerCase().includes(inputValue.toLowerCase())
+    const SearchResult = brands.filter((brand) =>
+      brand.title.toLowerCase().includes(searchEnteredText.toLowerCase())
     );
-    setSearchData(searchMatched);
+    setSearchData(SearchResult);
   };
 
-  // @ Check handler
-  const onCheckHandler = (title: string) => {
-    const updatedData = (prev: typeof brands) =>
-      prev.map((brand) =>
-        brand.title.toLowerCase() === title.toLowerCase()
+  // Toggle brand selection
+  const toggleBrandSelection = (brandTitle: string) => {
+    updateQuery("toggle", "brand", brandTitle);
+
+    const toggleCheck = (brands: typeof brandData) =>
+      brands.map((brand) =>
+        brand.title.toLowerCase() === brandTitle.toLowerCase()
           ? { ...brand, check: !brand.check }
           : brand
       );
-    setBrandData(updatedData);
-    setSearchData(updatedData);
 
-    queryHandler("brand", title);
+    setBrandData(toggleCheck);
+    setSearchData(toggleCheck);
   };
 
-  const [params, setParams] = useState<{ [key: string]: string[] } | null>(
-    null
-  );
+  // Update URL parameters
+  const updateUrlParams = (params: paramsTypes) => {
+    if (!params || typeof params !== "object") return;
 
-  useEffect(() => {
-    const paramsObject: { [key: string]: string[] } | null = {};
-
-    //  @ Get params from url and group values
-    searchParams.forEach((value, key) => {
-      let paramsObjectValue = paramsObject[key];
-
-      if (paramsObject.hasOwnProperty(key)) {
-        paramsObjectValue.includes(value)
-          ? (paramsObject[key] = paramsObjectValue.filter(
-              (currValue) => currValue !== value
-            ))
-          : (paramsObject[key] = [...paramsObjectValue, value]);
-      } else {
-        paramsObject[key] = [value];
-      }
-
-      // @ update the query state
-      queryHandler(key, value);
-      onCheckHandler(value);
-    });
-
-    setParams(paramsObject);
-  }, []);
-
-  // @ Set or update Params in url
-  const onUrlParamsUpdate = (urlParameters: typeof params) => {
-    if (!urlParameters || typeof urlParameters !== "object") {
-      return;
-    }
-
-    const paramsArray = Object.entries(urlParameters);
-
-    let searchString = paramsArray
-      .map(([key, value]) => {
-        if (Array.isArray(value)) {
-          return value.length
-            ? `${key}=${encodeURIComponent(value.join("&"))}`
-            : "";
-        }
-      })
+    const searchParams = Object.entries(params)
+      .map(([key, val]) =>
+        Array.isArray(val) && val.length
+          ? `${key}=${encodeURIComponent(val.join("&"))}`
+          : ""
+      )
+      .filter(Boolean)
       .join("&");
 
-    navigate({ search: searchString });
+    navigate({ search: searchParams });
   };
 
-  // @ Query object
-  const [query, setQuery] = useState<{ [key: string]: string[] }>({});
+  // State and handler for query parameters
+  const [queryParams, setQueryParams] = useState<paramsTypes | null>(null);
 
-  const queryHandler = (propertyName: string, checkedPropertyValue: string) => {
-    let updatedQuery = { ...query };
+  const updateQuery = (
+    action: string,
+    key?: string,
+    value?: string,
+    initialState?: paramsTypes
+  ) => {
+    let newQuery = { ...queryParams, ...initialState };
 
-    let propertyValue = updatedQuery[propertyName];
-
-    if (updatedQuery.hasOwnProperty(propertyName)) {
-      propertyValue.includes(checkedPropertyValue)
-        ? (updatedQuery[propertyName] = propertyValue.filter(
-            (value) => value !== checkedPropertyValue
-          ))
-        : (updatedQuery[propertyName] = [
-            ...propertyValue,
-            checkedPropertyValue,
-          ]);
-    } else {
-      updatedQuery[propertyName] = [checkedPropertyValue];
+    switch (action) {
+      case "initial":
+        Object.entries(initialState ?? {}).forEach(([k, v]) => {
+          v.forEach((val) => toggleBrandSelection(val));
+          newQuery[k] = [...(newQuery[k] ?? []), ...v];
+        });
+        break;
+      case "toggle":
+        if (key && value) {
+          newQuery[key] = newQuery[key]?.includes(value)
+            ? newQuery[key].filter((val) => val !== value)
+            : [...(newQuery[key] ?? []), value];
+        }
+        break;
     }
-    onUrlParamsUpdate(updatedQuery);
-    setQuery(updatedQuery);
+
+    setQueryParams(newQuery);
+    updateUrlParams(newQuery);
   };
+
+  // Initialize query parameters from URL on component mount
+  useEffect(() => {
+    const urlParams: paramsTypes = {};
+
+    searchParams.forEach((val, key) => {
+      const values = val.split("&");
+      urlParams[key] = [...(urlParams[key] ?? []), ...values];
+    });
+
+    updateQuery("initial", undefined, undefined, urlParams);
+  }, []);
 
   return (
     <>
@@ -194,8 +186,8 @@ export default function UniversalFilter() {
             getAriaLabel={() => "Minimum distance"}
             min={8}
             max={30000}
-            value={value}
-            onChange={handleChange}
+            value={minMaxPrice}
+            onChange={priceSliderHandler}
             getAriaValueText={valuetext}
             disableSwap
             color="warning"
@@ -236,7 +228,7 @@ export default function UniversalFilter() {
                 width: "40%",
               }}
             >
-              ${value[0]}
+              ${minMaxPrice[0]}
             </Typography>
             <Typography
               sx={{ width: "20%", textAlign: "center" }}
@@ -251,7 +243,7 @@ export default function UniversalFilter() {
               fontSize={13}
               sx={{ border: "1px solid #f2ecec", py: 0.5, px: 2, width: "40%" }}
             >
-              ${value[1]}
+              ${minMaxPrice[1]}
             </Typography>
           </Stack>
         </Box>
@@ -341,7 +333,7 @@ export default function UniversalFilter() {
                 title={brand.title}
                 control={
                   <Checkbox
-                    onChange={() => onCheckHandler(brand.title)}
+                    onChange={() => toggleBrandSelection(brand.title)}
                     checked={brand.check}
                     value={brand}
                   />
