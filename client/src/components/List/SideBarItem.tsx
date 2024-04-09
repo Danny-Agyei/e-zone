@@ -1,4 +1,4 @@
-import * as React from "react";
+import { ChangeEvent, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -13,45 +13,45 @@ import {
   Typography,
 } from "@mui/material";
 import { BiSearch } from "react-icons/bi";
+import { useQueryParams } from "../../Utilities";
+
+type paramsTypes = { [key: string]: string[] } | null;
 
 export default function SideBarItem({
   listData,
   title,
   placeholderText,
   expand,
+  keyName,
 }: {
   listData: { id: number; title: string; check: boolean }[];
   placeholderText?: string;
   expand?: boolean;
   title: string;
+  keyName: string;
 }) {
-  // @ Filter Search
+  // @ Filter Search handler
   const dataToFilter = listData;
 
-  const [initialData, setInitialData] = React.useState(dataToFilter);
-  const [searchData, setSearchData] = React.useState(initialData);
+  const [otherFilterData, setOtherFilterData] = useState(dataToFilter);
+  const [searchData, setSearchData] = useState(otherFilterData);
 
-  const onSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
+  const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const searchEnteredText = event.target.value
+      .toLowerCase()
+      .replaceAll(" ", "");
 
-    const searchMatched = initialData.filter((data) =>
-      data.title.toLowerCase().includes(inputValue.toLowerCase())
+    const searchedResult = otherFilterData.filter((data) =>
+      data.title.toLowerCase().replaceAll(" ", "").includes(searchEnteredText)
     );
-    setSearchData(searchMatched);
+    setSearchData(searchedResult);
   };
 
-  // @ Check handler
-  const onCheckHandler = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    id: number
-  ) => {
-    const updatedData = (prev: typeof initialData) =>
-      prev.map((data) =>
-        id === data.id ? { ...data, check: !data.check } : data
-      );
-    setInitialData(updatedData);
-    setSearchData(updatedData);
-  };
+  const { toggleSelection } = useQueryParams(
+    setSearchData,
+    setOtherFilterData,
+    undefined
+  );
 
   return (
     <Box>
@@ -136,7 +136,7 @@ export default function SideBarItem({
             }}
           >
             <FormGroup>
-              {searchData.map((data, indx) => (
+              {searchData.map((data) => (
                 <FormControlLabel
                   sx={{
                     "& .MuiTypography-root": {
@@ -152,11 +152,11 @@ export default function SideBarItem({
                       "&:hover": { color: "text.secondary" },
                     },
                   }}
-                  key={indx}
+                  key={data.id}
                   title={data.title}
                   control={
                     <Checkbox
-                      onChange={(e) => onCheckHandler(e, data.id)}
+                      onChange={(e) => toggleSelection(keyName, data.title)}
                       checked={data.check}
                       value={data.title}
                     />

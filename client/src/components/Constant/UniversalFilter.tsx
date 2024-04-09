@@ -13,12 +13,12 @@ import {
   Typography,
 } from "@mui/material";
 import SideBarItem from "../List/SideBarItem";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ChangeEvent, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import filterData from "../../filterData.json";
-
-type paramsTypes = { [key: string]: string[] } | null;
+import ElectronicFilter from "./ElectronicsFilter";
+import { useQueryParams } from "../../Utilities";
 
 export default function UniversalFilter() {
   const {
@@ -30,9 +30,7 @@ export default function UniversalFilter() {
   } = filterData;
 
   const location = useLocation();
-  const navigate = useNavigate();
 
-  const searchParams = new URLSearchParams(location.search);
   const pathname = location.pathname.toLowerCase();
   const categoryName = pathname.slice(pathname.lastIndexOf("/") + 1);
 
@@ -80,7 +78,7 @@ export default function UniversalFilter() {
 
   // @ Brand search
 
-  const [brands, setBrandData] = useState(brandData);
+  const [brands, setBrandFilterData] = useState(brandData);
   const [searchData, setSearchData] = useState(brands);
 
   const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -92,79 +90,11 @@ export default function UniversalFilter() {
     setSearchData(SearchResult);
   };
 
-  // Toggle brand selection
-  const toggleBrandSelection = (brandTitle: string) => {
-    updateQuery("toggle", "brand", brandTitle);
-
-    const toggleCheck = (brands: typeof brandData) =>
-      brands.map((brand) =>
-        brand.title.toLowerCase() === brandTitle.toLowerCase()
-          ? { ...brand, check: !brand.check }
-          : brand
-      );
-
-    setBrandData(toggleCheck);
-    setSearchData(toggleCheck);
-  };
-
-  // Update URL parameters
-  const updateUrlParams = (params: paramsTypes) => {
-    if (!params || typeof params !== "object") return;
-
-    const searchParams = Object.entries(params)
-      .map(([key, val]) =>
-        Array.isArray(val) && val.length
-          ? `${key}=${encodeURIComponent(val.join("&"))}`
-          : ""
-      )
-      .filter(Boolean)
-      .join("&");
-
-    navigate({ search: searchParams });
-  };
-
-  // State and handler for query parameters
-  const [queryParams, setQueryParams] = useState<paramsTypes | null>(null);
-
-  const updateQuery = (
-    action: string,
-    key?: string,
-    value?: string,
-    initialState?: paramsTypes
-  ) => {
-    let newQuery = { ...queryParams, ...initialState };
-
-    switch (action) {
-      case "initial":
-        Object.entries(initialState ?? {}).forEach(([k, v]) => {
-          v.forEach((val) => toggleBrandSelection(val));
-          newQuery[k] = [...(newQuery[k] ?? []), ...v];
-        });
-        break;
-      case "toggle":
-        if (key && value) {
-          newQuery[key] = newQuery[key]?.includes(value)
-            ? newQuery[key].filter((val) => val !== value)
-            : [...(newQuery[key] ?? []), value];
-        }
-        break;
-    }
-
-    setQueryParams(newQuery);
-    updateUrlParams(newQuery);
-  };
-
-  // Initialize query parameters from URL on component mount
-  useEffect(() => {
-    const urlParams: paramsTypes = {};
-
-    searchParams.forEach((val, key) => {
-      const values = val.split("&");
-      urlParams[key] = [...(urlParams[key] ?? []), ...values];
-    });
-
-    updateQuery("initial", undefined, undefined, urlParams);
-  }, []);
+  const { toggleSelection } = useQueryParams(
+    setSearchData,
+    undefined,
+    setBrandFilterData
+  );
 
   return (
     <>
@@ -333,7 +263,7 @@ export default function UniversalFilter() {
                 title={brand.title}
                 control={
                   <Checkbox
-                    onChange={() => toggleBrandSelection(brand.title)}
+                    onChange={() => toggleSelection("brand", brand.title)}
                     checked={brand.check}
                     value={brand}
                   />
@@ -347,6 +277,7 @@ export default function UniversalFilter() {
       <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         {categoryName === "electronics" || categoryName === "fashion" ? (
           <SideBarItem
+            keyName="category"
             expand={true}
             title="Categories"
             listData={categories}
@@ -388,6 +319,7 @@ export default function UniversalFilter() {
           </>
         )}
       </Box>
+      <ElectronicFilter />
     </>
   );
 }

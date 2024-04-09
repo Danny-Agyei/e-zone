@@ -146,7 +146,6 @@ const Shop = () => {
                     }}
                   >
                     <UniversalFilter />
-                    <ElectronicsFilter />
                   </Box>
                 </Grid>
                 <Grid sx={{ py: 8 }} item xs={12} sm={9} md={9}>

@@ -12,23 +12,65 @@ const getStoreData = async function ({
   params: Params<string>;
 }) {
   try {
+    const searchParamsFromStorage = Object.entries(
+      JSON.parse(localStorage.getItem("queryParams")!)
+    ).length
+      ? JSON.parse(localStorage.getItem("queryParams")!)
+      : null;
+
+    let newQuery = {};
+
+    if (searchParamsFromStorage) {
+      for (const key in searchParamsFromStorage) {
+        newQuery = { [key]: { $in: searchParamsFromStorage[key] } };
+      }
+    }
+
+    const query = qs.stringify(
+      {
+        filters: {
+          $and: [
+            {
+              ...(params.category
+                ? { categories: { title: { $eqi: params.category } } }
+                : {}),
+            },
+            {
+              ...newQuery,
+            },
+          ],
+        },
+        populate: "*",
+      },
+      {
+        encodeValuesOnly: true, // prettify URL
+      }
+    );
+    // let a = {
+    //   ...(params.category
+    //     ? { categories: { title: { $eqi: params.category } } }
+    //     : {}),
+    //   ...newQuery,
+    // };
+
+    // console.log(a);
+
     const endpoint = params.category
       ? `/api/products?filters[$and][0][categories][title][$eqi]=${params.category}&populate=*`
       : "/api/products?populate=*";
 
-    const productPromise = fetch(
-      `${process.env.REACT_APP_BASE_URL}${endpoint}`,
-      {
-        signal: request.signal,
-      }
-    );
+    const url = `/api/products?${query}`;
+
+    const productPromise = fetch(`${process.env.REACT_APP_BASE_URL}${url}`, {
+      signal: request.signal,
+    });
 
     const [productsRes] = await Promise.all([productPromise]);
 
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const products = await productsRes.json();
-
+    console.log(products);
     return { products: products.data };
   } catch (error: any) {
     console.log(error.message);

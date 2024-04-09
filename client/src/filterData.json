@@ -8,11 +8,11 @@
     "Date, Old to New"
   ],
    "processors": [
-        {"id":1, "check":false, "title": "2.6 Ghz Apple_ci5"},
+        {"id":1, "check":false, "title": "2.6 Ghz Apple_Core_i5"},
         {"id":2, "check":false, "title": "Intel Pentium Silver N5000"},
         {"id":3, "check":false, "title": "2.5 Ghz"},
-        {"id":4, "check":false, "title": "9th Generation Intel Core I5-9300h"},
-        {"id":5, "check":false, "title": "Apple"},
+        {"id":4, "check":false, "title": "9th Generation Intel Core i5-9300h"},
+        {"id":5, "check":false, "title": "4.2 Ghz Intel_core_i5_1135g7"},
         {"id":6, "check":false, "title": "4.1 Ghz Core_i5_family"},
         {"id":7, "check":false, "title": "Intel Celeron"},
         {"id":8, "check":false, "title": "1.5 Ghz Core_i7_family"},
@@ -20,13 +20,12 @@
         {"id":10, "check":false, "title": "2.9 Ghz Core_i5"},
         {"id":11, "check":false, "title": "4.2 Ghz Core_i5"},
         {"id":12, "check":false, "title": "3.3 Ghz Ryzen_5"},
-        {"id":13, "check":false, "title": "Intel Core I7"},
-        {"id":14, "check":false, "title": "Intel Core I7 - 8th Generation"},
+        {"id":13, "check":false, "title": "Intel Core i7"},
+        {"id":14, "check":false, "title": "Intel Core i7 - 8th Generation"},
         {"id":15, "check":false, "title": "4.5 Ghz Core_i5"},
         {"id":16, "check":false, "title": "3.8 Ghz Ryzen_7"},
-        {"id":17, "check":false, "title": "2.9 Ghz Apple_ci5"},
-        {"id":18, "check":false, "title": "3 Ghz Ryzen_5_4600h"},
-        {"id":19, "check":false, "title": "4.2 Ghz Intel_core_i5_1135g7"}
+        {"id":17, "check":false, "title": "2.9 Ghz Apple_Core_i5"},
+        {"id":18, "check":false, "title": "3 Ghz Ryzen_5_4600h"}
       ],
       
       "graphicDetails" : [
@@ -49,12 +48,11 @@
       
       , "displaySize" : [
         {"id":1,  "check":false, "title": "15.6 Inches"},
-        {"id":2,  "check":false, "title": "15.6 Inches"},
+        {"id":2,  "check":false, "title": "23.8 Inches"},
         {"id":3,  "check":false, "title": "11.6 Inches"},
         {"id":4,  "check":false, "title": "14 Inches"},
         {"id":5,  "check":false, "title": "17.3 Inches"},
-        {"id":6,  "check":false, "title": "16.1 Inches"},
-        {"id":7,  "check":false, "title": "23.8 Inches"}
+        {"id":6,  "check":false, "title": "16.1 Inches"}
       ]
       
       , "memorySize" : [
