@@ -15,8 +15,6 @@ import {
 import { BiSearch } from "react-icons/bi";
 import { useQueryParams } from "../../Utilities";
 
-type paramsTypes = { [key: string]: string[] } | null;
-
 export default function SideBarItem({
   listData,
   title,

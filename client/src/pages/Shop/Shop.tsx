@@ -15,15 +15,12 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 
 import { ProductType } from "../../types";
 import ProductSkeleton from "../../components/Constant/ProductSkeleton";
-import {
-  ElectronicsFilter,
-  ProductCard,
-  UniversalFilter,
-} from "../../components";
+import { ProductCard, UniversalFilter } from "../../components";
 import Pagination from "@mui/material/Pagination";
 
 import store from "../../lib/zustand/store";
 import filterData from "../../filterData.json";
+import { useQueryParams } from "../../Utilities";
 const { sortData } = filterData;
 
 // @to delete
@@ -47,6 +44,8 @@ export const PaginationControlled = function () {
 };
 
 const Shop = () => {
+  const { updateQuery } = useQueryParams(undefined, undefined, undefined);
+
   const loadedData = useLoaderData() as {
     data: Promise<{
       data: Promise<any>;
@@ -57,15 +56,18 @@ const Shop = () => {
   const [gridLayout, setGridLayout] = useState(3);
 
   // @ sort
-  const [sortText, setSortText] = React.useState(sortData[0]);
+  const [selectedSortTitle, setSelectedSortTitle] = React.useState(
+    sortData[0].title
+  );
 
   const onSortByHandler = (
     event: React.MouseEvent<HTMLDivElement>,
-    selectedText: string
+    selected: (typeof sortData)[0]
   ) => {
     event.stopPropagation();
-    setSortText(selectedText);
+    setSelectedSortTitle(selected.title);
     setOpen(false);
+    updateQuery("toggle", "sort", selected.keyword, undefined);
   };
 
   // @ menu toggler
@@ -82,13 +84,6 @@ const Shop = () => {
 
   // @ shop filtering
   const [loading, setLoading] = useState(false);
-  const [filterData, setFilterData] = useState({});
-
-  useEffect(() => {}, [filterData]);
-
-  const onFilterHandler: (data: { [key: string]: string }) => void = (
-    data
-  ) => {};
 
   return (
     <Suspense fallback={<ProductSkeleton />}>
@@ -197,7 +192,7 @@ const Shop = () => {
                             fontSize={13}
                             color="#777"
                           >
-                            {sortText}
+                            {selectedSortTitle}
                           </Typography>
                           <MdKeyboardArrowDown size={22} color="#1c1b1b" />
                           <List
@@ -222,9 +217,9 @@ const Shop = () => {
                               },
                             }}
                           >
-                            {sortData.map((data, indx) => (
+                            {sortData.map((data) => (
                               <ListItemText
-                                key={indx}
+                                key={data.id}
                                 sx={{ borderBottom: "1px solid #eaeaea", p: 0 }}
                                 primary={
                                   <Box
@@ -243,7 +238,7 @@ const Shop = () => {
                                     }}
                                   >
                                     <Typography fontSize={13}>
-                                      {data}
+                                      {data.title}
                                     </Typography>
                                   </Box>
                                 }

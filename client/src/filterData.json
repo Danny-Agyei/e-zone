@@ -1,11 +1,11 @@
 
 {
   "sortData":[
-    "Alphabetical, A-Z",
-    "Price, High to Low",
-    "Price, Low to Top",
-    "Date, New to Old",
-    "Date, Old to New"
+   {"id":1, "keyword":"name:ASC", "title":"Alphabetical, A-Z"},
+   {"id":2, "keyword":"price:DESC", "title":"Price, High to Low"},
+   {"id":3, "keyword":"price:ASC", "title":"Price, Low to High"}, 
+   {"id":4, "keyword":"createdAt:DESC", "title":"Date, New to Old"},
+   {"id":5, "keyword":"createdAt:ASC", "title":"Date, Old to New"}
   ],
    "processors": [
         {"id":1, "check":false, "title": "2.6 Ghz Apple_Core_i5"},
@@ -207,12 +207,14 @@
         { "id": 43, "check": false, "title": "Canon" },
         { "id": 44, "check": false, "title": "Apple" },
         { "id": 45, "check": false, "title": "Samsung" },
-        { "id": 46, "check": false, "title": "Electronics Basket" },
+        { "id": 46, "check": false, "title": "Hp" },
         { "id": 47, "check": false, "title": "Microsoft" },
         { "id": 48, "check": false, "title": "Asus" },
         { "id": 49, "check": false, "title": "Lg" },
         { "id": 50, "check": false, "title": "Lenovo" },
-        { "id": 51, "check": false, "title": "Raising Electronics" }
+        { "id": 51, "check": false, "title": "Tecno" },
+        { "id": 52, "check": false, "title": "Itel" },
+        { "id": 53, "check": false, "title": "infinix" }
       ]
       
 

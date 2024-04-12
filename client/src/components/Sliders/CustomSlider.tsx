@@ -4,19 +4,9 @@ import { Box, IconButton } from "@mui/material";
 
 import { Swiper } from "swiper/react";
 
-import SwiperCore, {
-  Navigation,
-  Thumbs,
-  Pagination,
-  Controller,
-} from "swiper/core";
 import "swiper/swiper-bundle.min.css";
 import "swiper/swiper.min.css";
-import {
-  IoIosArrowBack,
-  IoIosArrowDropleft,
-  IoIosArrowForward,
-} from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const CustomSlider = ({
   children,

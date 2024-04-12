@@ -48,6 +48,15 @@ export default function UniversalFilter() {
       ? fashionBrands
       : electronicBrands.concat(fashionBrands);
 
+  const [brands, setBrandFilterData] = useState(brandData);
+  const [searchData, setSearchData] = useState(brands);
+
+  const { toggleSelection, updateQuery } = useQueryParams(
+    setSearchData,
+    undefined,
+    setBrandFilterData
+  );
+
   // @Price range slider
   const minDistance: number = 10;
   const [minMaxPrice, setMinMaxPrice] = useState<number[]>([10, 28000]);
@@ -56,7 +65,16 @@ export default function UniversalFilter() {
     return `${value}$`;
   }
 
-  const priceSliderHandler = (
+  const handlePriceRange = () => {
+    updateQuery(
+      "toggle",
+      "price",
+      `${minMaxPrice[0]},${minMaxPrice[1]}`,
+      undefined
+    );
+  };
+
+  const priceChangeHandler = (
     event: Event,
     newValue: number | number[],
     activeThumb: number
@@ -65,22 +83,14 @@ export default function UniversalFilter() {
       return;
     }
 
-    activeThumb === 0
-      ? setMinMaxPrice([
-          Math.min(newValue[0], minMaxPrice[1] - minDistance),
-          minMaxPrice[1],
-        ])
-      : setMinMaxPrice([
-          minMaxPrice[0],
-          Math.max(newValue[1], minMaxPrice[0] + minDistance),
-        ]);
+    let priceRange =
+      activeThumb === 0
+        ? [Math.min(newValue[0], minMaxPrice[1] - minDistance), minMaxPrice[1]]
+        : [minMaxPrice[0], Math.max(newValue[1], minMaxPrice[0] + minDistance)];
+    setMinMaxPrice(priceRange);
   };
 
   // @ Brand search
-
-  const [brands, setBrandFilterData] = useState(brandData);
-  const [searchData, setSearchData] = useState(brands);
-
   const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchEnteredText = event.target.value;
 
@@ -89,12 +99,6 @@ export default function UniversalFilter() {
     );
     setSearchData(SearchResult);
   };
-
-  const { toggleSelection } = useQueryParams(
-    setSearchData,
-    undefined,
-    setBrandFilterData
-  );
 
   return (
     <>
@@ -117,7 +121,8 @@ export default function UniversalFilter() {
             min={8}
             max={30000}
             value={minMaxPrice}
-            onChange={priceSliderHandler}
+            onChange={priceChangeHandler}
+            onChangeCommitted={handlePriceRange}
             getAriaValueText={valuetext}
             disableSwap
             color="warning"

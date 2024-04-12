@@ -50,7 +50,7 @@ export default function ElectronicFilter() {
       </Box>
       <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
-          keyName="harddrivesize"
+          keyName="hard_drive_size"
           title="Hard Drive"
           listData={hardDriveSize}
           placeholderText="Search by hard drive size"
@@ -66,7 +66,7 @@ export default function ElectronicFilter() {
       </Box>
       <Box sx={{ p: 1.5, boxShadow: "0 0 5px #e5e5e5", mt: 2 }}>
         <SideBarItem
-          keyName="perfomance"
+          keyName="speed"
           title="Speed"
           listData={performance}
           placeholderText="Search by performance"

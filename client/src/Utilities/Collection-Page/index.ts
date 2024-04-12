@@ -12,7 +12,7 @@ type ItemsTypes = {
 };
 
 const useQueryParams = (
-  setSearchData: Dispatch<SetStateAction<ItemsTypes[]>>,
+  setSearchData?: Dispatch<SetStateAction<ItemsTypes[]>>,
   setOtherFilterData?: Dispatch<SetStateAction<ItemsTypes[]>>,
   setBrandFilterData?: Dispatch<SetStateAction<ItemsTypes[]>>
 ) => {
@@ -53,7 +53,6 @@ const useQueryParams = (
 
     switch (action) {
       case "initial":
-        // console.log("Hurray");
         Object.entries(UrlParamsInitialState ?? {}).forEach(([k, v]) => {
           v.forEach((val) => {
             toggleSelection(k, val);
@@ -65,9 +64,14 @@ const useQueryParams = (
       case "toggle":
         newQuery = { ...previousParams };
         if (key && value) {
-          newQuery[key] = newQuery[key]?.includes(value)
-            ? newQuery[key].filter((val) => val !== value)
-            : [...(newQuery[key] ?? []), value];
+          newQuery[key] =
+            key === "price"
+              ? value.split(",")
+              : key === "sort"
+              ? [value]
+              : newQuery[key]?.includes(value)
+              ? newQuery[key].filter((val) => val !== value)
+              : [...(newQuery[key] ?? []), value];
         }
 
         break;
@@ -95,7 +99,7 @@ const useQueryParams = (
     } else {
       setOtherFilterData && setOtherFilterData(toggleCheck);
     }
-    setSearchData(toggleCheck);
+    setSearchData && setSearchData(toggleCheck)!;
   };
 
   useEffect(() => {
@@ -113,6 +117,7 @@ const useQueryParams = (
 
   return {
     toggleSelection,
+    updateQuery,
   };
 };
 
