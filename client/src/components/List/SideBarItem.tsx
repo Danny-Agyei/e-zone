@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -45,11 +45,25 @@ export default function SideBarItem({
     setSearchData(searchedResult);
   };
 
-  const { toggleSelection } = useQueryParams(
+  const { filterResetHandler, toggleSelection } = useQueryParams(
+    otherFilterData,
+    searchData,
+    dataToFilter,
     setSearchData,
-    setOtherFilterData,
     undefined
   );
+
+  // Cleanup checked filters state when navigating
+
+  const queryParamsFromStorage: null | { [keys: string]: string[] } =
+    localStorage.getItem("queryParams") !== null
+      ? JSON.parse(localStorage.getItem("queryParams")!)
+      : {};
+
+  const queryParamsEntries = Object.entries(queryParamsFromStorage!);
+  useEffect(() => {
+    filterResetHandler();
+  }, [queryParamsEntries, dataToFilter, otherFilterData, searchData]);
 
   return (
     <Box>

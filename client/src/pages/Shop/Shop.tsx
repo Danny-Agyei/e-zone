@@ -44,7 +44,13 @@ export const PaginationControlled = function () {
 };
 
 const Shop = () => {
-  const { updateQuery } = useQueryParams(undefined, undefined, undefined);
+  const { updateQuery } = useQueryParams(
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined
+  );
 
   const loadedData = useLoaderData() as {
     data: Promise<{

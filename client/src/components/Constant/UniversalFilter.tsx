@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import SideBarItem from "../List/SideBarItem";
 import { Link, useLocation } from "react-router-dom";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import filterData from "../../filterData.json";
 import ElectronicFilter from "./ElectronicsFilter";
@@ -48,10 +48,13 @@ export default function UniversalFilter() {
       ? fashionBrands
       : electronicBrands.concat(fashionBrands);
 
-  const [brands, setBrandFilterData] = useState(brandData);
-  const [searchData, setSearchData] = useState(brands);
+  const [brandFilterData, setBrandFilterData] = useState(brandData);
+  const [searchData, setSearchData] = useState(brandFilterData);
 
-  const { toggleSelection, updateQuery } = useQueryParams(
+  const { filterResetHandler, toggleSelection, updateQuery } = useQueryParams(
+    brandFilterData,
+    searchData,
+    brandData,
     setSearchData,
     undefined,
     setBrandFilterData
@@ -94,11 +97,23 @@ export default function UniversalFilter() {
   const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const searchEnteredText = event.target.value;
 
-    const SearchResult = brands.filter((brand) =>
+    const SearchResult = brandFilterData.filter((brand) =>
       brand.title.toLowerCase().includes(searchEnteredText.toLowerCase())
     );
     setSearchData(SearchResult);
   };
+
+  // Cleanup checked filters state when navigating
+
+  const queryParamsFromStorage: null | { [keys: string]: string[] } =
+    localStorage.getItem("queryParams") !== null
+      ? JSON.parse(localStorage.getItem("queryParams")!)
+      : {};
+
+  const queryParamsEntries = Object.entries(queryParamsFromStorage!);
+  useEffect(() => {
+    filterResetHandler();
+  }, [queryParamsEntries, brandData, brandFilterData, searchData]);
 
   return (
     <>

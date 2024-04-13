@@ -1,4 +1,4 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect, Dispatch, SetStateAction, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type ParamsTypes = {
@@ -12,6 +12,9 @@ type ItemsTypes = {
 };
 
 const useQueryParams = (
+  currentFilterData?: ItemsTypes[],
+  searchData?: ItemsTypes[],
+  initialFilterData?: ItemsTypes[],
   setSearchData?: Dispatch<SetStateAction<ItemsTypes[]>>,
   setOtherFilterData?: Dispatch<SetStateAction<ItemsTypes[]>>,
   setBrandFilterData?: Dispatch<SetStateAction<ItemsTypes[]>>
@@ -95,7 +98,7 @@ const useQueryParams = (
       );
 
     if (key === "brand") {
-      setBrandFilterData && setBrandFilterData((prev) => toggleCheck(prev));
+      setBrandFilterData && setBrandFilterData(toggleCheck);
     } else {
       setOtherFilterData && setOtherFilterData(toggleCheck);
     }
@@ -115,9 +118,73 @@ const useQueryParams = (
     updateQuery("initial", undefined, undefined, urlParams);
   }, []);
 
+  // Cleanup checked filters state when navigating
+  const queryParamsFromStorage: null | { [keys: string]: string[] } =
+    localStorage.getItem("queryParams") !== null
+      ? JSON.parse(localStorage.getItem("queryParams")!)
+      : {};
+
+  const queryParamsEntries = Object.entries(queryParamsFromStorage!);
+
+  const prevQueryParamsEntriesRef = useRef(queryParamsEntries);
+
+  const filterResetHandler = () => {
+    if (!isEqual(prevQueryParamsEntriesRef.current, queryParamsEntries)) {
+      if (queryParamsEntries.length > 0) {
+        let totalQueryParamValues = queryParamsEntries.reduce(
+          (currTotal, entry) => {
+            return currTotal + entry[1].length;
+          },
+          0
+        );
+        console.log("greater");
+        if (totalQueryParamValues < 1) {
+          if (
+            !isEqual(currentFilterData!, initialFilterData!) ||
+            !isEqual(searchData!, initialFilterData!)
+          ) {
+            setBrandFilterData && setBrandFilterData(initialFilterData!);
+            setOtherFilterData && setOtherFilterData(initialFilterData!);
+            setSearchData && setSearchData(initialFilterData!);
+          }
+        }
+      } else {
+        console.log("Less");
+        if (!isEqual(currentFilterData!, initialFilterData!)) {
+          setBrandFilterData && setBrandFilterData(initialFilterData!);
+          setOtherFilterData && setOtherFilterData(initialFilterData!);
+        }
+        if (!isEqual(searchData!, initialFilterData!)) {
+          setSearchData && setSearchData(initialFilterData!);
+        }
+      }
+      prevQueryParamsEntriesRef.current = queryParamsEntries;
+    }
+  };
+  useEffect(() => {}, [
+    queryParamsEntries,
+    initialFilterData,
+    currentFilterData,
+    searchData,
+  ]);
+
+  // Helper function to check if two arrays are equal
+  function isEqual(arr1: any[], arr2: any[]): boolean {
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   return {
     toggleSelection,
     updateQuery,
+    filterResetHandler,
   };
 };
 

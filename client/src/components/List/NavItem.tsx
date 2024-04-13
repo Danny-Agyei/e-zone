@@ -1,14 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { Link } from "react-router-dom";
-import { GiTShirt } from "react-icons/gi";
-import { RiTShirtFill } from "react-icons/ri";
 import { PiTShirtFill } from "react-icons/pi";
-import { IoIosShirt } from "react-icons/io";
-import { PiDevicesFill } from "react-icons/pi";
-import { PiDevicesBold } from "react-icons/pi";
 import { GoDeviceDesktop } from "react-icons/go";
+import { Link } from "react-router-dom";
+
+import { useQueryParams } from "../../Utilities";
 
 export default function NavItem({
   title,
@@ -27,11 +24,15 @@ export default function NavItem({
 }) {
   const [showMenu, setShowMenu] = useState(toggleMenu || false);
 
+  const handleClick = (event: React.MouseEvent) => {
+    localStorage.removeItem("queryParams");
+  };
+
   return (
     <>
       <Box sx={{ pl: pl || 0 }}>
         {!hasSubList ? (
-          <Link to={linkTo}>
+          <Link to={linkTo} onClick={handleClick}>
             <Typography
               color="#fff"
               fontSize={14}

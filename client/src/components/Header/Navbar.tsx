@@ -9,9 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { AccountDropdown, FilterSelector, NavItem } from "../../components";
-import { IoHeartOutline, IoHeart } from "react-icons/io5";
+import { IoHeartOutline } from "react-icons/io5";
 
 import { GiShoppingBag } from "react-icons/gi";
 
@@ -56,7 +55,7 @@ const Navbar = () => {
           alignItems="center"
         >
           <Box>
-            <Link to="/">
+            <a href="/">
               <Box
                 component="img"
                 width={120}
@@ -64,7 +63,7 @@ const Navbar = () => {
                 src={logo}
                 alt="logo"
               />
-            </Link>
+            </a>
           </Box>
           <Box
             sx={{
@@ -185,7 +184,7 @@ const Navbar = () => {
                   <ListItemText
                     sx={{ pb: 0.5 }}
                     primary={
-                      <Link to="/shop/collection?q=desktop">
+                      <a href="/shop/collection?q=desktop">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -196,13 +195,13 @@ const Navbar = () => {
                         >
                           Desktops
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5 }}
                     primary={
-                      <Link to="/shop/collection?q=laptop">
+                      <a href="/shop/collection?q=laptop">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -215,13 +214,13 @@ const Navbar = () => {
                         >
                           Laptops
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=computer-accessories">
+                      <a href="/shop/collection?q=computer-accessories">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -234,13 +233,13 @@ const Navbar = () => {
                         >
                           Computer Accessories
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=computer">
+                      <a href="/shop/collection?q=computer">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -253,7 +252,7 @@ const Navbar = () => {
                         >
                           Shop All
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                 </List>
@@ -268,7 +267,7 @@ const Navbar = () => {
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=tablet">
+                      <a href="/shop/collection?q=tablet">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -279,13 +278,13 @@ const Navbar = () => {
                         >
                           Tablets
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=cell-phone">
+                      <a href="/shop/collection?q=cell-phone">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -298,13 +297,13 @@ const Navbar = () => {
                         >
                           Cell Phones
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=smart-watch">
+                      <a href="/shop/collection?q=smart-watch">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -317,13 +316,13 @@ const Navbar = () => {
                         >
                           Smart Watches
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=mobile-accessories">
+                      <a href="/shop/collection?q=mobile-accessories">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -336,13 +335,13 @@ const Navbar = () => {
                         >
                           Mobile Accessories
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=mobile">
+                      <a href="/shop/collection?q=mobile">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -355,7 +354,7 @@ const Navbar = () => {
                         >
                           Shop All
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                 </List>
@@ -370,7 +369,7 @@ const Navbar = () => {
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=headphones">
+                      <a href="/shop/collection?q=headphones">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -381,13 +380,13 @@ const Navbar = () => {
                         >
                           Headphones
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=speakers">
+                      <a href="/shop/collection?q=speakers">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -400,13 +399,13 @@ const Navbar = () => {
                         >
                           Speakers
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=ear-buds">
+                      <a href="/shop/collection?q=ear-buds">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -419,13 +418,13 @@ const Navbar = () => {
                         >
                           Ear Buds
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=audio">
+                      <a href="/shop/collection?q=audio">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -438,7 +437,7 @@ const Navbar = () => {
                         >
                           Shop All
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                 </List>
@@ -453,7 +452,7 @@ const Navbar = () => {
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=tv">
+                      <a href="/shop/collection?q=tv">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -464,13 +463,13 @@ const Navbar = () => {
                         >
                           Tv & video
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=smart-home">
+                      <a href="/shop/collection?q=smart-home">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -483,13 +482,13 @@ const Navbar = () => {
                         >
                           Smart Home & Security
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=video-games">
+                      <a href="/shop/collection?q=video-games">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -502,13 +501,13 @@ const Navbar = () => {
                         >
                           Video Games & Consoles
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection/mobile-accessories">
+                      <a href="/shop/collection/mobile-accessories">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -521,13 +520,13 @@ const Navbar = () => {
                         >
                           Mobile Accessories
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=video">
+                      <a href="/shop/collection?q=video">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -540,7 +539,7 @@ const Navbar = () => {
                         >
                           Shop All
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                 </List>
@@ -562,7 +561,7 @@ const Navbar = () => {
                   <ListItemText
                     sx={{ pb: 0.5 }}
                     primary={
-                      <Link to="/shop/collection?q=men-jackets-coats">
+                      <a href="/shop/collection?q=men-jackets-coats">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -573,13 +572,13 @@ const Navbar = () => {
                         >
                           Jackets & Coats
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5 }}
                     primary={
-                      <Link to="/shop/collection?q=men-tshirt-tanks">
+                      <a href="/shop/collection?q=men-tshirt-tanks">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -592,13 +591,13 @@ const Navbar = () => {
                         >
                           T-shirt & Tanks
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=men-sweaters-cardigans">
+                      <a href="/shop/collection?q=men-sweaters-cardigans">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -611,13 +610,13 @@ const Navbar = () => {
                         >
                           Sweaters & Cardigans
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=men-tops-shirts">
+                      <a href="/shop/collection?q=men-tops-shirts">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -630,13 +629,13 @@ const Navbar = () => {
                         >
                           Tops & Shirts
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=men-hoodies-sweatshirts">
+                      <a href="/shop/collection?q=men-hoodies-sweatshirts">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -649,13 +648,13 @@ const Navbar = () => {
                         >
                           Hoodies & Sweatshirts
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=men-joggers-pants">
+                      <a href="/shop/collection?q=men-joggers-pants">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -668,13 +667,13 @@ const Navbar = () => {
                         >
                           Joggers & Pants
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=men-underwear">
+                      <a href="/shop/collection?q=men-underwear">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -687,13 +686,13 @@ const Navbar = () => {
                         >
                           Underwear
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=men-shorts">
+                      <a href="/shop/collection?q=men-shorts">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -706,13 +705,13 @@ const Navbar = () => {
                         >
                           Shorts
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=men-wear">
+                      <a href="/shop/collection?q=men-wear">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -725,7 +724,7 @@ const Navbar = () => {
                         >
                           Shop All
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                 </List>
@@ -740,7 +739,7 @@ const Navbar = () => {
                   <ListItemText
                     sx={{ pb: 0.5 }}
                     primary={
-                      <Link to="/shop/collection?q=womens-jackets-coats">
+                      <a href="/shop/collection?q=womens-jackets-coats">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -751,13 +750,13 @@ const Navbar = () => {
                         >
                           Jackets & Coats
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5 }}
                     primary={
-                      <Link to="/shop/collection?q=womens-tshirt-tanks">
+                      <a href="/shop/collection?q=womens-tshirt-tanks">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -770,13 +769,13 @@ const Navbar = () => {
                         >
                           T-shirt & Tanks
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=womens-sweaters-cardigans">
+                      <a href="/shop/collection?q=womens-sweaters-cardigans">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -789,13 +788,13 @@ const Navbar = () => {
                         >
                           Sweaters & Cardigans
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=womens-tops-shirts">
+                      <a href="/shop/collection?q=womens-tops-shirts">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -808,13 +807,13 @@ const Navbar = () => {
                         >
                           Tops & Shirts
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=womens-hoodies-sweatshirts">
+                      <a href="/shop/collection?q=womens-hoodies-sweatshirts">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -827,13 +826,13 @@ const Navbar = () => {
                         >
                           Hoodies & Sweatshirts
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 190 }}
                     primary={
-                      <Link to="/shop/collection?q=womens-joggers-pants-leggings">
+                      <a href="/shop/collection?q=womens-joggers-pants-leggings">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -846,13 +845,13 @@ const Navbar = () => {
                         >
                           Joggers, Pants & Leggings
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=women-dresses-jumpsuits">
+                      <a href="/shop/collection?q=women-dresses-jumpsuits">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -865,13 +864,13 @@ const Navbar = () => {
                         >
                           Dresses & Jumpsuits
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=women-shorts-skirts">
+                      <a href="/shop/collection?q=women-shorts-skirts">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -884,13 +883,13 @@ const Navbar = () => {
                         >
                           Shorts & Skirts
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=women-underwear">
+                      <a href="/shop/collection?q=women-underwear">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -903,13 +902,13 @@ const Navbar = () => {
                         >
                           Underwear
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                   <ListItemText
                     sx={{ pb: 0.5, maxWidth: 170 }}
                     primary={
-                      <Link to="/shop/collection?q=women-wear">
+                      <a href="/shop/collection?q=women-wear">
                         <Typography
                           sx={{
                             transition: "opacity .25s ease-in-out;",
@@ -922,7 +921,7 @@ const Navbar = () => {
                         >
                           Shop All
                         </Typography>
-                      </Link>
+                      </a>
                     }
                   />
                 </List>
