@@ -27,6 +27,13 @@ const useQueryParams = (
   const updateUrlParams = (params: ParamsTypes) => {
     if (!params || typeof params !== "object") return;
 
+    //check if they're search for specific product name
+    const isSearchQuery = params["q"] ? true : false;
+    const searchValue = params["q"];
+
+    //remove search key if they're not searching
+    // !isSearchQuery && delete params["q"];
+
     const searchParams = Object.entries(params)
       .map(([key, val]) =>
         Array.isArray(val) && val.length
@@ -36,7 +43,11 @@ const useQueryParams = (
       .filter(Boolean)
       .join("&");
 
-    navigate({ search: searchParams });
+    navigate(
+      isSearchQuery
+        ? `/shop/collection/search?q=${searchValue}`
+        : { search: searchParams }
+    );
   };
 
   const [queryParams, setQueryParams] = useState<ParamsTypes | null>(null);
@@ -72,6 +83,8 @@ const useQueryParams = (
               ? value.split(",")
               : key === "sort"
               ? [value]
+              : key === "q"
+              ? [value]
               : newQuery[key]?.includes(value)
               ? newQuery[key].filter((val) => val !== value)
               : [...(newQuery[key] ?? []), value];
@@ -79,7 +92,7 @@ const useQueryParams = (
 
         break;
     }
-
+    // console.log("toggle", newQuery);
     // @ Store current params values
     localStorage.setItem("queryParams", JSON.stringify(newQuery));
     setQueryParams(newQuery);
@@ -107,7 +120,7 @@ const useQueryParams = (
 
   useEffect(() => {
     const urlParams: ParamsTypes = {};
-    // @reset previous stored params
+    // @remove previous stored params
     localStorage.removeItem("queryParams");
 
     searchParams.forEach((val, key) => {
@@ -137,7 +150,6 @@ const useQueryParams = (
           },
           0
         );
-        console.log("greater");
         if (totalQueryParamValues < 1) {
           if (
             !isEqual(currentFilterData!, initialFilterData!) ||
@@ -149,7 +161,6 @@ const useQueryParams = (
           }
         }
       } else {
-        console.log("Less");
         if (!isEqual(currentFilterData!, initialFilterData!)) {
           setBrandFilterData && setBrandFilterData(initialFilterData!);
           setOtherFilterData && setOtherFilterData(initialFilterData!);

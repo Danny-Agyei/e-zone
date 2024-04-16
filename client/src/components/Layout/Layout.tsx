@@ -12,7 +12,7 @@ const Layout = () => {
         <Box
           component="main"
           sx={{
-            minHeight: "100vh",
+            minHeight: "100%",
             width: "100%",
             display: "flex",
             flexDirection: "row",

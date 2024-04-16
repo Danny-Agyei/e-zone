@@ -20,6 +20,7 @@ const getStoreData = async function ({
 
     let newQuery = {};
     let sortBy = null;
+    let searchTerm = null;
     let priceRange = null;
 
     if (searchParamsFromStorage) {
@@ -28,13 +29,21 @@ const getStoreData = async function ({
           ? (sortBy = searchParamsFromStorage[key])
           : key === "price"
           ? (priceRange = searchParamsFromStorage[key])
+          : key === "q"
+          ? (searchTerm = searchParamsFromStorage[key])
           : (newQuery = {
+              ...newQuery,
               [key]: {
                 $in: searchParamsFromStorage[key],
               },
             });
       }
     }
+    console.log(newQuery);
+
+    let pathname = params.pathname?.toLowerCase();
+
+    let endpoint = "";
 
     const query = qs.stringify(
       {
@@ -42,20 +51,35 @@ const getStoreData = async function ({
         filters: {
           $and: [
             {
-              ...(params.category
-                ? { categories: { title: { $eqi: params.category } } }
+              ...(searchTerm
+                ? {
+                    $or: [
+                      { name: { $containsi: searchTerm } },
+                      { description: { $containsi: searchTerm } },
+                    ],
+                  }
                 : {}),
             },
             {
-              ...newQuery,
-              ...(priceRange
-                ? {
-                    price: {
-                      $gte: Number(priceRange[0]),
-                      $lte: Number(priceRange[1]),
-                    },
-                  }
-                : {}),
+              $and: [
+                {
+                  ...(pathname && pathname !== "search"
+                    ? { categories: { title: { $eqi: pathname } } }
+                    : {}),
+                },
+
+                {
+                  ...newQuery,
+                  ...(priceRange
+                    ? {
+                        price: {
+                          $gte: Number(priceRange[0]),
+                          $lte: Number(priceRange[1]),
+                        },
+                      }
+                    : {}),
+                },
+              ],
             },
           ],
         },
@@ -65,11 +89,16 @@ const getStoreData = async function ({
         encodeValuesOnly: true, // prettify URL
       }
     );
-    const endpoint = searchParamsFromStorage
-      ? `/api/products?${query}`
-      : params.category
-      ? `/api/products?sort=name%3AASC&filters[$and][0][categories][title][$eqi]=${params.category}&populate=*`
-      : "/api/products?sort=name:ASC&populate=*";
+
+    if ((pathname === "search" && searchTerm) || searchParamsFromStorage) {
+      endpoint = `/api/products?${query}`;
+    } else if (pathname === "search" && !searchTerm) {
+      endpoint = "/api/products/null";
+    } else if (pathname && pathname !== "search") {
+      endpoint = `/api/products?sort=name%3AASC&filters[$and][0][categories][title][$eqi]=${pathname}&populate=*`;
+    } else {
+      endpoint = "/api/products?sort=name:ASC&populate=*";
+    }
 
     const productPromise = fetch(
       `${process.env.REACT_APP_BASE_URL}${endpoint}`,

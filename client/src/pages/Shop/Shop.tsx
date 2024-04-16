@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useState } from "react";
 import {
   Box,
   Grid,
@@ -116,7 +116,6 @@ const Shop = () => {
         }
       >
         {(resolveData) => {
-          // console.log("SHOP PRODUCTS =>", resolveData);
           const { products }: { products: ProductType[] } = resolveData;
           // const {
           //   attributes: {
@@ -146,7 +145,7 @@ const Shop = () => {
                       pr: 2,
                     }}
                   >
-                    <UniversalFilter />
+                    <UniversalFilter products={products} />
                   </Box>
                 </Grid>
                 <Grid sx={{ py: 8 }} item xs={12} sm={9} md={9}>
@@ -316,20 +315,24 @@ const Shop = () => {
                       </Stack>
                     </Stack>
                   </Box>
-                  <Grid container spacing={2}>
-                    {products.map((product, indx) => (
-                      <Grid
-                        lg={gridLayout}
-                        md={gridLayout === 3 ? 4 : gridLayout}
-                        sm={gridLayout === 3 ? 6 : 6}
-                        xs={12}
-                        item
-                        key={indx}
-                      >
-                        <ProductCard product={product} />
-                      </Grid>
-                    ))}
-                  </Grid>
+                  {products && products.length ? (
+                    <Grid container spacing={2}>
+                      {products.map((product, indx) => (
+                        <Grid
+                          lg={gridLayout}
+                          md={gridLayout === 3 ? 4 : gridLayout}
+                          sm={gridLayout === 3 ? 6 : 6}
+                          xs={12}
+                          item
+                          key={indx}
+                        >
+                          <ProductCard product={product} />
+                        </Grid>
+                      ))}
+                    </Grid>
+                  ) : (
+                    <Box sx={{ textAlign: "center" }}>Search not found!</Box>
+                  )}
                 </Grid>
               </Grid>
             </Box>

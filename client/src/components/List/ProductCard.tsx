@@ -60,7 +60,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
         border: "1px solid #eae5e5",
         borderRadius: 2,
         p: 2,
-        pb: 3,
+        pb: 1,
         height: 350,
         position: "relative",
       }}
@@ -138,7 +138,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
       <CardContent sx={{ px: 1, pt: 2, pb: "0 !important" }}>
         <Typography
           variant="body2"
-          fontSize={12}
+          fontSize={10}
           pb={1.5}
           fontWeight={500}
           color="#bf4800"
@@ -146,24 +146,24 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           {brand}
         </Typography>
         <Link to={`/products/${slug}`}>
-          <Typography variant="body2" fontSize={14} fontWeight={500}>
+          <Typography variant="body2" fontSize={12} fontWeight={500}>
             {name}
           </Typography>
         </Link>
         <Box py={1.5}>
           <Box lineHeight={0}>
-            <IoIosStar size={15} color="#ffc30e" />
-            <IoIosStar size={15} color="#ffc30e" />
-            <IoIosStar size={15} color="#ffc30e" />
-            <IoIosStar size={15} color="#ffc30e" />
-            <IoIosStar size={15} color="#ffc30e" />
+            <IoIosStar size={12} color="#ffc30e" />
+            <IoIosStar size={12} color="#ffc30e" />
+            <IoIosStar size={12} color="#ffc30e" />
+            <IoIosStar size={12} color="#ffc30e" />
+            <IoIosStar size={12} color="#ffc30e" />
           </Box>
         </Box>
         <Stack direction="row" spacing={1} alignItems="center">
           {hasDiscount && (
             <Typography
               variant="body2"
-              fontSize={14}
+              fontSize={12}
               sx={{ textDecoration: "line-through" }}
             >
               ${price.toFixed(2)}
@@ -171,7 +171,7 @@ export default function ProductCard({ product }: { product: ProductCardType }) {
           )}
           <Typography
             variant="body2"
-            fontSize={14}
+            fontSize={12}
             fontWeight={500}
             color={hasDiscount ? "#e02b40" : "text.primary"}
           >

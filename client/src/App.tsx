@@ -23,7 +23,7 @@ const router = createBrowserRouter([
         Component: ProductRoute.Component,
       },
       {
-        path: "/shop/collection/:category",
+        path: "/shop/collection/:pathname",
         loader: ShopRoute.loader,
         Component: ShopRoute.Component,
       },

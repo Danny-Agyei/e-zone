@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { AccountDropdown, FilterSelector, NavItem } from "../../components";
 import { IoHeartOutline } from "react-icons/io5";
 
@@ -19,6 +19,8 @@ import { BiSearch } from "react-icons/bi";
 import logo from "../../logo.png";
 import store from "../../lib/zustand/store";
 import CartDrawer from "./CartDrawer";
+
+import { useQueryParams } from "../../Utilities";
 
 const categories = [
   "All",
@@ -32,10 +34,30 @@ const categories = [
 ];
 
 const Navbar = () => {
+  const { updateQuery } = useQueryParams();
+
   const shopCart = store.use.cart();
   const [openCart, setOpenCart] = useState(false);
+  const [term, setTerm] = useState("");
 
   const toggleCartDrawer = () => setOpenCart(!openCart);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputText = event.target.value;
+    setTerm(inputText);
+  };
+
+  const handleSearch = (event: FormEvent) => {
+    event?.preventDefault();
+
+    if (!term.length) {
+      return;
+    }
+    // localStorage.removeItem("queryParams");
+    updateQuery("toggle", "q", term, undefined);
+    setTerm("");
+  };
+
   return (
     <Box
       sx={{
@@ -76,30 +98,54 @@ const Navbar = () => {
               border: "1px solid #eaeaea",
               borderRadius: 9999,
               bgcolor: "#fff",
+              position: "relative",
+              minWidth: 200,
             }}
           >
             <FilterSelector filterData={categories} />
-            <InputBase
-              fullWidth
-              placeholder="Search product"
-              sx={{
-                p: 1,
-                fontSize: 14,
-                color: "#777",
-                height: "100%",
+            <form
+              style={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
               }}
-            />
-            <IconButton
+              onSubmit={handleSearch}
+            >
+              <InputBase
+                onChange={handleChange}
+                value={term}
+                placeholder="Search product"
+                sx={{
+                  p: 1,
+                  fontSize: 14,
+                  width: "100%",
+                  color: "#777",
+                  height: "100%",
+                }}
+              />
+            </form>
+            <Box
               sx={{
-                bgcolor: "text.secondary",
-                "&:hover": {
-                  opacity: 0.85,
-                  bgcolor: "text.secondary",
-                },
+                position: "absolute",
+                right: 2,
+                zIndex: 999,
               }}
             >
-              <BiSearch color="#1c1b1b" size={20} />
-            </IconButton>
+              <IconButton
+                onClick={handleSearch}
+                sx={{
+                  bgcolor: "text.secondary",
+                  height: 38,
+                  width: 38,
+                  "&:hover": {
+                    opacity: 0.85,
+                    bgcolor: "text.secondary",
+                  },
+                }}
+              >
+                <BiSearch color="#1c1b1b" size={20} />
+              </IconButton>
+            </Box>
           </Box>
           <Box>
             <Stack
