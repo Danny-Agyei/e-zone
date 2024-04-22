@@ -53,7 +53,7 @@ const Navbar = () => {
     if (!term.length) {
       return;
     }
-    // localStorage.removeItem("queryParams");
+    localStorage.removeItem("queryParams");
     updateQuery("toggle", "q", term, undefined);
     setTerm("");
   };

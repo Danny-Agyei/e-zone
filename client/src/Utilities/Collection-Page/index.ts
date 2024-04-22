@@ -29,7 +29,6 @@ const useQueryParams = (
 
     //check if they're search for specific product name
     const isSearchQuery = params["q"] ? true : false;
-    const searchValue = params["q"];
 
     //remove search key if they're not searching
     // !isSearchQuery && delete params["q"];
@@ -45,7 +44,7 @@ const useQueryParams = (
 
     navigate(
       isSearchQuery
-        ? `/shop/collection/search?q=${searchValue}`
+        ? `/shop/collection/search?${searchParams && searchParams}`
         : { search: searchParams }
     );
   };
@@ -130,6 +129,23 @@ const useQueryParams = (
 
     updateQuery("initial", undefined, undefined, urlParams);
   }, []);
+
+  // Set filters back to default when searching for an item
+  const pathname = location.pathname.substring(
+    location.pathname.lastIndexOf("/") + 1
+  );
+
+  const searchQuery = searchParams.get("q");
+  useEffect(() => {
+    const defaultItems = (items: ItemsTypes[]) =>
+      items.map((item) => ({ ...item, check: false }));
+
+    if (pathname.toLowerCase() === "search" || searchQuery) {
+      setBrandFilterData && setBrandFilterData(defaultItems);
+      setBrandFilterData && setBrandFilterData(defaultItems);
+      setSearchData && setSearchData(defaultItems);
+    }
+  }, [pathname, searchQuery]);
 
   // Cleanup checked filters state when navigating
   const queryParamsFromStorage: null | { [keys: string]: string[] } =

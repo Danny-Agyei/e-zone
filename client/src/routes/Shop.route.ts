@@ -39,7 +39,6 @@ const getStoreData = async function ({
             });
       }
     }
-    console.log(newQuery);
 
     let pathname = params.pathname?.toLowerCase();
 
@@ -51,7 +50,7 @@ const getStoreData = async function ({
         filters: {
           $and: [
             {
-              ...(searchTerm
+              ...(pathname === "search" && searchTerm
                 ? {
                     $or: [
                       { name: { $containsi: searchTerm } },
@@ -89,10 +88,14 @@ const getStoreData = async function ({
         encodeValuesOnly: true, // prettify URL
       }
     );
+    const location = window.location.search;
+
+    const searchParams = new URLSearchParams(location);
+    // console.log("PARAMS => ", searchParams);
 
     if ((pathname === "search" && searchTerm) || searchParamsFromStorage) {
       endpoint = `/api/products?${query}`;
-    } else if (pathname === "search" && !searchTerm) {
+    } else if (searchParamsFromStorage) {
       endpoint = "/api/products/null";
     } else if (pathname && pathname !== "search") {
       endpoint = `/api/products?sort=name%3AASC&filters[$and][0][categories][title][$eqi]=${pathname}&populate=*`;
